@@ -7,12 +7,12 @@ package FORMS;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
-public class ReporteMedicamentos extends javax.swing.JInternalFrame {
+public class frmReporteMedicamentos extends javax.swing.JInternalFrame {
 
     DefaultTableModel modeloTabla;
     DAO.ProductoDAO productoDAO = new DAO.ProductoDAO();
 
-    public ReporteMedicamentos() {
+    public frmReporteMedicamentos() {
         initComponents();
         this.setTitle("Reporte de Medicamentos");
         configurarTabla();

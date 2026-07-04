@@ -4,13 +4,13 @@ import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class ReporteVentas extends javax.swing.JInternalFrame {
+public class frmReporteVentas extends javax.swing.JInternalFrame {
 
     DefaultTableModel modeloTabla;
     DAO.PedidoDAO pedidoDAO = new DAO.PedidoDAO();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     
-    public ReporteVentas() {
+    public frmReporteVentas() {
         initComponents();
         this.setTitle("Reporte de Ventas por Rango de Fechas");
         configurarTabla();

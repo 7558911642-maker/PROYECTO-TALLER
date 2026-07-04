@@ -585,17 +585,17 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     }
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {
-        ReporteProvedores ventana = new ReporteProvedores();
+        frmReporteProvedores ventana = new frmReporteProvedores();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {
-        ReporteMedicamentos ventana = new ReporteMedicamentos();
+        frmReporteMedicamentos ventana = new frmReporteMedicamentos();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
-        ReporteVentas ventana = new ReporteVentas();
+        frmReporteVentas ventana = new frmReporteVentas();
         abrirVentanaInterna(ventana);
     }
 
@@ -641,7 +641,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     }
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {
-        ReporteVentas ventana = new ReporteVentas();
+        frmReporteVentas ventana = new frmReporteVentas();
         abrirVentanaInterna(ventana);
     }
 
