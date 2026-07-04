@@ -12,7 +12,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jButton3.addActionListener(this::jButton3ActionPerformed);
         jButton5.addActionListener(this::jButton5ActionPerformed);       
         jMenuItem8.addActionListener(this::jMenuItem8ActionPerformed);
-        jMenuItem9.addActionListener(this::jMenuItem9ActionPerformed);
         jMenuItem11.addActionListener(this::jMenuItem11ActionPerformed);
         jMenuItem4.addActionListener(this::jMenuItem4ActionPerformed);
         jMenuItem5.addActionListener(this::jMenuItem5ActionPerformed);
@@ -60,7 +59,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jButton16 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        btnVentas = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -163,11 +162,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jButton8.setText("Inicio");
         jButton8.setBorder(null);
 
-        jButton9.setBackground(new java.awt.Color(102, 102, 255));
-        jButton9.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jButton9.setText("Ventas");
-        jButton9.setBorder(null);
+        btnVentas.setBackground(new java.awt.Color(102, 102, 255));
+        btnVentas.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        btnVentas.setForeground(new java.awt.Color(255, 255, 255));
+        btnVentas.setText("Ventas");
+        btnVentas.setBorder(null);
+        btnVentas.addActionListener(this::btnVentasActionPerformed);
 
         jButton2.setBackground(new java.awt.Color(102, 102, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -234,7 +234,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton10)
                     .addComponent(jButton8)
-                    .addComponent(jButton9)
+                    .addComponent(btnVentas)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton11))
@@ -248,7 +248,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
-                .addComponent(jButton9)
+                .addComponent(btnVentas)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
@@ -450,11 +450,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         abrirVentanaInterna(ventanaVentas);
     }
 
-    private void copyMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        AnularVentas ventanaAnulaciones = new AnularVentas();
-        abrirVentanaInterna(ventanaAnulaciones);
-    }
-
     private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
         ReporteCategorias ventana = new ReporteCategorias();
         abrirVentanaInterna(ventana);
@@ -472,11 +467,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {
         MantenimientoProveedores ventana = new MantenimientoProveedores();
-        abrirVentanaInterna(ventana);
-    }
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoVentas ventana = new MantenimientoVentas();
         abrirVentanaInterna(ventana);
     }
 
@@ -527,6 +517,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
+        // TODO add your handling code here:
+        MantenimientoVentas ventana = new MantenimientoVentas();
+        abrirVentanaInterna(ventana);
+    }//GEN-LAST:event_btnVentasActionPerformed
+
    
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -536,13 +532,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         MantenimientoCategorias ventana = new MantenimientoCategorias();
-        abrirVentanaInterna(ventana);
-    }
-
-  
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
-        AnularVentas ventana = new AnularVentas();
         abrirVentanaInterna(ventana);
     }
 
@@ -588,6 +577,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
+    private javax.swing.JButton btnVentas;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
@@ -609,7 +599,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
