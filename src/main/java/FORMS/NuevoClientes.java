@@ -1,5 +1,6 @@
 package FORMS;
 
+import java.awt.event.ActionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
@@ -13,31 +14,9 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
     public NuevoClientes() {
         initComponents();
         this.setTitle("Mantenimiento de Clientes - Registro de Asegurados");
-        configurarTabla();
-        configurarTabla2();
         cargarTabla();
-        btnEliminar1.addActionListener(this::btnEliminar1ActionPerformed);
         btnEliminar2.addActionListener(this::btnEliminar2ActionPerformed);
-        btnEliminar3.addActionListener(this::btnEliminar3ActionPerformed);
-        btnActualizarStock1.addActionListener(this::btnActualizarStock1ActionPerformed);
-    }
-
-    private void configurarTabla() {
-        String[] cabecera = {"ID", "Documento", "Cliente", "Contacto", "Cargo", "Dirección", "Ciudad", "Teléfono"};
-        modeloTabla = new DefaultTableModel(null, cabecera) {
-            @Override
-            public boolean isCellEditable(int row, int column) { return false; }
-        };
-        tablaClientes.setModel(modeloTabla);
-    }
-
-    private void configurarTabla2() {
-        String[] cabecera = {"ID", "Documento", "Nombres", "Teléfono", "Dirección", "Estado"};
-        modeloTabla2 = new DefaultTableModel(null, cabecera) {
-            @Override
-            public boolean isCellEditable(int row, int column) { return false; }
-        };
-        tablaMedicamentos2.setModel(modeloTabla2);
+        btnlimpiar.addActionListener(this::btnEliminar3ActionPerformed);
     }
     
     private void cargarTabla() {
@@ -56,19 +35,6 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
             modeloTabla.addRow(fila);
         }
     }
-    
-    private void limpiarCampos() {
-        txtDocumento.setText("");
-        txtNombreCliente.setText("");
-        txtNombreContacto.setText("");
-        txtCargoContacto.setText("");
-        txtDireccion.setText("");
-        txtCiudad.setText("");
-        txtRegion.setText("");
-        txtPais.setText("");
-        txtTelefono.setText("");
-        txtDocumento.requestFocus();
-    }
 
     private void cargarTabla2() {
         modeloTabla2.setRowCount(0);
@@ -85,15 +51,15 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
     }
 
     private void limpiarCampos2() {
-        txtNombre3.setText("");
-        txtNombre4.setText("");
-        txtNombre5.setText("");
-        txtNombre6.setText("");
-        txtPrecio3.setText("");
-        txtStock3.setText("");
-        jComboBox3.setSelectedIndex(0);
-        jComboBox4.setSelectedIndex(0);
-        txtNombre3.requestFocus();
+        txtDocumento.setText("");
+        txtApellidos.setText("");
+        txtTelefono.setText("");
+        txtNombreCliente.setText("");
+        txtCorreo.setText("");
+        txtDireccion.setText("");
+        cbxEstado.setSelectedIndex(0);
+        cbxDocumento.setSelectedIndex(0);
+        txtDocumento.requestFocus();
     }
     
     @SuppressWarnings("unchecked")
@@ -164,28 +130,28 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
-        txtStock3 = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
-        txtNombre5 = new javax.swing.JTextField();
-        txtPrecio3 = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cbxEstado = new javax.swing.JComboBox<>();
         jLabel33 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        txtNombre3 = new javax.swing.JTextField();
+        txtDocumento = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        txtNombre4 = new javax.swing.JTextField();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        txtApellidos = new javax.swing.JTextField();
+        cbxDocumento = new javax.swing.JComboBox<>();
         jLabel29 = new javax.swing.JLabel();
-        txtNombre6 = new javax.swing.JTextField();
+        txtNombreCliente = new javax.swing.JTextField();
         btnGuardar1 = new javax.swing.JButton();
-        btnEliminar1 = new javax.swing.JButton();
-        btnEliminar3 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnlimpiar = new javax.swing.JButton();
         pnlEmpresa = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
@@ -661,8 +627,8 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
 
         jLabel26.setText(" ");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Pendiente", "Inactivo" }));
-        jComboBox3.addActionListener(this::jComboBox3ActionPerformed);
+        cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Pendiente", "Inactivo" }));
+        cbxEstado.addActionListener(this::cbxEstadoActionPerformed);
 
         jLabel33.setText("Estado:");
 
@@ -680,16 +646,16 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPrecio3, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel31)
                     .addComponent(jLabel32)
                     .addComponent(jLabel34)
                     .addComponent(jLabel33)
-                    .addComponent(txtStock3, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, 0, 252, Short.MAX_VALUE)
-                            .addComponent(txtNombre5, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(cbxEstado, javax.swing.GroupLayout.Alignment.LEADING, 0, 252, Short.MAX_VALUE)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -702,21 +668,21 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel31)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPrecio3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel32)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtStock3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel34)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
-                    .addComponent(txtNombre5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel33)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9))
         );
 
@@ -732,8 +698,8 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
 
         jLabel30.setText("Apellidos:");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI:", "PASAPORTE:", " " }));
-        jComboBox4.addActionListener(this::jComboBox4ActionPerformed);
+        cbxDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI:", "PASAPORTE:", " " }));
+        cbxDocumento.addActionListener(this::cbxDocumentoActionPerformed);
 
         jLabel29.setText("Nombres:");
 
@@ -756,10 +722,10 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel29)))
                             .addComponent(jLabel28)
                             .addComponent(jLabel27)
-                            .addComponent(txtNombre3)
-                            .addComponent(jComboBox4, 0, 218, Short.MAX_VALUE)
-                            .addComponent(txtNombre6)
-                            .addComponent(txtNombre4))))
+                            .addComponent(txtDocumento)
+                            .addComponent(cbxDocumento, 0, 218, Short.MAX_VALUE)
+                            .addComponent(txtNombreCliente)
+                            .addComponent(txtApellidos))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -770,19 +736,19 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel27)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addComponent(jLabel28)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel29)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel30)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -790,14 +756,14 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         btnGuardar1.setText("Guardar");
         btnGuardar1.addActionListener(this::btnGuardar1ActionPerformed);
 
-        btnEliminar1.setBackground(new java.awt.Color(0, 100, 248));
-        btnEliminar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar1.setText("Cancelar");
+        btnCancelar.setBackground(new java.awt.Color(0, 100, 248));
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("Cancelar");
 
-        btnEliminar3.setBackground(new java.awt.Color(248, 251, 254));
-        btnEliminar3.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
-        btnEliminar3.setForeground(new java.awt.Color(255, 102, 102));
-        btnEliminar3.setText("limpiar");
+        btnlimpiar.setBackground(new java.awt.Color(248, 251, 254));
+        btnlimpiar.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
+        btnlimpiar.setForeground(new java.awt.Color(255, 102, 102));
+        btnlimpiar.setText("limpiar");
 
         javax.swing.GroupLayout pnlPersonaNaturalLayout = new javax.swing.GroupLayout(pnlPersonaNatural);
         pnlPersonaNatural.setLayout(pnlPersonaNaturalLayout);
@@ -805,11 +771,11 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
             pnlPersonaNaturalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPersonaNaturalLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(btnEliminar3)
+                .addComponent(btnlimpiar)
                 .addGap(35, 35, 35))
             .addGroup(pnlPersonaNaturalLayout.createSequentialGroup()
                 .addGroup(pnlPersonaNaturalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -834,8 +800,8 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 25, Short.MAX_VALUE)
                 .addGroup(pnlPersonaNaturalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar1)
-                    .addComponent(btnEliminar1)
-                    .addComponent(btnEliminar3))
+                    .addComponent(btnCancelar)
+                    .addComponent(btnlimpiar))
                 .addGap(16, 16, 16))
         );
 
@@ -1109,29 +1075,10 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox11ActionPerformed
 
-    private void txtBuscar2KeyReleased(java.awt.event.KeyEvent evt) {
-        String criterio = txtBuscar2.getText().trim();
-        if (criterio.isEmpty()) {
-            cargarTabla2();
-        } else {
-            modeloTabla2.setRowCount(0);
-            for (LOGICA.ClienteClass cli : clienteDAO.buscarClientes(criterio)) {
-                Object[] fila = new Object[6];
-                fila[0] = cli.getIdCliente();
-                fila[1] = cli.getDocumento();
-                fila[2] = cli.getNombreCliente();
-                fila[3] = cli.getTelefono();
-                fila[4] = cli.getDireccion();
-                fila[5] = "";
-                modeloTabla2.addRow(fila);
-            }
-        }
-    }
-
     private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {
-        String nombres = txtNombre6.getText().trim();
-        String apellidos = txtNombre4.getText().trim();
-        String doc = txtNombre3.getText().trim();
+        String nombres = txtNombreCliente.getText().trim();
+        String apellidos = txtApellidos.getText().trim();
+        String doc = txtDocumento.getText().trim();
         if (nombres.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "El nombre del cliente es obligatorio.");
             return;
@@ -1139,8 +1086,8 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         LOGICA.ClienteClass cli = new LOGICA.ClienteClass();
         cli.setDocumento(doc);
         cli.setNombreCliente(nombres + " " + apellidos);
-        cli.setTelefono(txtNombre5.getText().trim());
-        cli.setDireccion(txtStock3.getText().trim());
+        cli.setTelefono(txtTelefono.getText().trim());
+        cli.setDireccion(txtDireccion.getText().trim());
         if (clienteDAO.registrarCliente(cli)) {
             javax.swing.JOptionPane.showMessageDialog(this, "Cliente guardado correctamente.");
             limpiarCampos2();
@@ -1154,24 +1101,6 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         limpiarCampos2();
     }
 
-    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {
-        String criterio = javax.swing.JOptionPane.showInputDialog(this, "Ingrese documento o nombre a buscar:");
-        if (criterio != null && !criterio.trim().isEmpty()) {
-            txtBuscar2.setText(criterio);
-            modeloTabla2.setRowCount(0);
-            for (LOGICA.ClienteClass cli : clienteDAO.buscarClientes(criterio.trim())) {
-                Object[] fila = new Object[6];
-                fila[0] = cli.getIdCliente();
-                fila[1] = cli.getDocumento();
-                fila[2] = cli.getNombreCliente();
-                fila[3] = cli.getTelefono();
-                fila[4] = cli.getDireccion();
-                fila[5] = "";
-                modeloTabla2.addRow(fila);
-            }
-        }
-    }
-
     private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {
         javax.swing.JOptionPane.showMessageDialog(this, "Función Eliminar no implementada.");
     }
@@ -1179,12 +1108,6 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
     private void btnEliminar3ActionPerformed(java.awt.event.ActionEvent evt) {
         limpiarCampos2();
     }
-
-    private void btnActualizarStock1ActionPerformed(java.awt.event.ActionEvent evt) {
-        FORMS.FrmPrincipal principal = (FORMS.FrmPrincipal) javax.swing.SwingUtilities.getWindowAncestor(this);
-        principal.abrirVentanaInterna(new MantenimientoClienteact());
-    }
-
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
@@ -1193,19 +1116,19 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEliminar1;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminar2;
-    private javax.swing.JButton btnEliminar3;
     private javax.swing.JButton btnEliminar4;
     private javax.swing.JButton btnEliminar5;
     private javax.swing.JButton btnEliminar6;
     private javax.swing.JButton btnGuardar1;
     private javax.swing.JButton btnGuardar2;
     private javax.swing.JButton btnGuardar3;
+    private javax.swing.JButton btnlimpiar;
+    private javax.swing.JComboBox<String> cbxDocumento;
+    private javax.swing.JComboBox<String> cbxEstado;
     private javax.swing.JComboBox<String> jComboBox10;
     private javax.swing.JComboBox<String> jComboBox11;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JComboBox<String> jComboBox7;
@@ -1279,6 +1202,10 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlDinamicos;
     private javax.swing.JPanel pnlEmpresa;
     private javax.swing.JPanel pnlPersonaNatural;
+    private javax.swing.JTextField txtApellidos;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtDocumento;
     private javax.swing.JTextField txtNombre10;
     private javax.swing.JTextField txtNombre11;
     private javax.swing.JTextField txtNombre12;
@@ -1289,22 +1216,30 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombre17;
     private javax.swing.JTextField txtNombre18;
     private javax.swing.JTextField txtNombre19;
-    private javax.swing.JTextField txtNombre3;
-    private javax.swing.JTextField txtNombre4;
-    private javax.swing.JTextField txtNombre5;
-    private javax.swing.JTextField txtNombre6;
     private javax.swing.JTextField txtNombre7;
     private javax.swing.JTextField txtNombre8;
     private javax.swing.JTextField txtNombre9;
-    private javax.swing.JTextField txtPrecio3;
+    private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtPrecio4;
     private javax.swing.JTextField txtPrecio5;
     private javax.swing.JTextField txtPrecio6;
     private javax.swing.JTextField txtPrecio7;
-    private javax.swing.JTextField txtStock3;
     private javax.swing.JTextField txtStock4;
     private javax.swing.JTextField txtStock5;
     private javax.swing.JTextField txtStock6;
     private javax.swing.JTextField txtStock7;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
+    private void txtDocumento1ActionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void cbxDocumentoActionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void cbxEstadoActionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

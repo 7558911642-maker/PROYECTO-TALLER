@@ -43,11 +43,9 @@
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="251" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -104,13 +102,13 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtCodigo3" min="-2" pref="209" max="-2" attributes="0"/>
+                                      <Component id="txtUsuario" min="-2" pref="209" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtNombre5" alignment="0" min="-2" pref="209" max="-2" attributes="0"/>
-                                          <Component id="txtNombre4" alignment="0" min="-2" pref="209" max="-2" attributes="0"/>
+                                          <Component id="txtConfirmContra" alignment="0" min="-2" pref="209" max="-2" attributes="0"/>
+                                          <Component id="txtContra" alignment="0" min="-2" pref="209" max="-2" attributes="0"/>
                                           <Component id="txtNombre3" alignment="0" min="-2" pref="209" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -121,7 +119,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jComboBox3" min="-2" pref="237" max="-2" attributes="0"/>
+                                          <Component id="cbxEstado" min="-2" pref="237" max="-2" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -129,13 +127,13 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <Component id="txtPrecio3" min="-2" pref="241" max="-2" attributes="0"/>
+                                  <Component id="txtRol" min="-2" pref="241" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Component id="btnGuardar2" min="-2" pref="92" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btnGuardar1" min="-2" pref="92" max="-2" attributes="0"/>
+                                      <Component id="btnCancelar" min="-2" pref="92" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btnEliminar3" min="-2" pref="81" max="-2" attributes="0"/>
+                                      <Component id="btnLimpiar" min="-2" pref="81" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -156,8 +154,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtCodigo3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPrecio3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtRol" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -168,23 +166,23 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtNombre3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbxEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel29" min="-2" pref="18" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txtNombre4" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtContra" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtNombre5" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtConfirmContra" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnGuardar2" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="btnGuardar1" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="btnEliminar3" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="btnCancelar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="btnLimpiar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="14" max="32767" attributes="0"/>
@@ -203,9 +201,9 @@
                 <Property name="text" type="java.lang.String" value="Usuario:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtPrecio3">
+            <Component class="javax.swing.JTextField" name="txtRol">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPrecio3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtRolActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel28">
@@ -218,7 +216,7 @@
                 <Property name="text" type="java.lang.String" value="Ingrese Contrase&#xf1;a:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtCodigo3">
+            <Component class="javax.swing.JTextField" name="txtUsuario">
             </Component>
             <Component class="javax.swing.JTextField" name="txtNombre3">
             </Component>
@@ -243,7 +241,7 @@
                 <Property name="text" type="java.lang.String" value="Estado:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox3">
+            <Component class="javax.swing.JComboBox" name="cbxEstado">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
@@ -257,9 +255,9 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre4">
+            <Component class="javax.swing.JTextField" name="txtContra">
             </Component>
-            <Component class="javax.swing.JTextField" name="txtNombre5">
+            <Component class="javax.swing.JTextField" name="txtConfirmContra">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel30">
               <Properties>
@@ -274,15 +272,15 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardar2ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnGuardar1">
+            <Component class="javax.swing.JButton" name="btnCancelar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cancelar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardar1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnEliminar3">
+            <Component class="javax.swing.JButton" name="btnLimpiar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="limpiar"/>
               </Properties>

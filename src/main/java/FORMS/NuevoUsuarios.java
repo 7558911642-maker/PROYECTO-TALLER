@@ -4,6 +4,7 @@
  */
 package FORMS;
 
+import java.awt.event.ActionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
@@ -11,30 +12,10 @@ import java.util.List;
  *
  * @author HP
  */
-public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
+public class NuevoUsuarios extends javax.swing.JInternalFrame {
 
     DefaultTableModel modeloTabla;
     DAO.UsuarioDAO usuarioDAO = new DAO.UsuarioDAO();
-
-    public FrmMantenimientoUsuarios() {
-        initComponents();
-        this.setTitle("Mantenimiento de Usuarios");
-        configurarTabla();
-        cargarTabla();
-        btnEliminar1.addActionListener(this::btnEliminar1ActionPerformed);
-        btnEliminar2.addActionListener(this::btnEliminar2ActionPerformed);
-        btnEliminar3.addActionListener(this::btnEliminar3ActionPerformed);
-        btnActualizarStock1.addActionListener(this::btnActualizarStock1ActionPerformed);
-    }
-
-    private void configurarTabla() {
-        String[] cabecera = {"ID", "Usuario", "Nombre"};
-        modeloTabla = new DefaultTableModel(null, cabecera) {
-            @Override
-            public boolean isCellEditable(int row, int column) { return false; }
-        };
-        tablaMedicamentos2.setModel(modeloTabla);
-    }
 
     private void cargarTabla() {
         modeloTabla.setRowCount(0);
@@ -48,12 +29,11 @@ public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
     }
 
     private void limpiarCampos() {
-        txtCodigo3.setText("");
+        txtUsuario.setText("");
         txtNombre3.setText("");
-        txtPrecio3.setText("");
-        jComboBox1.setSelectedIndex(0);
-        jComboBox3.setSelectedIndex(0);
-        txtCodigo3.requestFocus();
+        txtRol.setText("");
+        cbxEstado.setSelectedIndex(0);
+        txtUsuario.requestFocus();
     }
 
     /**
@@ -70,21 +50,21 @@ public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        txtPrecio3 = new javax.swing.JTextField();
+        txtRol = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        txtCodigo3 = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
         txtNombre3 = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        txtNombre4 = new javax.swing.JTextField();
-        txtNombre5 = new javax.swing.JTextField();
+        cbxEstado = new javax.swing.JComboBox<>();
+        txtContra = new javax.swing.JTextField();
+        txtConfirmContra = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         btnGuardar2 = new javax.swing.JButton();
-        btnGuardar1 = new javax.swing.JButton();
-        btnEliminar3 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -98,7 +78,7 @@ public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
 
         jLabel27.setText("Usuario:");
 
-        txtPrecio3.addActionListener(this::txtPrecio3ActionPerformed);
+        txtRol.addActionListener(this::txtRolActionPerformed);
 
         jLabel28.setText("Nombre:");
 
@@ -112,17 +92,17 @@ public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
 
         jLabel33.setText("Estado:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Pendiente", "Inactivo" }));
+        cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Pendiente", "Inactivo" }));
 
         jLabel30.setText("Confirmar Contraseña:");
 
         btnGuardar2.setText("Guardar");
         btnGuardar2.addActionListener(this::btnGuardar2ActionPerformed);
 
-        btnGuardar1.setText("Cancelar");
-        btnGuardar1.addActionListener(this::btnGuardar1ActionPerformed);
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(this::btnCancelarActionPerformed);
 
-        btnEliminar3.setText("limpiar");
+        btnLimpiar.setText("limpiar");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -144,12 +124,12 @@ public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel30)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(txtCodigo3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre5, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtConfirmContra, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(71, 71, 71)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,18 +137,18 @@ public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel33)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(txtPrecio3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRol, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(btnGuardar2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminar3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -182,8 +162,8 @@ public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
                     .addComponent(jLabel31))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodigo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPrecio3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
@@ -192,21 +172,21 @@ public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel30)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombre5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtConfirmContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnGuardar2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEliminar3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -218,9 +198,8 @@ public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(251, Short.MAX_VALUE))))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,29 +229,14 @@ public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardar2ActionPerformed
 
-    private void txtPrecio3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecio3ActionPerformed
+    private void txtRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRolActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecio3ActionPerformed
+    }//GEN-LAST:event_txtRolActionPerformed
 
-    private void txtBuscar2KeyReleased(java.awt.event.KeyEvent evt) {
-        String criterio = txtBuscar2.getText().trim();
-        if (criterio.isEmpty()) {
-            cargarTabla();
-        } else {
-            modeloTabla.setRowCount(0);
-            for (LOGICA.UsuarioClass u : usuarioDAO.buscar(criterio)) {
-                Object[] fila = new Object[3];
-                fila[0] = u.getIdUsuario();
-                fila[1] = u.getUsuario();
-                fila[2] = u.getNombre();
-                modeloTabla.addRow(fila);
-            }
-        }
-    }
 
     private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {
-        String user = txtCodigo3.getText().trim();
-        String pass = txtPrecio3.getText().trim();
+        String user = txtUsuario.getText().trim();
+        String pass = txtRol.getText().trim();
         if (user.isEmpty() || pass.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Usuario y contraseña son obligatorios.");
             return;
@@ -294,21 +258,6 @@ public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
         limpiarCampos();
     }
 
-    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {
-        String criterio = javax.swing.JOptionPane.showInputDialog(this, "Ingrese usuario o nombre a buscar:");
-        if (criterio != null && !criterio.trim().isEmpty()) {
-            txtBuscar2.setText(criterio);
-            modeloTabla.setRowCount(0);
-            for (LOGICA.UsuarioClass u : usuarioDAO.buscar(criterio.trim())) {
-                Object[] fila = new Object[3];
-                fila[0] = u.getIdUsuario();
-                fila[1] = u.getUsuario();
-                fila[2] = u.getNombre();
-                modeloTabla.addRow(fila);
-            }
-        }
-    }
-
     private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {
         javax.swing.JOptionPane.showMessageDialog(this, "Función no disponible para usuarios.");
     }
@@ -323,10 +272,10 @@ public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEliminar3;
-    private javax.swing.JButton btnGuardar1;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JComboBox<String> cbxEstado;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -338,10 +287,14 @@ public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField txtCodigo3;
+    private javax.swing.JTextField txtConfirmContra;
+    private javax.swing.JTextField txtContra;
     private javax.swing.JTextField txtNombre3;
-    private javax.swing.JTextField txtNombre4;
-    private javax.swing.JTextField txtNombre5;
-    private javax.swing.JTextField txtPrecio3;
+    private javax.swing.JTextField txtRol;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    private void btnCancelarActionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

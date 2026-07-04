@@ -45,19 +45,19 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jButton15 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
+        btnInicio = new javax.swing.JButton();
+        btnClientes = new javax.swing.JButton();
+        btnInventario = new javax.swing.JButton();
+        btnProvedores = new javax.swing.JButton();
+        btnReportes = new javax.swing.JButton();
+        btnMedicamentos = new javax.swing.JButton();
+        btnConfiguraciones = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxTipoUser = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -171,51 +171,51 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(0, 100, 248));
 
-        jButton8.setBackground(new java.awt.Color(0, 100, 248));
-        jButton8.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("Inicio");
-        jButton8.setBorder(null);
+        btnInicio.setBackground(new java.awt.Color(0, 100, 248));
+        btnInicio.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        btnInicio.setForeground(new java.awt.Color(255, 255, 255));
+        btnInicio.setText("Inicio");
+        btnInicio.setBorder(null);
 
-        jButton2.setBackground(new java.awt.Color(0, 100, 248));
-        jButton2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Clientes");
-        jButton2.setBorder(null);
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        btnClientes.setBackground(new java.awt.Color(0, 100, 248));
+        btnClientes.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        btnClientes.setForeground(new java.awt.Color(255, 255, 255));
+        btnClientes.setText("Clientes");
+        btnClientes.setBorder(null);
+        btnClientes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnClientes.addActionListener(this::btnClientesActionPerformed);
 
-        jButton10.setBackground(new java.awt.Color(0, 100, 248));
-        jButton10.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(255, 255, 255));
-        jButton10.setText("Inventario");
-        jButton10.setBorder(null);
+        btnInventario.setBackground(new java.awt.Color(0, 100, 248));
+        btnInventario.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        btnInventario.setForeground(new java.awt.Color(255, 255, 255));
+        btnInventario.setText("Inventario");
+        btnInventario.setBorder(null);
 
-        jButton3.setBackground(new java.awt.Color(0, 100, 248));
-        jButton3.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Provedores");
-        jButton3.setBorder(null);
-        jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnProvedores.setBackground(new java.awt.Color(0, 100, 248));
+        btnProvedores.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        btnProvedores.setForeground(new java.awt.Color(255, 255, 255));
+        btnProvedores.setText("Provedores");
+        btnProvedores.setBorder(null);
+        btnProvedores.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
-        jButton11.setBackground(new java.awt.Color(0, 100, 248));
-        jButton11.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
-        jButton11.setForeground(new java.awt.Color(255, 255, 255));
-        jButton11.setText("Reportes");
-        jButton11.setBorder(null);
+        btnReportes.setBackground(new java.awt.Color(0, 100, 248));
+        btnReportes.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        btnReportes.setForeground(new java.awt.Color(255, 255, 255));
+        btnReportes.setText("Reportes");
+        btnReportes.setBorder(null);
 
-        jButton1.setBackground(new java.awt.Color(0, 100, 248));
-        jButton1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Medicamentos ");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        btnMedicamentos.setBackground(new java.awt.Color(0, 100, 248));
+        btnMedicamentos.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        btnMedicamentos.setForeground(new java.awt.Color(255, 255, 255));
+        btnMedicamentos.setText("Medicamentos ");
+        btnMedicamentos.setBorder(null);
+        btnMedicamentos.addActionListener(this::btnMedicamentosActionPerformed);
 
-        jButton13.setBackground(new java.awt.Color(0, 100, 248));
-        jButton13.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
-        jButton13.setForeground(new java.awt.Color(255, 255, 255));
-        jButton13.setText("configuraciones");
-        jButton13.setBorder(null);
+        btnConfiguraciones.setBackground(new java.awt.Color(0, 100, 248));
+        btnConfiguraciones.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        btnConfiguraciones.setForeground(new java.awt.Color(255, 255, 255));
+        btnConfiguraciones.setText("configuraciones");
+        btnConfiguraciones.setBorder(null);
 
         jLabel5.setText("<html>\n    <center>\n        <font face=\"Segoe UI\" color=\"#DCE7F3\" size=\"3\">\n            Tu salud, nuestro compromiso\n        </font>\n    </center>\n</html>");
 
@@ -228,13 +228,13 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton13)
-                    .addComponent(jButton10)
-                    .addComponent(jButton8)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11))
+                    .addComponent(btnMedicamentos)
+                    .addComponent(btnConfiguraciones)
+                    .addComponent(btnInventario)
+                    .addComponent(btnInicio)
+                    .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProvedores, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReportes))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -249,19 +249,19 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton8)
+                .addComponent(btnInicio)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnMedicamentos)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnClientes)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnProvedores)
                 .addGap(18, 18, 18)
-                .addComponent(jButton10)
+                .addComponent(btnInventario)
                 .addGap(18, 18, 18)
-                .addComponent(jButton11)
+                .addComponent(btnReportes)
                 .addGap(18, 18, 18)
-                .addComponent(jButton13)
+                .addComponent(btnConfiguraciones)
                 .addGap(129, 129, 129))
         );
 
@@ -271,12 +271,12 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
 
         jLabel4.setText("Hora:");
 
-        jComboBox1.setBackground(new java.awt.Color(0, 100, 248));
-        jComboBox1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Mi perfil" }));
-        jComboBox1.setBorder(null);
-        jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
+        cbxTipoUser.setBackground(new java.awt.Color(0, 100, 248));
+        cbxTipoUser.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        cbxTipoUser.setForeground(new java.awt.Color(255, 255, 255));
+        cbxTipoUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Mi perfil" }));
+        cbxTipoUser.setBorder(null);
+        cbxTipoUser.addActionListener(this::cbxTipoUserActionPerformed);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -284,7 +284,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxTipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(135, 135, 135)
                 .addComponent(jLabel3)
                 .addGap(298, 298, 298)
@@ -298,7 +298,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(jLabel4))
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxTipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -554,12 +554,12 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoCategorias ventana = new MantenimientoCategorias();
+        NuevaCategoria ventana = new NuevaCategoria();
         abrirVentanaInterna(ventana);
     }
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimietnoMedicamentos ventanaMedicamentos = new MantenimietnoMedicamentos();
+        NuevoMedicamento ventanaMedicamentos = new NuevoMedicamento();
         abrirVentanaInterna(ventanaMedicamentos);
     }
 
@@ -569,12 +569,12 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     }
 
     private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoVentas ventanaVentas = new MantenimientoVentas();
+        FrmNuevaVenta ventanaVentas = new FrmNuevaVenta();
         abrirVentanaInterna(ventanaVentas);
     }
 
     private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        ReporteCategorias ventana = new ReporteCategorias();
+        GestionarCategorias ventana = new GestionarCategorias();
         abrirVentanaInterna(ventana);
     }
 
@@ -584,42 +584,42 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     }
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {
-        Estadisticas_Ventas ventanaEstadisticas = new Estadisticas_Ventas();
+        FrmEstadisticasVentas ventanaEstadisticas = new FrmEstadisticasVentas();
         abrirVentanaInterna(ventanaEstadisticas);      
     }
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoProveedores ventana = new MantenimientoProveedores();
+        NuevoProvedor ventana = new NuevoProvedor();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoVentas ventana = new MantenimientoVentas();
+        FrmNuevaVenta ventana = new FrmNuevaVenta();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoUsuarios ventana = new MantenimientoUsuarios();
+        NuevoUsuarios ventana = new NuevoUsuarios();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {
-        ReporteClientes ventana = new ReporteClientes();
+        GestionarClientes ventana = new GestionarClientes();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {
-        frmReporteProvedores ventana = new frmReporteProvedores();
+        GestionProvedores ventana = new GestionProvedores();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {
-        frmReporteMedicamentos ventana = new frmReporteMedicamentos();
+        GestionMedicamentos ventana = new GestionMedicamentos();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
-        frmReporteVentas ventana = new frmReporteVentas();
+        GestionarVentas ventana = new GestionarVentas();
         abrirVentanaInterna(ventana);
     }
 
@@ -627,18 +627,18 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         System.exit(0);
     }
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MantenimietnoMedicamentos ventana = new MantenimietnoMedicamentos();
+    private void btnMedicamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedicamentosActionPerformed
+        GestionMedicamentos ventana = new GestionMedicamentos();
         abrirVentanaInterna(ventana);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnMedicamentosActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnClientesActionPerformed
 
     private void exitMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItem1ActionPerformed
         // TODO add your handling code here:
@@ -652,24 +652,24 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_saveMenuItem2ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cbxTipoUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoUserActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cbxTipoUserActionPerformed
 
    
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoProveedores ventana = new MantenimientoProveedores();
+        GestionProvedores ventana = new GestionProvedores();
         abrirVentanaInterna(ventana);
     }
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoCategorias ventana = new MantenimientoCategorias();
+        GestionarCategorias ventana = new GestionarCategorias();
         abrirVentanaInterna(ventana);
     }
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {
-        frmReporteVentas ventana = new frmReporteVentas();
+        GestionarVentas ventana = new GestionarVentas();
         abrirVentanaInterna(ventana);
     }
 
@@ -710,6 +710,14 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClientes;
+    private javax.swing.JButton btnConfiguraciones;
+    private javax.swing.JButton btnInicio;
+    private javax.swing.JButton btnInventario;
+    private javax.swing.JButton btnMedicamentos;
+    private javax.swing.JButton btnProvedores;
+    private javax.swing.JButton btnReportes;
+    private javax.swing.JComboBox<String> cbxTipoUser;
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JDesktopPane desktopPane;
@@ -717,19 +725,11 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem1;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
