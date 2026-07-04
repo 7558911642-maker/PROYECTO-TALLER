@@ -13,8 +13,8 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
         this.setTitle("Arqueo de Caja Diario - Control de Ganancias");
         configurarTabla();
         generarReporte();
-        jButton5.addActionListener(this::jButton5ActionPerformed);
-        jButton6.addActionListener(this::jButton6ActionPerformed);
+        jBLimpiar.addActionListener(this::jButton5ActionPerformed);
+        jbExportar.addActionListener(this::jButton6ActionPerformed);
     }
 
     private void configurarTabla() {
@@ -73,15 +73,15 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         dcFechaInicio3 = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jBLimpiar = new javax.swing.JButton();
+        jbExportar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        txtVentasAnuladas = new javax.swing.JLabel();
+        txtresultadoVentasDia = new javax.swing.JLabel();
+        txtGanancia = new javax.swing.JLabel();
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jLabel3.setText("fecha de inicio");
@@ -147,9 +147,9 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
         jLabel9.setForeground(new java.awt.Color(0, 100, 248));
         jLabel9.setText("Fecha:");
 
-        jButton5.setText("Limpiar");
+        jBLimpiar.setText("Limpiar");
 
-        jButton6.setText("Imprimir");
+        jbExportar.setText("Exportar");
 
         btnActualizar.setBackground(new java.awt.Color(0, 100, 248));
         btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
@@ -168,9 +168,9 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnActualizar)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addComponent(jBLimpiar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton6)
+                .addComponent(jbExportar)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -179,8 +179,8 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton5)
-                        .addComponent(jButton6)
+                        .addComponent(jBLimpiar)
+                        .addComponent(jbExportar)
                         .addComponent(btnActualizar))
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel9)
@@ -197,11 +197,11 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
         jLabel12.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jLabel12.setText(" Total Ganancia ");
 
-        jLabel1.setText("0");
+        txtVentasAnuladas.setText("0");
 
-        jLabel4.setText("0");
+        txtresultadoVentasDia.setText("0");
 
-        jLabel5.setText("0");
+        txtGanancia.setText("0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -219,25 +219,21 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
                                 .addComponent(jLabel10)
                                 .addGap(90, 90, 90)
                                 .addComponent(jLabel11))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(208, 208, 208)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtresultadoVentasDia, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)
+                                .addComponent(txtVentasAnuladas, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(89, 89, 89)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtGanancia, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12))))
                 .addContainerGap(21, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(49, 49, 49)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(479, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,21 +247,14 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
                         .addComponent(jLabel10)
                         .addComponent(jLabel11))
                     .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                        .addContainerGap())))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(150, 150, 150)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addGap(257, 257, 257)))
+                    .addComponent(txtresultadoVentasDia, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                    .addComponent(txtVentasAnuladas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtGanancia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -308,22 +297,22 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnActualizar;
     private com.toedter.calendar.JDateChooser dcFechaInicio1;
     private com.toedter.calendar.JDateChooser dcFechaInicio3;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jBLimpiar;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbExportar;
     private javax.swing.JTable tablaVentasDiarias;
+    private javax.swing.JLabel txtGanancia;
+    private javax.swing.JLabel txtVentasAnuladas;
+    private javax.swing.JLabel txtresultadoVentasDia;
     // End of variables declaration//GEN-END:variables
 }

@@ -146,10 +146,10 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
 
         btnEliminar1.setBackground(new java.awt.Color(0, 100, 248));
         btnEliminar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar1.setText("Cancelar");
+        btnEliminar1.setText("Guardar");
 
         btnGuardar1.setBackground(new java.awt.Color(237, 246, 254));
-        btnGuardar1.setText("Guardar");
+        btnGuardar1.setText("Cancelar");
         btnGuardar1.addActionListener(this::btnGuardar1ActionPerformed);
 
         btnEliminar3.setBackground(new java.awt.Color(248, 251, 254));
