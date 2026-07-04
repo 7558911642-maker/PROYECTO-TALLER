@@ -1,5 +1,6 @@
 package FORMS;
 
+import java.awt.event.ActionEvent;
 import javax.swing.JInternalFrame;
 
 public class FrmPrincipal_1 extends javax.swing.JFrame {
@@ -772,5 +773,9 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     private javax.swing.JMenuItem saveMenuItem1;
     private javax.swing.JMenuItem saveMenuItem2;
     // End of variables declaration//GEN-END:variables
+
+    private void copyMenuItemActionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }
