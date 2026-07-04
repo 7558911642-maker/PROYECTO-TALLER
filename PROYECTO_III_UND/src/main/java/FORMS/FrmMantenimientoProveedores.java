@@ -5,13 +5,13 @@ import LOGICA.ProveedorClass;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class MantenimientoProveedoresact extends javax.swing.JInternalFrame {
+public class FrmMantenimientoProveedores extends javax.swing.JInternalFrame {
 
     private final ProveedorDAO proveedorDAO = new ProveedorDAO();
     private DefaultTableModel modeloTabla;
     private int idSeleccionado = -1;
 
-    public MantenimientoProveedoresact() {
+    public FrmMantenimientoProveedores() {
         initComponents();
         cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Activo", "Inactivo"}));
         initListeners();

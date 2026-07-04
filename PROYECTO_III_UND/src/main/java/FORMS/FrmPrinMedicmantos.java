@@ -340,7 +340,7 @@ public class FrmPrinMedicmantos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MantenimietnoMedicamentos ventana = new MantenimietnoMedicamentos();
+        FrmMantenimietnoMedicamentos ventana = new FrmMantenimietnoMedicamentos();
         abrirVentanaInterna(ventana);
     }//GEN-LAST:event_jButton1ActionPerformed
 

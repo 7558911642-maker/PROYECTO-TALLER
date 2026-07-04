@@ -6,13 +6,13 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class MantenimientoCategoriasact extends javax.swing.JInternalFrame {
+public class FrmMantenimientoCategorias extends javax.swing.JInternalFrame {
 
     private final CategoriaDAO categoriaDAO = new CategoriaDAO();
     private DefaultTableModel modeloTabla;
     private int idSeleccionado = -1;
 
-    public MantenimientoCategoriasact() {
+    public FrmMantenimientoCategorias() {
         initComponents();
         initListeners();
         configurarTabla();

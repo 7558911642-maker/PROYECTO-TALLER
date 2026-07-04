@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MantenimientoVentas extends javax.swing.JInternalFrame {
+public class FrmMantenimientoVentas extends javax.swing.JInternalFrame {
 
     DefaultTableModel modeloCarrito;
     
@@ -17,7 +17,7 @@ public class MantenimientoVentas extends javax.swing.JInternalFrame {
     private int idEmpleadoActivo = 1;
     private BigDecimal totalVenta = BigDecimal.ZERO;
     
-    public MantenimientoVentas() {
+    public FrmMantenimientoVentas() {
         initComponents();
         this.setTitle("Módulo de Ventas - Facturación de Mostrador");
         configurarTablaCarrito();

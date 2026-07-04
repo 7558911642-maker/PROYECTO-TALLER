@@ -8,12 +8,12 @@ package FORMS;
  *
  * @author garci
  */
-public class frmNuevaVenta extends javax.swing.JInternalFrame {
+public class FrmNuevaVenta extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmNuevaVenta
      */
-    public frmNuevaVenta() {
+    public FrmNuevaVenta() {
         initComponents();
     }
 
@@ -90,6 +90,7 @@ public class frmNuevaVenta extends javax.swing.JInternalFrame {
         jButton2.setText("EDITAR VENTA");
 
         jButton3.setText("ANULAR VENTA");
+        jButton3.addActionListener(this::jButton3ActionPerformed);
 
         jButton4.setText("REPORTE VENTAS");
 
@@ -499,6 +500,10 @@ public class frmNuevaVenta extends javax.swing.JInternalFrame {
     private void txtPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPagarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPagarActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

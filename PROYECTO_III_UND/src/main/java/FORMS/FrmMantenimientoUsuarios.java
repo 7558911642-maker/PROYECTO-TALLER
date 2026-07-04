@@ -1,40 +1,34 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ */
 package FORMS;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
-public class MantenimientoProveedores extends javax.swing.JInternalFrame {
+/**
+ *
+ * @author HP
+ */
+public class FrmMantenimientoUsuarios extends javax.swing.JInternalFrame {
 
     DefaultTableModel modeloTabla;
-    DAO.ProveedorDAO proveedorDAO = new DAO.ProveedorDAO();
+    DAO.UsuarioDAO usuarioDAO = new DAO.UsuarioDAO();
 
-    public MantenimientoProveedores() {
+    public FrmMantenimientoUsuarios() {
         initComponents();
-        this.setTitle("Mantenimiento de Proveedores");
+        this.setTitle("Mantenimiento de Usuarios");
         configurarTabla();
         cargarTabla();
         btnEliminar1.addActionListener(this::btnEliminar1ActionPerformed);
         btnEliminar2.addActionListener(this::btnEliminar2ActionPerformed);
         btnEliminar3.addActionListener(this::btnEliminar3ActionPerformed);
         btnActualizarStock1.addActionListener(this::btnActualizarStock1ActionPerformed);
-        tablaMedicamentos2.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) {
-                int fila = tablaMedicamentos2.getSelectedRow();
-                if (fila >= 0) {
-                    txtCodigo3.setText(modeloTabla.getValueAt(fila, 1).toString());
-                    txtNombre3.setText(modeloTabla.getValueAt(fila, 2).toString());
-                    txtNombre4.setText(modeloTabla.getValueAt(fila, 3) != null ? modeloTabla.getValueAt(fila, 3).toString() : "");
-                    txtPrecio3.setText(modeloTabla.getValueAt(fila, 4) != null ? modeloTabla.getValueAt(fila, 4).toString() : "");
-                    txtStock3.setText(modeloTabla.getValueAt(fila, 5) != null ? modeloTabla.getValueAt(fila, 5).toString() : "");
-                    String estado = modeloTabla.getValueAt(fila, 6) != null ? modeloTabla.getValueAt(fila, 6).toString() : "Activo";
-                    jComboBox3.setSelectedItem(estado);
-                }
-            }
-        });
     }
 
     private void configurarTabla() {
-        String[] cabecera = {"ID", "RUC", "Razón Social", "Teléfono", "Correo", "Dirección", "Estado"};
+        String[] cabecera = {"ID", "Usuario", "Nombre"};
         modeloTabla = new DefaultTableModel(null, cabecera) {
             @Override
             public boolean isCellEditable(int row, int column) { return false; }
@@ -44,15 +38,11 @@ public class MantenimientoProveedores extends javax.swing.JInternalFrame {
 
     private void cargarTabla() {
         modeloTabla.setRowCount(0);
-        for (LOGICA.ProveedorClass p : proveedorDAO.listar()) {
-            Object[] fila = new Object[7];
-            fila[0] = p.getIdProveedor();
-            fila[1] = p.getRuc();
-            fila[2] = p.getNombreProveedor();
-            fila[3] = p.getTelefono();
-            fila[4] = p.getCorreo();
-            fila[5] = p.getDireccion();
-            fila[6] = p.getEstado();
+        for (LOGICA.UsuarioClass u : usuarioDAO.listar()) {
+            Object[] fila = new Object[3];
+            fila[0] = u.getIdUsuario();
+            fila[1] = u.getUsuario();
+            fila[2] = u.getNombre();
             modeloTabla.addRow(fila);
         }
     }
@@ -60,9 +50,8 @@ public class MantenimientoProveedores extends javax.swing.JInternalFrame {
     private void limpiarCampos() {
         txtCodigo3.setText("");
         txtNombre3.setText("");
-        txtNombre4.setText("");
         txtPrecio3.setText("");
-        txtStock3.setText("");
+        jComboBox1.setSelectedIndex(0);
         jComboBox3.setSelectedIndex(0);
         txtCodigo3.requestFocus();
     }
@@ -100,21 +89,19 @@ public class MantenimientoProveedores extends javax.swing.JInternalFrame {
         txtNombre3 = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        txtStock3 = new javax.swing.JTextField();
-        jLabel32 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel33 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
-        txtNombre4 = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(153, 153, 255));
-        jLabel9.setText("Mantenimiento de Provedores ");
+        jLabel9.setText("Mantenimiento de Usuarios ");
 
         jPanel4.setBackground(new java.awt.Color(232, 232, 255));
 
-        jLabel20.setText("Buscar Provedor (Ruc /Razon social):");
+        jLabel20.setText("Buscar Usuario (Usuario/Nombre):");
 
         txtBuscar2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -140,14 +127,15 @@ public class MantenimientoProveedores extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jLabel20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel20)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -191,11 +179,11 @@ public class MantenimientoProveedores extends javax.swing.JInternalFrame {
                 .addComponent(btnActualizarStock1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(19, 19, 19)
                 .addComponent(btnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEliminar3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,19 +203,19 @@ public class MantenimientoProveedores extends javax.swing.JInternalFrame {
 
         jLabel26.setText(" ");
 
-        jLabel27.setText("Ruc:");
+        jLabel27.setText("Usuario:");
 
-        jLabel28.setText("Razon Social:");
+        jLabel28.setText("Nombre:");
 
-        jLabel29.setText("Teléfono:");
+        jLabel29.setText("Contraseña:");
 
-        jLabel31.setText("Correo:");
+        jLabel31.setText("Rol:");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(153, 153, 255));
-        jLabel11.setText("Datos del Provedores");
+        jLabel11.setText("Datos del Usuario");
 
-        jLabel32.setText("Direccion");
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "da", "ssa" }));
 
         jLabel33.setText("Estado:");
 
@@ -247,24 +235,26 @@ public class MantenimientoProveedores extends javax.swing.JInternalFrame {
                             .addComponent(jLabel29))
                         .addGap(46, 46, 46)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCodigo3, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                            .addComponent(txtCodigo3)
                             .addComponent(txtNombre3)
-                            .addComponent(txtNombre4))
+                            .addComponent(jComboBox1, 0, 209, Short.MAX_VALUE))
                         .addGap(61, 61, 61)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel33)
-                                    .addComponent(jLabel32))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel33)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel31))
-                        .addGap(16, 16, 16)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPrecio3)
-                            .addComponent(txtStock3)
-                            .addComponent(jComboBox3, 0, 191, Short.MAX_VALUE))
-                        .addGap(13, 13, 13))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(txtPrecio3, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                                .addGap(13, 13, 13))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboBox3, 0, 196, Short.MAX_VALUE)
+                                .addContainerGap())))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addContainerGap())))
@@ -285,14 +275,12 @@ public class MantenimientoProveedores extends javax.swing.JInternalFrame {
                     .addComponent(jLabel28)
                     .addComponent(txtNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel26)
-                    .addComponent(txtStock3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel32))
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel33))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
-                    .addComponent(jLabel33)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -307,12 +295,11 @@ public class MantenimientoProveedores extends javax.swing.JInternalFrame {
                         .addComponent(jLabel9))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 671, Short.MAX_VALUE)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,124 +329,73 @@ public class MantenimientoProveedores extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtBuscar2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar2KeyReleased
-        modeloTabla.setRowCount(0);
-        String busqueda = txtBuscar2.getText().trim();
-        for (LOGICA.ProveedorClass p : proveedorDAO.buscar(busqueda)) {
-            Object[] fila = new Object[7];
-            fila[0] = p.getIdProveedor();
-            fila[1] = p.getRuc();
-            fila[2] = p.getNombreProveedor();
-            fila[3] = p.getTelefono();
-            fila[4] = p.getCorreo();
-            fila[5] = p.getDireccion();
-            fila[6] = p.getEstado();
-            modeloTabla.addRow(fila);
-        }
-    }//GEN-LAST:event_txtBuscar2KeyReleased
-
-    private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
-        String ruc = txtCodigo3.getText().trim();
-        String razonSocial = txtNombre3.getText().trim();
-        String telefono = txtNombre4.getText().trim();
-        String correo = txtPrecio3.getText().trim();
-        String direccion = txtStock3.getText().trim();
-        String estado = jComboBox3.getSelectedItem().toString();
-        if (ruc.isEmpty() || razonSocial.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "RUC y Razón Social son obligatorios");
-            return;
-        }
-        LOGICA.ProveedorClass proveedor = new LOGICA.ProveedorClass();
-        proveedor.setRuc(ruc);
-        proveedor.setNombreProveedor(razonSocial);
-        proveedor.setTelefono(telefono);
-        proveedor.setCorreo(correo);
-        proveedor.setDireccion(direccion);
-        proveedor.setEstado(estado);
-        if (proveedorDAO.registrar(proveedor)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Proveedor guardado correctamente");
-            limpiarCampos();
+    private void txtBuscar2KeyReleased(java.awt.event.KeyEvent evt) {
+        String criterio = txtBuscar2.getText().trim();
+        if (criterio.isEmpty()) {
             cargarTabla();
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar el proveedor");
-        }
-    }//GEN-LAST:event_btnGuardar1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        limpiarCampos();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {
-        modeloTabla.setRowCount(0);
-        String busqueda = txtBuscar2.getText().trim();
-        for (LOGICA.ProveedorClass p : proveedorDAO.buscar(busqueda)) {
-            Object[] fila = new Object[7];
-            fila[0] = p.getIdProveedor();
-            fila[1] = p.getRuc();
-            fila[2] = p.getNombreProveedor();
-            fila[3] = p.getTelefono();
-            fila[4] = p.getCorreo();
-            fila[5] = p.getDireccion();
-            fila[6] = p.getEstado();
-            modeloTabla.addRow(fila);
+            modeloTabla.setRowCount(0);
+            for (LOGICA.UsuarioClass u : usuarioDAO.buscar(criterio)) {
+                Object[] fila = new Object[3];
+                fila[0] = u.getIdUsuario();
+                fila[1] = u.getUsuario();
+                fila[2] = u.getNombre();
+                modeloTabla.addRow(fila);
+            }
         }
     }
 
-    private void btnActualizarStock1ActionPerformed(java.awt.event.ActionEvent evt) {
-        int fila = tablaMedicamentos2.getSelectedRow();
-        if (fila < 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un proveedor de la tabla");
+    private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {
+        String user = txtCodigo3.getText().trim();
+        String pass = txtPrecio3.getText().trim();
+        if (user.isEmpty() || pass.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Usuario y contraseña son obligatorios.");
             return;
         }
-        int id = Integer.parseInt(modeloTabla.getValueAt(fila, 0).toString());
-        String ruc = txtCodigo3.getText().trim();
-        String razonSocial = txtNombre3.getText().trim();
-        String telefono = txtNombre4.getText().trim();
-        String correo = txtPrecio3.getText().trim();
-        String direccion = txtStock3.getText().trim();
-        String estado = jComboBox3.getSelectedItem().toString();
-        if (ruc.isEmpty() || razonSocial.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "RUC y Razón Social son obligatorios");
-            return;
-        }
-        LOGICA.ProveedorClass proveedor = new LOGICA.ProveedorClass();
-        proveedor.setIdProveedor(id);
-        proveedor.setRuc(ruc);
-        proveedor.setNombreProveedor(razonSocial);
-        proveedor.setTelefono(telefono);
-        proveedor.setCorreo(correo);
-        proveedor.setDireccion(direccion);
-        proveedor.setEstado(estado);
-        if (proveedorDAO.actualizar(proveedor)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Proveedor actualizado correctamente");
+        LOGICA.UsuarioClass u = new LOGICA.UsuarioClass();
+        u.setUsuario(user);
+        u.setContrasenia(pass);
+        u.setNombre(txtNombre3.getText().trim());
+        if (usuarioDAO.registrar(u)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Usuario guardado correctamente.");
+            limpiarCampos();
             cargarTabla();
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error al actualizar el proveedor");
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al registrar el usuario.");
+        }
+    }
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        limpiarCampos();
+    }
+
+    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {
+        String criterio = javax.swing.JOptionPane.showInputDialog(this, "Ingrese usuario o nombre a buscar:");
+        if (criterio != null && !criterio.trim().isEmpty()) {
+            txtBuscar2.setText(criterio);
+            modeloTabla.setRowCount(0);
+            for (LOGICA.UsuarioClass u : usuarioDAO.buscar(criterio.trim())) {
+                Object[] fila = new Object[3];
+                fila[0] = u.getIdUsuario();
+                fila[1] = u.getUsuario();
+                fila[2] = u.getNombre();
+                modeloTabla.addRow(fila);
+            }
         }
     }
 
     private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {
-        int fila = tablaMedicamentos2.getSelectedRow();
-        if (fila < 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un proveedor de la tabla");
-            return;
-        }
-        int id = Integer.parseInt(modeloTabla.getValueAt(fila, 0).toString());
-        int confirm = javax.swing.JOptionPane.showConfirmDialog(this, "¿Eliminar el proveedor seleccionado?", "Confirmar", javax.swing.JOptionPane.YES_NO_OPTION);
-        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-            if (proveedorDAO.eliminar(id)) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Proveedor eliminado correctamente");
-                limpiarCampos();
-                cargarTabla();
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar el proveedor");
-            }
-        }
+        javax.swing.JOptionPane.showMessageDialog(this, "Función no disponible para usuarios.");
     }
 
     private void btnEliminar3ActionPerformed(java.awt.event.ActionEvent evt) {
         limpiarCampos();
     }
+
+    private void btnActualizarStock1ActionPerformed(java.awt.event.ActionEvent evt) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Función no disponible para usuarios.");
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizarStock1;
@@ -468,6 +404,7 @@ public class MantenimientoProveedores extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEliminar3;
     private javax.swing.JButton btnGuardar1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel20;
@@ -476,7 +413,6 @@ public class MantenimientoProveedores extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -488,8 +424,6 @@ public class MantenimientoProveedores extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtBuscar2;
     private javax.swing.JTextField txtCodigo3;
     private javax.swing.JTextField txtNombre3;
-    private javax.swing.JTextField txtNombre4;
     private javax.swing.JTextField txtPrecio3;
-    private javax.swing.JTextField txtStock3;
     // End of variables declaration//GEN-END:variables
 }

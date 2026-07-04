@@ -530,72 +530,67 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoCategorias ventana = new MantenimientoCategorias();
+        FrmMantenimientoCategorias ventana = new FrmMantenimientoCategorias();
         abrirVentanaInterna(ventana);
     }
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimietnoMedicamentos ventanaMedicamentos = new MantenimietnoMedicamentos();
+        FrmMantenimietnoMedicamentos ventanaMedicamentos = new FrmMantenimietnoMedicamentos();
         abrirVentanaInterna(ventanaMedicamentos);
     }
 
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoClientes ventanaClientes = new MantenimientoClientes();
+        FrmMantenimientoClientes ventanaClientes = new FrmMantenimientoClientes();
         abrirVentanaInterna(ventanaClientes);
     }
 
     private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoVentas ventanaVentas = new MantenimientoVentas();
+        FrmMantenimientoVentas ventanaVentas = new FrmMantenimientoVentas();
         abrirVentanaInterna(ventanaVentas);
     }
 
     private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        ReporteCategorias ventana = new ReporteCategorias();
+        FrmReporteCategorias ventana = new FrmReporteCategorias();
         abrirVentanaInterna(ventana);
     }
 
-    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        ReporteDiarioVentas ventanaDiaria = new ReporteDiarioVentas();
-        abrirVentanaInterna(ventanaDiaria);
-    }
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {
-        Estadisticas_Ventas ventanaEstadisticas = new Estadisticas_Ventas();
+        FrmEstadisticasVentas ventanaEstadisticas = new FrmEstadisticasVentas();
         abrirVentanaInterna(ventanaEstadisticas);      
     }
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoProveedores ventana = new MantenimientoProveedores();
+        FrmMantenimientoProveedores ventana = new FrmMantenimientoProveedores();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoVentas ventana = new MantenimientoVentas();
+        FrmMantenimientoVentas ventana = new FrmMantenimientoVentas();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoUsuarios ventana = new MantenimientoUsuarios();
+        FrmMantenimientoUsuarios ventana = new FrmMantenimientoUsuarios();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {
-        ReporteClientes ventana = new ReporteClientes();
+        FrmReporteClientes ventana = new FrmReporteClientes();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {
-        frmReporteProvedores ventana = new frmReporteProvedores();
+        FrmReporteProvedores ventana = new FrmReporteProvedores();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {
-        frmReporteMedicamentos ventana = new frmReporteMedicamentos();
+        FrmReporteMedicamentos ventana = new FrmReporteMedicamentos();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
-        frmReporteVentas ventana = new frmReporteVentas();
+        FrmReporteVentas ventana = new FrmReporteVentas();
         abrirVentanaInterna(ventana);
     }
 
@@ -604,7 +599,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MantenimietnoMedicamentos ventana = new MantenimietnoMedicamentos();
+        FrmMantenimietnoMedicamentos ventana = new FrmMantenimietnoMedicamentos();
         abrirVentanaInterna(ventana);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -631,17 +626,17 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
    
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoProveedores ventana = new MantenimientoProveedores();
+        FrmMantenimientoProveedores ventana = new FrmMantenimientoProveedores();
         abrirVentanaInterna(ventana);
     }
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoCategorias ventana = new MantenimientoCategorias();
+        FrmMantenimientoCategorias ventana = new FrmMantenimientoCategorias();
         abrirVentanaInterna(ventana);
     }
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {
-        frmReporteVentas ventana = new frmReporteVentas();
+        FrmReporteVentas ventana = new FrmReporteVentas();
         abrirVentanaInterna(ventana);
     }
 

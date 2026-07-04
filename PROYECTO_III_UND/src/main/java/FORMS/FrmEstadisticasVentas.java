@@ -3,13 +3,13 @@ package FORMS;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
-public class Estadisticas_Ventas extends javax.swing.JInternalFrame {
+public class FrmEstadisticasVentas extends javax.swing.JInternalFrame {
 
     DefaultTableModel modeloProductos;
     DefaultTableModel modeloClientes;
     DAO.PedidoDAO pedidoDAO = new DAO.PedidoDAO();
     
-    public Estadisticas_Ventas() {
+    public FrmEstadisticasVentas() {
         initComponents();
         this.setTitle("Módulo de Analítica y Estadísticas Gerenciales");
         configurarTablas();
@@ -222,7 +222,7 @@ public class Estadisticas_Ventas extends javax.swing.JInternalFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
