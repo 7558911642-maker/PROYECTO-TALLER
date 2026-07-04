@@ -79,7 +79,7 @@ public class FrmReporteMedicamentos extends javax.swing.JInternalFrame {
         btnBuscar5 = new javax.swing.JButton();
         btnBuscar6 = new javax.swing.JButton();
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(237, 246, 254));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 153, 255));

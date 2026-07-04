@@ -46,7 +46,6 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jButton16 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -178,12 +177,6 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jButton8.setText("Inicio");
         jButton8.setBorder(null);
 
-        jButton9.setBackground(new java.awt.Color(0, 100, 248));
-        jButton9.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jButton9.setText("Nueva Ventas");
-        jButton9.setBorder(null);
-
         jButton2.setBackground(new java.awt.Color(0, 100, 248));
         jButton2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -239,7 +232,6 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
                     .addComponent(jButton13)
                     .addComponent(jButton10)
                     .addComponent(jButton8)
-                    .addComponent(jButton9)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton11))
@@ -256,10 +248,8 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton8)
-                .addGap(18, 18, 18)
-                .addComponent(jButton9)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
@@ -318,7 +308,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("<html>\n<font color=\"#1451C9\" size=\"4\"><b>Bienvenido</b></font>\n<br><br>\n\n<font color=\"#09256D\" size=\"7\">\n<b>Sistema de Gestión NOVA</b>\n</font>\n\n<br><br>\n\n<font color=\"#52617A\" size=\"4\">\nControl de ventas, inventario y medicamentos\n</font>\n\n<br>\n<hr width=\"290\" align=\"left\">\n\n<font color=\"#65738A\" size=\"3\">\nAdministra tu farmacia de forma eficiente y segura.\n<br><br>\nGestiona ventas, controla inventario, atiende a tus clientes\n<br>\ny toma decisiones con información confiable.\n</font>\n</html>");
+        jLabel2.setText("<html>\n<font color=\"#1451C9\" size=\"10\"><b>Bienvenido</b></font>\n<br><br>\n\n<font color=\"#09256D\" size=\"7\">\n<b>Sistema de Gestión NOVA</b>\n</font>\n\n<br><br>\n\n<font color=\"#52617A\" size=\"4\">\nControl de ventas, inventario y medicamentos\n</font>\n\n<br>\n<hr width=\"290\" align=\"left\">\n\n<font color=\"#65738A\" size=\"3\">\nAdministra tu farmacia de forma eficiente y segura.\n<br><br>\nGestiona ventas, controla inventario, atiende a tus clientes\n<br>\ny toma decisiones con información confiable.\n</font>\n</html>");
         jLabel2.setOpaque(true);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/baner principal.png"))); // NOI18N
@@ -338,9 +328,9 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -367,7 +357,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -557,7 +547,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+            .addComponent(desktopPane)
         );
 
         pack();
@@ -574,7 +564,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     }
 
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        MantenimientoClientes ventanaClientes = new MantenimientoClientes();
+        NuevoClientes ventanaClientes = new NuevoClientes();
         abrirVentanaInterna(ventanaClientes);
     }
 
@@ -739,7 +729,6 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

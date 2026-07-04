@@ -331,7 +331,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="desktopPane" pref="575" max="32767" attributes="0"/>
+          <Component id="desktopPane" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -379,7 +379,7 @@
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="40" max="32767" attributes="0"/>
                               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jPanel3" max="32767" attributes="0"/>
@@ -494,7 +494,6 @@
                               <Component id="jButton13" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton10" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton8" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton9" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton2" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
                               <Component id="jButton3" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
                               <Component id="jButton11" min="-2" max="-2" attributes="0"/>
@@ -515,10 +514,8 @@
                           <Component id="jLabel7" min="-2" pref="122" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="10" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jButton8" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jButton9" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -549,23 +546,6 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Inicio"/>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="null"/>
-                    </Property>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="jButton9">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="f8" green="64" red="0" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI Emoji" size="14" style="1"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Nueva Ventas"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
@@ -795,9 +775,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel6" min="-2" pref="280" max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" pref="263" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel6" max="32767" attributes="0"/>
+                              <Component id="jLabel2" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace pref="32" max="32767" attributes="0"/>
                       </Group>
@@ -817,7 +797,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;font color=&quot;#1451C9&quot; size=&quot;4&quot;&gt;&lt;b&gt;Bienvenido&lt;/b&gt;&lt;/font&gt;&#xa;&lt;br&gt;&lt;br&gt;&#xa;&#xa;&lt;font color=&quot;#09256D&quot; size=&quot;7&quot;&gt;&#xa;&lt;b&gt;Sistema de Gesti&#xf3;n NOVA&lt;/b&gt;&#xa;&lt;/font&gt;&#xa;&#xa;&lt;br&gt;&lt;br&gt;&#xa;&#xa;&lt;font color=&quot;#52617A&quot; size=&quot;4&quot;&gt;&#xa;Control de ventas, inventario y medicamentos&#xa;&lt;/font&gt;&#xa;&#xa;&lt;br&gt;&#xa;&lt;hr width=&quot;290&quot; align=&quot;left&quot;&gt;&#xa;&#xa;&lt;font color=&quot;#65738A&quot; size=&quot;3&quot;&gt;&#xa;Administra tu farmacia de forma eficiente y segura.&#xa;&lt;br&gt;&lt;br&gt;&#xa;Gestiona ventas, controla inventario, atiende a tus clientes&#xa;&lt;br&gt;&#xa;y toma decisiones con informaci&#xf3;n confiable.&#xa;&lt;/font&gt;&#xa;&lt;/html&gt;"/>
+                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;font color=&quot;#1451C9&quot; size=&quot;10&quot;&gt;&lt;b&gt;Bienvenido&lt;/b&gt;&lt;/font&gt;&#xa;&lt;br&gt;&lt;br&gt;&#xa;&#xa;&lt;font color=&quot;#09256D&quot; size=&quot;7&quot;&gt;&#xa;&lt;b&gt;Sistema de Gesti&#xf3;n NOVA&lt;/b&gt;&#xa;&lt;/font&gt;&#xa;&#xa;&lt;br&gt;&lt;br&gt;&#xa;&#xa;&lt;font color=&quot;#52617A&quot; size=&quot;4&quot;&gt;&#xa;Control de ventas, inventario y medicamentos&#xa;&lt;/font&gt;&#xa;&#xa;&lt;br&gt;&#xa;&lt;hr width=&quot;290&quot; align=&quot;left&quot;&gt;&#xa;&#xa;&lt;font color=&quot;#65738A&quot; size=&quot;3&quot;&gt;&#xa;Administra tu farmacia de forma eficiente y segura.&#xa;&lt;br&gt;&lt;br&gt;&#xa;Gestiona ventas, controla inventario, atiende a tus clientes&#xa;&lt;br&gt;&#xa;y toma decisiones con informaci&#xf3;n confiable.&#xa;&lt;/font&gt;&#xa;&lt;/html&gt;"/>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </Component>
