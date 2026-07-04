@@ -37,8 +37,8 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        dcFechaInicio1 = new com.toedter.calendar.JDateChooser();
-        dcFechaFin1 = new com.toedter.calendar.JDateChooser();
+        fchInicio = new com.toedter.calendar.JDateChooser();
+        fchFin = new com.toedter.calendar.JDateChooser();
         btnBuscar1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         txtTotalVentas = new javax.swing.JTextField();
@@ -54,8 +54,8 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnListar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 255));
         setClosable(true);
@@ -63,9 +63,9 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(237, 246, 254));
 
-        jPanel2.setBackground(new java.awt.Color(232, 232, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jLabel1.setText("fecha de inicio:");
@@ -73,9 +73,9 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jLabel2.setText("fecha de fin:");
 
-        dcFechaInicio1.setDateFormatString("yyyy-MM-dd");
+        fchInicio.setDateFormatString("yyyy-MM-dd");
 
-        dcFechaFin1.setDateFormatString("yyyy-MM-dd");
+        fchFin.setDateFormatString("yyyy-MM-dd");
 
         btnBuscar1.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         btnBuscar1.setText("Buscar");
@@ -89,11 +89,11 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(dcFechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fchInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(dcFechaFin1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fchFin, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnBuscar1)
                 .addGap(17, 17, 17))
@@ -106,13 +106,13 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
                     .addComponent(btnBuscar1)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2)
-                        .addComponent(dcFechaFin1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(dcFechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fchFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fchInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)))
                 .addGap(24, 24, 24))
         );
 
-        jPanel3.setBackground(new java.awt.Color(232, 232, 255));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         txtTotalVentas.addActionListener(this::txtTotalVentasActionPerformed);
 
@@ -162,6 +162,8 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
         tblGestionVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -196,7 +198,7 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 153, 255));
-        jLabel4.setText("<html> <table width=\"320\" cellpadding=\"0\" cellspacing=\"0\">  <tr bgcolor=\"#FFFFFF\">     <td>         <font face=\"Segoe UI\" color=\"#092B70\" size=\"5\">             <b>Gestion Ventas</b>         </font>          <br>          <font face=\"Segoe UI\" color=\"#6B7280\" size=\"3\">             Administrar las Ventas    </font>     </td> </tr>  <tr bgcolor=\"#FFFFFF\">     <td height=\"18\"></td> </tr>  </table> </html>");
+        jLabel4.setText("<html>\n<table cellpadding=\"0\" cellspacing=\"0\">\n    <tr>\n        <td style=\"padding-left:18px;\">\n            <span style=\"font-family:Segoe UI; font-size:28px; color:#075DEB;\">\n                <b>Gestion Ventas</b>\n            </span>\n            <br>\n            <span style=\"font-family:Segoe UI; font-size:13px; color:#5A6E8C;\">\n                Informe de Ventas\n            </span>\n        </td>\n    </tr>\n    <tr>\n        <td>\n            <hr color=\"#0066FF\" size=\"1\">\n        </td>\n    </tr>\n</table>\n</html>");
 
         btnVolver.setText("<-- VOLVER");
 
@@ -205,8 +207,8 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVolver)
                 .addGap(66, 66, 66))
@@ -214,16 +216,20 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jButton1.setText("LISTAR");
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton2.setText("EDITAR");
+        btnListar.setText("LISTAR");
+
+        btnEditar.setText("EDITAR");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -232,17 +238,17 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btnEditar)
+                    .addComponent(btnListar))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addComponent(jButton1)
+                .addComponent(btnListar)
                 .addGap(38, 38, 38)
-                .addComponent(jButton2)
+                .addComponent(btnEditar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -295,8 +301,8 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {
-        java.util.Date fechaInicio = dcFechaInicio1.getDate();
-        java.util.Date fechaFin = dcFechaFin1.getDate();
+        java.util.Date fechaInicio = fchInicio.getDate();
+        java.util.Date fechaFin = fchFin.getDate();
         if (fechaInicio == null || fechaFin == null) {
             javax.swing.JOptionPane.showMessageDialog(this, "Seleccione fecha de inicio y fecha de fin.");
             return;
@@ -343,11 +349,11 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar1;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnListar;
     private javax.swing.JButton btnVolver;
-    private com.toedter.calendar.JDateChooser dcFechaFin1;
-    private com.toedter.calendar.JDateChooser dcFechaInicio1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private com.toedter.calendar.JDateChooser fchFin;
+    private com.toedter.calendar.JDateChooser fchInicio;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -8,12 +8,12 @@ package FORMS;
  *
  * @author HP
  */
-public class x extends javax.swing.JInternalFrame {
+public class NuevoMedicamento extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form x
      */
-    public x() {
+    public NuevoMedicamento() {
         initComponents();
     }
 
