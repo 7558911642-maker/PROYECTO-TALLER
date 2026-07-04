@@ -236,12 +236,12 @@ public class FrmReporteCategorias extends javax.swing.JInternalFrame {
 
         jButton1.setText("INICIO");
 
-        jButton2.setText("EDITAR PROVEEDOR");
+        jButton2.setText("EDITAR CATEGORIA");
 
-        jButton3.setText("ANULAR PROVEEDOR");
+        jButton3.setText("ANULAR CATEGORIA");
         jButton3.addActionListener(this::jButton3ActionPerformed);
 
-        jButton5.setText("NUEVO PROVEEDOR");
+        jButton5.setText("NUEVO CATEGORIA");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
