@@ -8,7 +8,7 @@ public class PROYECTO_III_UND {
 
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(() -> {
-            new FORMS.LoginForm().setVisible(true);
+            new FORMS.LoginForm_1().setVisible(true);
         });
     }
 }

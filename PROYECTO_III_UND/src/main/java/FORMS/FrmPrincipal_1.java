@@ -549,11 +549,6 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         abrirVentanaInterna(ventanaVentas);
     }
 
-    private void copyMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        AnularVentas ventanaAnulaciones = new AnularVentas();
-        abrirVentanaInterna(ventanaAnulaciones);
-    }
-
     private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
         ReporteCategorias ventana = new ReporteCategorias();
         abrirVentanaInterna(ventana);
@@ -604,11 +599,6 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         abrirVentanaInterna(ventana);
     }
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {
-        this.dispose();
-        new LoginForm().setVisible(true);
-    }
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {
         System.exit(0);
     }
@@ -647,13 +637,6 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         MantenimientoCategorias ventana = new MantenimientoCategorias();
-        abrirVentanaInterna(ventana);
-    }
-
-  
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
-        AnularVentas ventana = new AnularVentas();
         abrirVentanaInterna(ventana);
     }
 
