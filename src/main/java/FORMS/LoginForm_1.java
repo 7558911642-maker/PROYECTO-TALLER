@@ -47,7 +47,9 @@ public class LoginForm_1 extends javax.swing.JFrame {
 
         jLabel2.setText("<html>\n    <center>\n        <font face=\"Segoe UI\" color=\"#FFFFFF\" size=\"5\">\n            <b>Bienvenido</b>\n        </font>\n        <br><br>\n        <font face=\"Segoe UI\" color=\"#D9EEEE\" size=\"4\">\n            Inicia sesión para continuar\n        </font>\n    </center>\n</html>");
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 189, 148));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login.png"))); // NOI18N
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 170, 160));
 
         btnIniciar1.setBackground(new java.awt.Color(0, 100, 248));
         btnIniciar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
