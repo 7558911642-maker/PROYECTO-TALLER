@@ -1,143 +1,16 @@
 package FORMS;
 
-import DAO.ProveedorDAO;
-import LOGICA.ProveedorClass;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
-public class FrmMantenimientoProveedores extends javax.swing.JInternalFrame {
 
-    private final ProveedorDAO proveedorDAO = new ProveedorDAO();
-    private DefaultTableModel modeloTabla;
-    private int idSeleccionado = -1;
+public class NuevoProvedor extends javax.swing.JInternalFrame {
 
-    public FrmMantenimientoProveedores() {
+   
+
+    public NuevoProvedor() {
         initComponents();
-        cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Activo", "Inactivo"}));
-        initListeners();
-        configurarTabla();
+        
     }
 
-    private void initListeners() {
-        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
-        jButton1.addActionListener(this::btnActualizarActionPerformed);
-        jButton2.addActionListener(this::btnCancelarActionPerformed);
-        jButton3.addActionListener(this::btnLimpiarActionPerformed);
-        btnVolver.addActionListener(this::btnVolverActionPerformed);
-        tblListaProveedores.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) {
-                cargarCamposDesdeTabla();
-            }
-        });
-    }
-
-    private void configurarTabla() {
-        modeloTabla = new DefaultTableModel(
-            new String[]{"ID", "RUC", "Razón Social", "Teléfono", "Correo", "Dirección", "Estado"}, 0
-        ) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        tblListaProveedores.setModel(modeloTabla);
-    }
-
-    private void buscarProveedor() {
-        String ruc = txtBuscarRuc.getText().trim();
-        if (ruc.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingrese un RUC para buscar");
-            return;
-        }
-        modeloTabla.setRowCount(0);
-        for (ProveedorClass p : proveedorDAO.buscar(ruc)) {
-            modeloTabla.addRow(new Object[]{
-                p.getIdProveedor(), p.getRuc(), p.getNombreProveedor(),
-                p.getTelefono(), p.getCorreo(), p.getDireccion(), p.getEstado()
-            });
-        }
-        if (modeloTabla.getRowCount() > 0) {
-            tblListaProveedores.setRowSelectionInterval(0, 0);
-        } else {
-            JOptionPane.showMessageDialog(this, "Proveedor no encontrado");
-        }
-    }
-
-    private void cargarCamposDesdeTabla() {
-        int fila = tblListaProveedores.getSelectedRow();
-        if (fila < 0) return;
-        idSeleccionado = Integer.parseInt(modeloTabla.getValueAt(fila, 0).toString());
-        txtRuc.setText(modeloTabla.getValueAt(fila, 1).toString());
-        txtRazon.setText(modeloTabla.getValueAt(fila, 2).toString());
-        txtTelefono.setText(modeloTabla.getValueAt(fila, 3).toString());
-        txtCorreo.setText(modeloTabla.getValueAt(fila, 4).toString());
-        txtDireccion.setText(modeloTabla.getValueAt(fila, 5).toString());
-        String estado = modeloTabla.getValueAt(fila, 6).toString();
-        for (int i = 0; i < cbxEstado.getItemCount(); i++) {
-            if (cbxEstado.getItemAt(i).equals(estado)) {
-                cbxEstado.setSelectedIndex(i);
-                break;
-            }
-        }
-    }
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {
-        buscarProveedor();
-    }
-
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {
-        if (idSeleccionado < 0) {
-            JOptionPane.showMessageDialog(this, "Seleccione un proveedor de la tabla");
-            return;
-        }
-        String ruc = txtRuc.getText().trim();
-        String razonSocial = txtRazon.getText().trim();
-        String telefono = txtTelefono.getText().trim();
-        String correo = txtCorreo.getText().trim();
-        String direccion = txtDireccion.getText().trim();
-        String estado = cbxEstado.getSelectedItem().toString();
-        if (ruc.isEmpty() || razonSocial.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "RUC y Razón Social son obligatorios");
-            return;
-        }
-        ProveedorClass p = new ProveedorClass();
-        p.setIdProveedor(idSeleccionado);
-        p.setRuc(ruc);
-        p.setNombreProveedor(razonSocial);
-        p.setTelefono(telefono);
-        p.setCorreo(correo);
-        p.setDireccion(direccion);
-        p.setEstado(estado);
-        if (proveedorDAO.actualizar(p)) {
-            JOptionPane.showMessageDialog(this, "Proveedor actualizado correctamente");
-            limpiarCampos();
-            txtBuscarRuc.setText("");
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al actualizar el proveedor");
-        }
-    }
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {
-        limpiarCampos();
-    }
-
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {
-        limpiarCampos();
-    }
-
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {
-        this.dispose();
-    }
-
-    private void limpiarCampos() {
-        idSeleccionado = -1;
-        txtRuc.setText("");
-        txtRazon.setText("");
-        txtTelefono.setText("");
-        txtCorreo.setText("");
-        txtDireccion.setText("");
-        cbxEstado.setSelectedIndex(0);
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -145,8 +18,6 @@ public class FrmMantenimientoProveedores extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -163,6 +34,9 @@ public class FrmMantenimientoProveedores extends javax.swing.JInternalFrame {
         txtDireccion1 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         cbxEstado1 = new javax.swing.JComboBox<>();
+        btnEliminar1 = new javax.swing.JButton();
+        btnGuardar1 = new javax.swing.JButton();
+        btnEliminar3 = new javax.swing.JButton();
 
         setForeground(new java.awt.Color(51, 51, 255));
 
@@ -170,17 +44,13 @@ public class FrmMantenimientoProveedores extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(101, 65, 136));
-        jLabel1.setText("<html>\n<table width=\"320\" cellpadding=\"0\" cellspacing=\"0\">\n\n<tr bgcolor=\"#FFFFFF\">\n    <td>\n        <font face=\"Segoe UI\" color=\"#092B70\" size=\"5\">\n            <b>Nuevo Provedor</b>\n        </font>\n\n        <br>\n\n        <font face=\"Segoe UI\" color=\"#6B7280\" size=\"3\">\n            Registre un nuevo cliente\n        </font>\n    </td>\n</tr>\n\n<tr bgcolor=\"#FFFFFF\">\n    <td height=\"18\"></td>\n</tr>\n\n</table>\n</html>");
-
-        jButton2.setText("CANCELAR");
-
-        jButton3.setText("LIMPIAR");
+        jLabel1.setText("<html>\n<table cellpadding=\"0\" cellspacing=\"0\">\n    <tr>\n        <td style=\"padding-left:18px;\">\n            <span style=\"font-family:Segoe UI; font-size:28px; color:#075DEB;\">\n                <b>Nuevo Provedor</b>\n            </span>\n            <br>\n            <span style=\"font-family:Segoe UI; font-size:13px; color:#5A6E8C;\">\n                Registre un nuevo Provedor\n            </span>\n        </td>\n    </tr>\n    <tr>\n        <td>\n            <hr color=\"#0066FF\" size=\"1\">\n        </td>\n    </tr>\n</table>\n</html>");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(200, 96, 222));
-        jLabel4.setText("informacion empresarial ");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 100, 248));
+        jLabel4.setText("Informacion empresarial ");
 
         jLabel5.setText("RUC:");
 
@@ -226,8 +96,8 @@ public class FrmMantenimientoProveedores extends javax.swing.JInternalFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(200, 96, 222));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 100, 248));
         jLabel7.setText("Datos de contacto");
 
         jLabel15.setText("Correo:");
@@ -274,26 +144,41 @@ public class FrmMantenimientoProveedores extends javax.swing.JInternalFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        btnEliminar1.setBackground(new java.awt.Color(0, 100, 248));
+        btnEliminar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar1.setText("Cancelar");
+
+        btnGuardar1.setBackground(new java.awt.Color(237, 246, 254));
+        btnGuardar1.setText("Guardar");
+        btnGuardar1.addActionListener(this::btnGuardar1ActionPerformed);
+
+        btnEliminar3.setBackground(new java.awt.Color(248, 251, 254));
+        btnEliminar3.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
+        btnEliminar3.setForeground(new java.awt.Color(255, 102, 102));
+        btnEliminar3.setText("limpiar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(44, 44, 44)
-                .addComponent(jButton3)
-                .addGap(31, 31, 31))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(21, 21, 21))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(btnEliminar3)
+                .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,11 +189,12 @@ public class FrmMantenimientoProveedores extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
-                .addContainerGap())
+                    .addComponent(btnEliminar1)
+                    .addComponent(btnGuardar1)
+                    .addComponent(btnEliminar3))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -325,11 +211,16 @@ public class FrmMantenimientoProveedores extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminar1;
+    private javax.swing.JButton btnEliminar3;
+    private javax.swing.JButton btnGuardar1;
     private javax.swing.JComboBox<String> cbxEstado1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;

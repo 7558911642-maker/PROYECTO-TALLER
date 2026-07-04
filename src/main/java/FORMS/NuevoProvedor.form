@@ -44,24 +44,26 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                  <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-              </Group>
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Component id="jPanel4" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="178" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="486" max="-2" attributes="0"/>
+                  <EmptySpace pref="58" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnEliminar1" min="-2" pref="81" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="btnGuardar1" min="-2" pref="92" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="btnEliminar3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -75,12 +77,13 @@
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEliminar1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnGuardar1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEliminar3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -94,17 +97,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="88" green="41" red="65" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;table width=&quot;320&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&#xa;&#xa;&lt;tr bgcolor=&quot;#FFFFFF&quot;&gt;&#xa;    &lt;td&gt;&#xa;        &lt;font face=&quot;Segoe UI&quot; color=&quot;#092B70&quot; size=&quot;5&quot;&gt;&#xa;            &lt;b&gt;Nuevo Provedor&lt;/b&gt;&#xa;        &lt;/font&gt;&#xa;&#xa;        &lt;br&gt;&#xa;&#xa;        &lt;font face=&quot;Segoe UI&quot; color=&quot;#6B7280&quot; size=&quot;3&quot;&gt;&#xa;            Registre un nuevo cliente&#xa;        &lt;/font&gt;&#xa;    &lt;/td&gt;&#xa;&lt;/tr&gt;&#xa;&#xa;&lt;tr bgcolor=&quot;#FFFFFF&quot;&gt;&#xa;    &lt;td height=&quot;18&quot;&gt;&lt;/td&gt;&#xa;&lt;/tr&gt;&#xa;&#xa;&lt;/table&gt;&#xa;&lt;/html&gt;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="CANCELAR"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="LIMPIAR"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&#xa;    &lt;tr&gt;&#xa;        &lt;td style=&quot;padding-left:18px;&quot;&gt;&#xa;            &lt;span style=&quot;font-family:Segoe UI; font-size:28px; color:#075DEB;&quot;&gt;&#xa;                &lt;b&gt;Nuevo Provedor&lt;/b&gt;&#xa;            &lt;/span&gt;&#xa;            &lt;br&gt;&#xa;            &lt;span style=&quot;font-family:Segoe UI; font-size:13px; color:#5A6E8C;&quot;&gt;&#xa;                Registre un nuevo Provedor&#xa;            &lt;/span&gt;&#xa;        &lt;/td&gt;&#xa;    &lt;/tr&gt;&#xa;    &lt;tr&gt;&#xa;        &lt;td&gt;&#xa;            &lt;hr color=&quot;#0066FF&quot; size=&quot;1&quot;&gt;&#xa;        &lt;/td&gt;&#xa;    &lt;/tr&gt;&#xa;&lt;/table&gt;&#xa;&lt;/html&gt;"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel3">
@@ -158,12 +151,12 @@
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="12" style="1"/>
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="de" green="60" red="c8" type="rgb"/>
+                  <Color blue="f8" green="64" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="informacion empresarial "/>
+                <Property name="text" type="java.lang.String" value="Informacion empresarial "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
@@ -240,10 +233,10 @@
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="12" style="1"/>
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="de" green="60" red="c8" type="rgb"/>
+                  <Color blue="f8" green="64" red="0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Datos de contacto"/>
               </Properties>
@@ -283,6 +276,42 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="btnEliminar1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f8" green="64" red="0" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Cancelar"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnGuardar1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="fe" green="f6" red="ed" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Guardar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardar1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnEliminar3">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="fe" green="fb" red="f8" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Historic" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="limpiar"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
