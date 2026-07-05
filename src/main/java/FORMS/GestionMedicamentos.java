@@ -224,6 +224,7 @@ public class GestionMedicamentos extends javax.swing.JInternalFrame {
 
         btnVolver.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnVolver.setText("<-- VOLVER");
+        btnVolver.addActionListener(this::btnVolverActionPerformed);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -297,6 +298,10 @@ public class GestionMedicamentos extends javax.swing.JInternalFrame {
     private void txtTotalRecaudadoActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {
+        dispose();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;

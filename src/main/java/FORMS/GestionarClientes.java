@@ -165,6 +165,7 @@ public class GestionarClientes extends javax.swing.JInternalFrame {
 
         btnVolver.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnVolver.setText("<-- VOLVER");
+        btnVolver.addActionListener(this::btnVolverActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -223,6 +224,10 @@ public class GestionarClientes extends javax.swing.JInternalFrame {
     private void txtTotalRecaudadoActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {
+        dispose();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar1;

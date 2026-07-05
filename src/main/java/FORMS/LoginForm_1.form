@@ -70,14 +70,14 @@
                                   <Component id="jLabel4" max="32767" attributes="0"/>
                                   <EmptySpace min="171" pref="171" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="txtContraseña1" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtUsuario1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtusuario" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                  <Component id="btniniciosecion" min="-2" pref="177" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="txtclave" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                          <Component id="btnIniciar1" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -92,13 +92,13 @@
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="txtUsuario1" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtusuario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Component id="jLabel5" max="32767" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="txtContraseña1" max="32767" attributes="0"/>
+                  <Component id="txtclave" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnIniciar1" pref="34" max="32767" attributes="0"/>
+                  <Component id="btniniciosecion" pref="34" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
               </Group>
               <Component id="jPanel4" max="32767" attributes="0"/>
@@ -127,19 +127,35 @@
             </Property>
           </Properties>
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-            <Property name="useNullLayout" type="boolean" value="false"/>
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" pref="180" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                      <Component id="jLabel3" min="-2" pref="160" max="-2" attributes="0"/>
+                      <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;    &lt;center&gt;&#xa;        &lt;font face=&quot;Segoe UI&quot; color=&quot;#FFFFFF&quot; size=&quot;5&quot;&gt;&#xa;            &lt;b&gt;Bienvenido&lt;/b&gt;&#xa;        &lt;/font&gt;&#xa;        &lt;br&gt;&lt;br&gt;&#xa;        &lt;font face=&quot;Segoe UI&quot; color=&quot;#D9EEEE&quot; size=&quot;4&quot;&gt;&#xa;            Inicia sesi&#xf3;n para continuar&#xa;        &lt;/font&gt;&#xa;    &lt;/center&gt;&#xa;&lt;/html&gt;"/>
               </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="13" y="200" width="180" height="-1"/>
-                </Constraint>
-              </Constraints>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
@@ -147,15 +163,10 @@
                   <Image iconType="3" name="/login.png"/>
                 </Property>
               </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="10" y="20" width="170" height="160"/>
-                </Constraint>
-              </Constraints>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btnIniciar1">
+        <Component class="javax.swing.JButton" name="btniniciosecion">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f8" green="64" red="0" type="rgb"/>
@@ -169,10 +180,8 @@
             <Property name="text" type="java.lang.String" value="Iniciar sesion "/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIniciar1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btniniciosecionActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JPasswordField" name="txtContrase&#xf1;a1">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -182,7 +191,7 @@
             <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtUsuario1">
+        <Component class="javax.swing.JTextField" name="txtusuario">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
@@ -191,6 +200,8 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Usuario:"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txtclave">
         </Component>
       </SubComponents>
     </Container>

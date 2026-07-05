@@ -7,6 +7,7 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
     }
 
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -47,7 +48,7 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(tblGestionCategorias);
 
-        btnNuevo.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14));
+        btnNuevo.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         btnNuevo.setText("+ Nuevo");
         btnNuevo.addActionListener(this::btnNuevoActionPerformed);
 
@@ -82,33 +83,33 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14));
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel3.setText(" Total Categorias");
 
-        lblTotalCat.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18));
+        lblTotalCat.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         lblTotalCat.setForeground(new java.awt.Color(0, 100, 248));
         lblTotalCat.setText("0");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14));
+        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel5.setText(" Categorias activas  ");
 
-        lblCatActivas.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18));
+        lblCatActivas.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         lblCatActivas.setForeground(new java.awt.Color(34, 165, 90));
         lblCatActivas.setText("0");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14));
+        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel6.setText("Categorias Inactivas");
 
-        lblCatInactiva.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18));
+        lblCatInactiva.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         lblCatInactiva.setForeground(new java.awt.Color(255, 0, 0));
         lblCatInactiva.setText("0");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 153, 255));
         jLabel4.setText("<html>\n<table width=\"260\" cellpadding=\"0\" cellspacing=\"0\">\n  <tr>\n    <td><font face=\"Segoe UI\" color=\"#0645A3\" size=\"5\"><b>Gestion Categorías</b></font></td>\n  </tr>\n  <tr>\n    <td><font face=\"Segoe UI\" color=\"#707782\" size=\"2\">Administración de Categorías</font></td>\n  </tr>\n  <!-- Se eliminó la fila intermedia que daba el espacio de altura 5 -->\n  <tr>\n    <td bgcolor=\"#62A9F5\" height=\"3\"></td>\n  </tr>\n</table>\n</html>");
         jLabel4.setToolTipText("");
 
-        btnVolver.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14));
+        btnVolver.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnVolver.setText("<-- VOLVER");
         btnVolver.addActionListener(this::btnVolverActionPerformed);
 
@@ -178,10 +179,11 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
         );
 
         pack();
-    }
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {
-    }
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {
         NuevaCategoria ventana = new NuevaCategoria();
@@ -192,6 +194,7 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
         }
     }
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
@@ -207,4 +210,5 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblTotalCat;
     private javax.swing.JTable tblGestionCategorias;
     private javax.swing.JTextField txtBuscar;
+    // End of variables declaration//GEN-END:variables
 }

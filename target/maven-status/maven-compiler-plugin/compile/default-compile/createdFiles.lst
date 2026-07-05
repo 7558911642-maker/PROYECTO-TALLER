@@ -8,6 +8,7 @@ FORMS\FrmPrincipal_1$1.class
 FORMS\GestionarInventario.class
 FORMS\GestionarVentas.class
 FORMS\GestionMedicamentos.class
+LOGICA\InicioSesion.class
 CONEX\ConexionBD.class
 FORMS\FrmPrincipal_1.class
 FORMS\GestionarVentas$1.class

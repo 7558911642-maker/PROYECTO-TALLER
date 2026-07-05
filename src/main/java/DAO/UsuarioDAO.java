@@ -21,8 +21,8 @@ public class UsuarioDAO {
                 return rs.next();
             }
         } catch (SQLException e) {
-            System.out.println("Error al validar el usuario: " + e.getMessage());
-            return false;
+            System.err.println("Error al validar el usuario: " + e.getMessage());
+            throw new RuntimeException("Error de conexión con la base de datos: " + e.getMessage(), e);
         }
     }
 

@@ -6,7 +6,10 @@ import javax.swing.JInternalFrame;
 public class FrmPrincipal_1 extends javax.swing.JFrame {
 
     
-   
+   public FrmPrincipal_1() {
+    initComponents();
+}
+
 
     
     private void abrirVentanaInterna(JInternalFrame ventana) {
@@ -179,6 +182,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         btnInicio.setForeground(new java.awt.Color(255, 255, 255));
         btnInicio.setText("Inicio");
         btnInicio.setBorder(null);
+        btnInicio.addActionListener(this::btnInicioActionPerformed);
 
         btnClientes.setBackground(new java.awt.Color(0, 100, 248));
         btnClientes.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
@@ -193,6 +197,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         btnInventario.setForeground(new java.awt.Color(255, 255, 255));
         btnInventario.setText("Inventario");
         btnInventario.setBorder(null);
+        btnInventario.addActionListener(this::btnInventarioActionPerformed);
 
         btnProvedores.setBackground(new java.awt.Color(0, 100, 248));
         btnProvedores.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
@@ -200,12 +205,14 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         btnProvedores.setText("Provedores");
         btnProvedores.setBorder(null);
         btnProvedores.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnProvedores.addActionListener(this::btnProvedoresActionPerformed);
 
         btnReportes.setBackground(new java.awt.Color(0, 100, 248));
         btnReportes.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
         btnReportes.setForeground(new java.awt.Color(255, 255, 255));
         btnReportes.setText("Reportes");
         btnReportes.setBorder(null);
+        btnReportes.addActionListener(this::btnReportesActionPerformed);
 
         btnMedicamentos.setBackground(new java.awt.Color(0, 100, 248));
         btnMedicamentos.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
@@ -219,6 +226,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         btnConfiguraciones.setForeground(new java.awt.Color(255, 255, 255));
         btnConfiguraciones.setText("configuraciones");
         btnConfiguraciones.setBorder(null);
+        btnConfiguraciones.addActionListener(this::btnConfiguracionesActionPerformed);
 
         jLabel5.setText("<html>\n    <center>\n        <font face=\"Segoe UI\" color=\"#DCE7F3\" size=\"3\">\n            Tu salud, nuestro compromiso\n        </font>\n    </center>\n</html>");
 
@@ -427,6 +435,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu15.add(jMenuItem35);
 
         jMenuItem36.setText("Gestionar usuarios");
+        jMenuItem36.addActionListener(this::jMenuItem36ActionPerformed);
         jMenu15.add(jMenuItem36);
 
         fileMenu.add(jMenu15);
@@ -451,6 +460,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         editMenu.add(jMenuItem10);
 
         jMenuItem12.setText("Consultar inventario");
+        jMenuItem12.addActionListener(this::jMenuItem12ActionPerformed);
         editMenu.add(jMenuItem12);
 
         menuBar.add(editMenu);
@@ -465,12 +475,15 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu2.add(jMenuItem6);
 
         jMenuItem13.setText("Ventas por Cliente");
+        jMenuItem13.addActionListener(this::jMenuItem13ActionPerformed);
         jMenu2.add(jMenuItem13);
 
         jMenuItem14.setText("Ventas por Usuario");
+        jMenuItem14.addActionListener(this::jMenuItem14ActionPerformed);
         jMenu2.add(jMenuItem14);
 
         jMenuItem15.setText("Ventas anuladas");
+        jMenuItem15.addActionListener(this::jMenuItem15ActionPerformed);
         jMenu2.add(jMenuItem15);
 
         helpMenu.add(jMenu2);
@@ -478,15 +491,19 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu4.setText("Inventario");
 
         jMenuItem7.setText("Stock actual");
+        jMenuItem7.addActionListener(this::jMenuItem7ActionPerformed);
         jMenu4.add(jMenuItem7);
 
         jMenuItem16.setText("Bajo stock");
+        jMenuItem16.addActionListener(this::jMenuItem16ActionPerformed);
         jMenu4.add(jMenuItem16);
 
         jMenuItem17.setText("Medicamentos vencidos ");
+        jMenuItem17.addActionListener(this::jMenuItem17ActionPerformed);
         jMenu4.add(jMenuItem17);
 
         jMenuItem18.setText("Proximos a Vencer");
+        jMenuItem18.addActionListener(this::jMenuItem18ActionPerformed);
         jMenu4.add(jMenuItem18);
 
         helpMenu.add(jMenu4);
@@ -508,6 +525,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu5.add(jMenuItem20);
 
         jMenuItem21.setText("Usuarios");
+        jMenuItem21.addActionListener(this::jMenuItem21ActionPerformed);
         jMenu5.add(jMenuItem21);
 
         helpMenu.add(jMenu5);
@@ -515,12 +533,15 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu6.setText("Estadisticas");
 
         jMenuItem19.setText("Estadísticas de ventas");
+        jMenuItem19.addActionListener(this::jMenuItem19ActionPerformed);
         jMenu6.add(jMenuItem19);
 
         jMenuItem23.setText("Productos más vendidos");
+        jMenuItem23.addActionListener(this::jMenuItem23ActionPerformed);
         jMenu6.add(jMenuItem23);
 
         jMenuItem24.setText("Clientes frecuentes");
+        jMenuItem24.addActionListener(this::jMenuItem24ActionPerformed);
         jMenu6.add(jMenuItem24);
 
         saveMenuItem2.setMnemonic('s');
@@ -535,9 +556,11 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu3.setText("Ayuda");
 
         jMenuItem33.setText("Manual de usuario");
+        jMenuItem33.addActionListener(this::jMenuItem33ActionPerformed);
         jMenu3.add(jMenuItem33);
 
         jMenuItem34.setText("Informacion del sistema");
+        jMenuItem34.addActionListener(this::jMenuItem34ActionPerformed);
         jMenu3.add(jMenuItem34);
 
         menuBar.add(jMenu3);
@@ -635,11 +658,6 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         abrirVentanaInterna(ventana);
     }
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
-        GestionarVentas ventana = new GestionarVentas();
-        abrirVentanaInterna(ventana);
-    }
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {
         System.exit(0);
     }
@@ -709,6 +727,115 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {
         GestionarVentas ventana = new GestionarVentas();
         abrirVentanaInterna(ventana);
+    }
+
+    private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            for (JInternalFrame frame : desktopPane.getAllFrames()) {
+                frame.setIcon(false);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al minimizar ventanas: " + e.getMessage());
+        }
+    }
+
+    private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {
+        GestionInventario ventana = new GestionInventario();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void btnProvedoresActionPerformed(java.awt.event.ActionEvent evt) {
+        GestionProvedores ventana = new GestionProvedores();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {
+        ReporteDiarioVentas ventana = new ReporteDiarioVentas();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void btnConfiguracionesActionPerformed(java.awt.event.ActionEvent evt) {
+        NuevoUsuario ventana = new NuevoUsuario();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem36ActionPerformed(java.awt.event.ActionEvent evt) {
+        GestionarUsuarios ventana = new GestionarUsuarios();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {
+        GestionInventario ventana = new GestionInventario();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {
+        ReporteDiarioVentas ventana = new ReporteDiarioVentas();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {
+        FrmEstadisticasVentas ventana = new FrmEstadisticasVentas();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {
+        GestionarVentas ventana = new GestionarVentas();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
+        GestionInventario ventana = new GestionInventario();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {
+        AlertasInventario ventana = new AlertasInventario();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {
+        AlertasInventario ventana = new AlertasInventario();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {
+        AlertasInventario ventana = new AlertasInventario();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {
+        GestionarUsuarios ventana = new GestionarUsuarios();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {
+        FrmEstadisticasVentas ventana = new FrmEstadisticasVentas();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {
+        FrmEstadisticasVentas ventana = new FrmEstadisticasVentas();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {
+        GestionarClientes ventana = new GestionarClientes();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem33ActionPerformed(java.awt.event.ActionEvent evt) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "Para más información, consulte el manual de usuario del sistema.",
+            "Manual de usuario",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void jMenuItem34ActionPerformed(java.awt.event.ActionEvent evt) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "Sistema de Gestión NOVA\nVersión: 1.0\nDesarrollado para la gestión de farmacias.",
+            "Información del sistema",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**

@@ -27,10 +27,10 @@ public class NuevaCategoria extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        btnEliminar3 = new javax.swing.JButton();
-        btnGuardar1 = new javax.swing.JButton();
-        btnEliminar1 = new javax.swing.JButton();
+        cbEstado = new javax.swing.JComboBox<>();
+        btnLimpiar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -56,7 +56,7 @@ public class NuevaCategoria extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Estado:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Activo", "Inactivo" }));
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Activo", "Inactivo" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -80,7 +80,7 @@ public class NuevaCategoria extends javax.swing.JInternalFrame {
                         .addGap(30, 30, 30)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtDescripcion)
-                            .addComponent(jComboBox1, 0, 246, Short.MAX_VALUE))))
+                            .addComponent(cbEstado, 0, 246, Short.MAX_VALUE))))
                 .addGap(18, 18, 18))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
@@ -107,28 +107,29 @@ public class NuevaCategoria extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        btnEliminar3.setBackground(new java.awt.Color(248, 251, 254));
-        btnEliminar3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
-        btnEliminar3.setForeground(new java.awt.Color(255, 102, 102));
-        btnEliminar3.setText("limpiar");
-        btnEliminar3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
+        btnLimpiar.setBackground(new java.awt.Color(248, 251, 254));
+        btnLimpiar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+        btnLimpiar.setForeground(new java.awt.Color(255, 102, 102));
+        btnLimpiar.setText("limpiar");
+        btnLimpiar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
+        btnLimpiar.addActionListener(this::btnLimpiarActionPerformed);
 
-        btnGuardar1.setBackground(new java.awt.Color(237, 246, 254));
-        btnGuardar1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
-        btnGuardar1.setForeground(new java.awt.Color(0, 100, 248));
-        btnGuardar1.setText("Guardar");
-        btnGuardar1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 100, 248), 2, true));
-        btnGuardar1.addActionListener(this::btnGuardar1ActionPerformed);
+        btnCancelar.setBackground(new java.awt.Color(237, 246, 254));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(0, 100, 248));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 100, 248), 2, true));
+        btnCancelar.addActionListener(this::btnCancelarActionPerformed);
 
-        btnEliminar1.setBackground(new java.awt.Color(0, 100, 248));
-        btnEliminar1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
-        btnEliminar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar1.setText("Cancelar");
-        btnEliminar1.addActionListener(this::btnEliminar1ActionPerformed);
+        btnGuardar.setBackground(new java.awt.Color(0, 100, 248));
+        btnGuardar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -140,11 +141,11 @@ public class NuevaCategoria extends javax.swing.JInternalFrame {
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)
-                                .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnEliminar3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(17, 17, 17))
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -156,14 +157,14 @@ public class NuevaCategoria extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminar1)
-                    .addComponent(btnGuardar1)
-                    .addComponent(btnEliminar3))
+                    .addComponent(btnGuardar)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnLimpiar))
                 .addGap(22, 22, 22))
         );
 
@@ -171,9 +172,7 @@ public class NuevaCategoria extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,20 +182,48 @@ public class NuevaCategoria extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardar1ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminar1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        String nombre = txtNombre.getText().trim();
+        String descripcion = txtDescripcion.getText().trim();
+        String codigo = txtCodigo.getText().trim();
+        if (nombre.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "El nombre de la categoría es obligatorio", "Campo vacío", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        LOGICA.CategoriaClass cat = new LOGICA.CategoriaClass();
+        cat.setNombreCategoria(nombre);
+        cat.setDescripcion(descripcion);
+        cat.setCodigo(codigo.isEmpty() ? "CAT-" + System.currentTimeMillis() : codigo);
+        DAO.CategoriaDAO dao = new DAO.CategoriaDAO();
+        try {
+            if (dao.registrar(cat)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Categoría registrada correctamente", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al registrar la categoría", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error de conexión: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtDescripcion.setText("");
+        cbEstado.setSelectedIndex(0);
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEliminar1;
-    private javax.swing.JButton btnEliminar3;
-    private javax.swing.JButton btnGuardar1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel4;
