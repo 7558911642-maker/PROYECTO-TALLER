@@ -44,52 +44,56 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="29" max="32767" attributes="0"/>
+                          <EmptySpace pref="43" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtTotalProvee" min="-2" pref="134" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                  <Component id="txtTotalProvee" min="-2" pref="144" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="txtInactivo" min="-2" pref="148" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="txtInactivo" min="-2" pref="132" max="-2" attributes="0"/>
-                                  <EmptySpace pref="119" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+                                  <Component id="txtActivos" min="-2" pref="132" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtActivos" min="-2" pref="120" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" min="-2" pref="126" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
                   </Group>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
+                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnVolver" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel4" alignment="3" max="32767" attributes="0"/>
+                      <Component id="btnVolver" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -103,7 +107,7 @@
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="26" pref="18" max="32767" attributes="0"/>
+                  <EmptySpace min="26" pref="20" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -128,10 +132,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" pref="696" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jScrollPane2" min="-2" pref="696" max="-2" attributes="0"/>
                       <EmptySpace pref="32" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -139,9 +140,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnNuevo" max="32767" attributes="0"/>
                           <Component id="txtBuscar" max="32767" attributes="0"/>
@@ -188,74 +187,12 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtBuscar">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI Semibold" size="12" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Buscar (nombre/categoria/codigo)"/>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
-        <Container class="javax.swing.JPanel" name="jPanel5">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-          </Properties>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="86" max="32767" attributes="0"/>
-                      <Component id="btnVolver" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="15" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnVolver" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="3" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel4">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="24" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="99" red="99" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&#xa;    &lt;tr&gt;&#xa;        &lt;td style=&quot;padding-left:18px;&quot;&gt;&#xa;            &lt;span style=&quot;font-family:Segoe UI; font-size:28px; color:#075DEB;&quot;&gt;&#xa;                &lt;b&gt;Gestion Proveedor&lt;/b&gt;&#xa;            &lt;/span&gt;&#xa;            &lt;br&gt;&#xa;            &lt;span style=&quot;font-family:Segoe UI; font-size:13px; color:#5A6E8C;&quot;&gt;&#xa;                Informe de Proveedor&#xa;            &lt;/span&gt;&#xa;        &lt;/td&gt;&#xa;    &lt;/tr&gt;&#xa;    &lt;tr&gt;&#xa;        &lt;td&gt;&#xa;            &lt;hr color=&quot;#0066FF&quot; size=&quot;1&quot;&gt;&#xa;        &lt;/td&gt;&#xa;    &lt;/tr&gt;&#xa;&lt;/table&gt;&#xa;&lt;/html&gt;"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnVolver">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI Semibold" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="&lt;-- VOLVER"/>
-              </Properties>
-            </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI Black" size="12" style="1"/>
+              <Font name="Segoe UI Semibold" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value=" Total de Provedores "/>
           </Properties>
@@ -263,7 +200,7 @@
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI Black" size="12" style="1"/>
+              <Font name="Segoe UI Semibold" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Provedores Inactivos"/>
           </Properties>
@@ -271,7 +208,7 @@
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI Black" size="12" style="1"/>
+              <Font name="Segoe UI Semibold" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Provedores activos"/>
           </Properties>
@@ -287,6 +224,25 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtActivos">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel4">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="24" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="99" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&#xa;    &lt;tr&gt;&#xa;        &lt;td style=&quot;padding-left:18px;&quot;&gt;&#xa;            &lt;span style=&quot;font-family:Segoe UI; font-size:28px; color:#075DEB;&quot;&gt;&#xa;                &lt;b&gt;Gestion Proveedor&lt;/b&gt;&#xa;            &lt;/span&gt;&#xa;            &lt;br&gt;&#xa;            &lt;span style=&quot;font-family:Segoe UI; font-size:13px; color:#5A6E8C;&quot;&gt;&#xa;                Informe de Proveedor&#xa;            &lt;/span&gt;&#xa;        &lt;/td&gt;&#xa;    &lt;/tr&gt;&#xa;    &lt;tr&gt;&#xa;        &lt;td&gt;&#xa;            &lt;hr color=&quot;#0066FF&quot; size=&quot;1&quot;&gt;&#xa;        &lt;/td&gt;&#xa;    &lt;/tr&gt;&#xa;&lt;/table&gt;&#xa;&lt;/html&gt;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnVolver">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Semibold" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="&lt;-- VOLVER"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

@@ -569,7 +569,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     }
 
     private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-        FrmNuevaVenta ventanaVentas = new FrmNuevaVenta();
+        NuevaVenta ventanaVentas = new NuevaVenta();
         abrirVentanaInterna(ventanaVentas);
     }
 
@@ -594,12 +594,12 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     }
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {
-        FrmNuevaVenta ventana = new FrmNuevaVenta();
+        NuevaVenta ventana = new NuevaVenta();
         abrirVentanaInterna(ventana);
     }
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {
-        NuevoUsuarios ventana = new NuevoUsuarios();
+        NuevoUsuario ventana = new NuevoUsuario();
         abrirVentanaInterna(ventana);
     }
 
@@ -788,6 +788,10 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void copyMenuItemActionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void abrirVentanaInterna(GestionarCategorias ventana) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

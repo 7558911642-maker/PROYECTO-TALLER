@@ -1,5 +1,7 @@
 package FORMS;
 
+import java.awt.event.ActionEvent;
+
 
 public class NuevoClientes extends javax.swing.JInternalFrame {
 
@@ -1186,4 +1188,12 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtcorreo;
     private javax.swing.JTextField txttelefono;
     // End of variables declaration//GEN-END:variables
+
+    private void cbEstadoActionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void cbTipoDcumentoActionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
