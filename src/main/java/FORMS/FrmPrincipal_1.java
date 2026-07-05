@@ -131,10 +131,13 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jButton5.addActionListener(this::jButton5ActionPerformed);
 
         jButton14.setText("<html><center><b>Consulta Stock</b><br><font size=\"2\">Consultar disponibilidad<br>de medicamentos.</font></center></html>");
+        jButton14.addActionListener(this::jButton14ActionPerformed);
 
         jButton15.setText("<html><center><b>Nuevo Cliente</b><br><font size=\"2\">Registrar un nuevo<br>cliente en el sistema.</font></center></html>");
+        jButton15.addActionListener(this::saveMenuItemActionPerformed);
 
         jButton16.setText("<html><center><b>Alertas</b><br><font size=\"2\">Ver alertas de stock bajo<br>y vencimientos.</font></center></html>");
+        jButton16.addActionListener(this::jButton16ActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -372,9 +375,11 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu7.setText("Categoria");
 
         jMenuItem1.setText("Registrar categoría");
+        jMenuItem1.addActionListener(this::exitMenuItemActionPerformed);
         jMenu7.add(jMenuItem1);
 
         jMenuItem4.setText("Gestionar categorías");
+        jMenuItem4.addActionListener(this::contentMenuItemActionPerformed);
         jMenu7.add(jMenuItem4);
 
         fileMenu.add(jMenu7);
@@ -382,9 +387,11 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu9.setText("Clientes");
 
         jMenuItem5.setText("Registrar cliente");
+        jMenuItem5.addActionListener(this::saveMenuItemActionPerformed);
         jMenu9.add(jMenuItem5);
 
         jMenuItem22.setText("Gestionar clientes");
+        jMenuItem22.addActionListener(this::jMenuItem4ActionPerformed);
         jMenu9.add(jMenuItem22);
 
         fileMenu.add(jMenu9);
@@ -392,9 +399,11 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu17.setText("Provedores");
 
         jMenuItem31.setText("Registrar proveedor");
+        jMenuItem31.addActionListener(this::jMenuItem8ActionPerformed);
         jMenu17.add(jMenuItem31);
 
         jMenuItem32.setText("Gestionar proveedores");
+        jMenuItem32.addActionListener(this::jMenuItem5ActionPerformed);
         jMenu17.add(jMenuItem32);
 
         fileMenu.add(jMenu17);
@@ -402,9 +411,11 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu11.setText("Medicamentos");
 
         jMenuItem27.setText("Registrar medicamento");
+        jMenuItem27.addActionListener(this::openMenuItemActionPerformed);
         jMenu11.add(jMenuItem27);
 
         jMenuItem28.setText("Gestionar medicamentos");
+        jMenuItem28.addActionListener(this::jMenuItem6ActionPerformed);
         jMenu11.add(jMenuItem28);
 
         fileMenu.add(jMenu11);
@@ -412,6 +423,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu15.setText("Usuarios");
 
         jMenuItem35.setText("Registrar usuario");
+        jMenuItem35.addActionListener(this::jMenuItem11ActionPerformed);
         jMenu15.add(jMenuItem35);
 
         jMenuItem36.setText("Gestionar usuarios");
@@ -435,6 +447,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         editMenu.add(copyMenuItem);
 
         jMenuItem10.setText(" Ajustar stock");
+        jMenuItem10.addActionListener(this::jButton14ActionPerformed);
         editMenu.add(jMenuItem10);
 
         jMenuItem12.setText("Consultar inventario");
@@ -448,6 +461,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu2.setText(" Ventas");
 
         jMenuItem6.setText("Ventas por fecha");
+        jMenuItem6.addActionListener(this::aboutMenuItemActionPerformed);
         jMenu2.add(jMenuItem6);
 
         jMenuItem13.setText("Ventas por Cliente");
@@ -490,6 +504,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu5.add(saveMenuItem1);
 
         jMenuItem20.setText("Provedores");
+        jMenuItem20.addActionListener(this::jMenuItem5ActionPerformed);
         jMenu5.add(jMenuItem20);
 
         jMenuItem21.setText("Usuarios");
@@ -530,9 +545,11 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu1.setText("Salir");
 
         jMenuItem2.setText("CerrarSesion");
+        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("SalirSistema");
+        jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
         jMenu1.add(jMenuItem3);
 
         menuBar.add(jMenu1);
@@ -633,28 +650,49 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMedicamentosActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        NuevaVenta ventana = new NuevaVenta();
+        abrirVentanaInterna(ventana);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        // TODO add your handling code here:
+        GestionarClientes ventana = new GestionarClientes();
+        abrirVentanaInterna(ventana);
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void exitMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        GestionarCategorias ventana = new GestionarCategorias();
+        abrirVentanaInterna(ventana);
     }//GEN-LAST:event_exitMenuItem1ActionPerformed
 
     private void saveMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        GestionarClientes ventana = new GestionarClientes();
+        abrirVentanaInterna(ventana);
     }//GEN-LAST:event_saveMenuItem1ActionPerformed
 
     private void saveMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        FrmEstadisticasVentas ventanaEstadisticas = new FrmEstadisticasVentas();
+        abrirVentanaInterna(ventanaEstadisticas);
     }//GEN-LAST:event_saveMenuItem2ActionPerformed
 
     private void cbxTipoUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoUserActionPerformed
-        // TODO add your handling code here:
+        // Acción del combo box de perfil de usuario
     }//GEN-LAST:event_cbxTipoUserActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {
+        GestionInventario ventana = new GestionInventario();
+        abrirVentanaInterna(ventana);
+    }
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {
+        dispose();
+        FORMS.LoginForm_1 login = new FORMS.LoginForm_1();
+        login.setVisible(true);
+    }
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {
+        AlertasInventario ventana = new AlertasInventario();
+        abrirVentanaInterna(ventana);
+    }
 
    
 
@@ -788,11 +826,8 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void copyMenuItemActionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void abrirVentanaInterna(GestionarCategorias ventana) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        GestionarVentas ventana = new GestionarVentas();
+        abrirVentanaInterna(ventana);
     }
 
 }

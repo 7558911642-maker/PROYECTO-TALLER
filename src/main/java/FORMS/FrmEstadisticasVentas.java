@@ -27,30 +27,13 @@ public class FrmEstadisticasVentas extends javax.swing.JInternalFrame {
         };
         tablaTopProductos1.setModel(modeloProductos);
 
-        // Configuración de la tabla de clientes
-        String[] cabeceraCli = {"Documento (DNI/RUC)", "Cliente / Asegurado", "N° Visitas/Compras", "Total Invertido (S/.)"};
-        modeloClientes = new DefaultTableModel(null, cabeceraCli) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        tablaEstadisticasClientes1.setModel(modeloClientes);
     }
     
     private void cargarDatosEstadisticos() {
-        // 1. Cargar Top 5 Productos
         modeloProductos.setRowCount(0);
         List<Object[]> topProductos = pedidoDAO.obtenerTop5Medicamentos();
         for (Object[] fila : topProductos) {
             modeloProductos.addRow(fila);
-        }
-
-        // 2. Cargar Estadísticas Clientes
-        modeloClientes.setRowCount(0);
-        List<Object[]> estadisticasCli = pedidoDAO.obtenerEstadisticasClientes();
-        for (Object[] fila : estadisticasCli) {
-            modeloClientes.addRow(fila);
         }
     }
     
@@ -294,5 +277,6 @@ public class FrmEstadisticasVentas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblCatInactiva;
     private javax.swing.JLabel lblTotalCat;
     private javax.swing.JTable tablaTopProductos1;
+    private javax.swing.JTable tablaEstadisticasClientes1;
     // End of variables declaration//GEN-END:variables
 }

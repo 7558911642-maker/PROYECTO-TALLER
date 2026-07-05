@@ -1063,7 +1063,11 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardar6ActionPerformed
 
+    private void cbEstadoActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
+    private void cbTipoDcumentoActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar10;

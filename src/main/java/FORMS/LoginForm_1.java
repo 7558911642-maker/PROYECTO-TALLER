@@ -131,7 +131,28 @@ public class LoginForm_1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciar1ActionPerformed
-        // TODO add your handling code here:
+        String usuario = txtUsuario1.getText().trim();
+        String contrasena = new String(txtContraseña1.getPassword()).trim();
+
+        if (usuario.isEmpty() || contrasena.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Ingrese usuario y contraseña",
+                    "Campos vacíos",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        DAO.UsuarioDAO dao = new DAO.UsuarioDAO();
+        if (dao.login(usuario, contrasena)) {
+            FrmPrincipal_1 principal = new FrmPrincipal_1();
+            principal.setVisible(true);
+            dispose();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Usuario o contraseña incorrectos",
+                    "Error de inicio de sesión",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnIniciar1ActionPerformed
 
     /**
