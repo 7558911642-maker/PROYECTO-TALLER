@@ -50,9 +50,9 @@ public class NuevoUsuario extends javax.swing.JInternalFrame {
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jComboBox4 = new javax.swing.JComboBox<>();
-        btnGuardar4 = new javax.swing.JButton();
-        btnEliminar4 = new javax.swing.JButton();
-        btnGuardarusuario = new javax.swing.JButton();
+        btnEliminar11 = new javax.swing.JButton();
+        btnGuardar6 = new javax.swing.JButton();
+        btnEliminar12 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(237, 246, 254));
 
@@ -177,14 +177,24 @@ public class NuevoUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        btnGuardar4.setText("Cancelar");
-        btnGuardar4.addActionListener(this::btnGuardar4ActionPerformed);
+        btnEliminar11.setBackground(new java.awt.Color(0, 100, 248));
+        btnEliminar11.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+        btnEliminar11.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar11.setText("Guardar");
+        btnEliminar11.addActionListener(this::btnEliminar11ActionPerformed);
 
-        btnEliminar4.setText("limpiar");
+        btnGuardar6.setBackground(new java.awt.Color(237, 246, 254));
+        btnGuardar6.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+        btnGuardar6.setForeground(new java.awt.Color(0, 100, 248));
+        btnGuardar6.setText("Cancelar");
+        btnGuardar6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 100, 248), 2, true));
+        btnGuardar6.addActionListener(this::btnGuardar6ActionPerformed);
 
-        btnGuardarusuario.setBackground(new java.awt.Color(0, 100, 248));
-        btnGuardarusuario.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardarusuario.setText("Guardar");
+        btnEliminar12.setBackground(new java.awt.Color(248, 251, 254));
+        btnEliminar12.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+        btnEliminar12.setForeground(new java.awt.Color(255, 102, 102));
+        btnEliminar12.setText("limpiar");
+        btnEliminar12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -197,14 +207,15 @@ public class NuevoUsuario extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnGuardarusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnGuardar4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnEliminar11, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnEliminar4))
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btnGuardar6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(btnEliminar12, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -216,11 +227,11 @@ public class NuevoUsuario extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnGuardar4)
-                            .addComponent(btnEliminar4)
-                            .addComponent(btnGuardarusuario)))
+                            .addComponent(btnEliminar11)
+                            .addComponent(btnGuardar6)
+                            .addComponent(btnEliminar12)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -245,16 +256,20 @@ public class NuevoUsuario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecio4ActionPerformed
 
-    private void btnGuardar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar4ActionPerformed
+    private void btnEliminar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar11ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardar4ActionPerformed
+    }//GEN-LAST:event_btnEliminar11ActionPerformed
+
+    private void btnGuardar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardar6ActionPerformed
 
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEliminar4;
-    private javax.swing.JButton btnGuardar4;
-    private javax.swing.JButton btnGuardarusuario;
+    private javax.swing.JButton btnEliminar11;
+    private javax.swing.JButton btnEliminar12;
+    private javax.swing.JButton btnGuardar6;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel26;
