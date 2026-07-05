@@ -1,55 +1,15 @@
 package FORMS;
 
-import java.awt.event.ActionEvent;
-import javax.swing.table.DefaultTableModel;
-import java.util.List;
 
-import com.kitfox.svg.SVGUniverse;
-import com.kitfox.svg.app.beans.SVGIcon;
-
-import javax.swing.*;
-import java.io.File;
-import java.net.URI;
 
 public class GestionarCategorias extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modeloTabla;
-    DAO.CategoriaDAO categoriaDAO = new DAO.CategoriaDAO();
-
+    
     public GestionarCategorias() {
         initComponents();
-        this.setTitle("Reporte de Categorías");
-        configurarTabla();
-        cargarTabla("");
+       
     }
 
-    private void configurarTabla() {
-        String[] cabecera = {"ID", "Código", "Nombre", "Descripción"};
-        modeloTabla = new DefaultTableModel(null, cabecera) {
-            @Override
-            public boolean isCellEditable(int row, int column) { return false; }
-        };
-        tblGestionCategorias.setModel(modeloTabla);
-    }
-
-    private void cargarTabla(String criterio) {
-        modeloTabla.setRowCount(0);
-        List<LOGICA.CategoriaClass> lista;
-        if (criterio.isEmpty()) {
-            lista = categoriaDAO.listar();
-        } else {
-            lista = categoriaDAO.buscar(criterio);
-        }
-        int total = 0;
-        for (LOGICA.CategoriaClass c : lista) {
-            Object[] fila = new Object[4];
-            fila[0] = c.getIdCategoria();
-            fila[1] = c.getCodigo();
-            fila[2] = c.getNombreCategoria();
-            fila[3] = c.getDescripcion();
-            modeloTabla.addRow(fila);
-            total++;
-        }
         /*
         txtTotalRecaudado.setText(String.valueOf(total));
         txtCatInactiva.setText(String.valueOf(total));
@@ -324,12 +284,7 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {
-        cargarTabla(txtBuscar.getText().trim());
-    }
-
-    private void txtTotalRecaudadoActionPerformed(java.awt.event.ActionEvent evt) {
-    }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -356,7 +311,3 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 
-    private void btnNuevoActionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-}

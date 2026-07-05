@@ -1,60 +1,16 @@
 package FORMS;
 
-import javax.swing.table.DefaultTableModel;
-import java.util.List;
+
 
 public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modeloTabla;
-    DAO.PedidoDAO pedidoDAO = new DAO.PedidoDAO();
+  
     
     public ReporteDiarioVentas() {
         initComponents();
-        this.setTitle("Arqueo de Caja Diario - Control de Ganancias");
-        configurarTabla();
-        generarReporte();
-        jBLimpiar.addActionListener(this::jButton5ActionPerformed);
-        jbExportar.addActionListener(this::jButton6ActionPerformed);
-    }
-
-    private void configurarTabla() {
-        String[] cabecera = {"N° Ticket", "Cliente / Asegurado", "Canal de Atención", "Monto Operación", "Estado"};
-        modeloTabla = new DefaultTableModel(null, cabecera) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        tablaVentasDiarias.setModel(modeloTabla);
-    }
     
-    private void generarReporte() {
-        modeloTabla.setRowCount(0); // Limpia filas previas
-        List<Object[]> datos = pedidoDAO.obtenerReporteDiario(); // Corrección interna del llamado de datos
-        List<Object[]> lista = pedidoDAO.obtenerReporteDiario(); 
-        
-        double sumaGanancias = 0.0;
-        double sumaVentas = 0.0;
-        int contadorAnulados = 0;
-
-        for (Object[] fila : lista) {
-            modeloTabla.addRow(fila);
-            
-            String estado = fila[4].toString();
-            double monto = ((java.math.BigDecimal) fila[3]).doubleValue();
-            sumaVentas += monto;
-            if (estado.equals("COMPLETADO")) {
-                sumaGanancias += monto;
-            } else if (estado.equals("ANULADO")) {
-                contadorAnulados++;
-            }
-        }
-
-        // Seteamos los resultados en los campos correspondientes
-        txtTotalGanancias.setText(String.format("%.2f", sumaGanancias));
-        txtTotalRecaudado1.setText(String.format("%.2f", sumaVentas));
-        txtVentasAnuladas.setText(String.valueOf(contadorAnulados));
     }
+
     
     
     
@@ -277,20 +233,10 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        generarReporte();
-        javax.swing.JOptionPane.showMessageDialog(this, "Estado de caja actualizado al instante.");
+       
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
-        modeloTabla.setRowCount(0);
-        txtTotalGanancias.setText("");
-        txtTotalRecaudado1.setText("");
-        txtVentasAnuladas.setText("");
-    }
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Función de impresión no disponible.");
-    }
+   
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
