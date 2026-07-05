@@ -130,6 +130,7 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         btnGuardar5 = new javax.swing.JButton();
         btnEliminar9 = new javax.swing.JButton();
         btnEliminar10 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jPanel5.setBackground(new java.awt.Color(232, 232, 255));
 
@@ -959,6 +960,8 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         btnEliminar10.setText("limpiar");
         btnEliminar10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
 
+        jButton1.setText("jButton1");
+
         javax.swing.GroupLayout pnlPersonaNaturalLayout = new javax.swing.GroupLayout(pnlPersonaNatural);
         pnlPersonaNatural.setLayout(pnlPersonaNaturalLayout);
         pnlPersonaNaturalLayout.setHorizontalGroup(
@@ -967,6 +970,8 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnlPersonaNaturalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlPersonaNaturalLayout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(69, 69, 69)
                         .addComponent(btnEliminar9, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(btnGuardar5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -991,10 +996,12 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pnlPersonaNaturalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminar9)
-                    .addComponent(btnGuardar5)
-                    .addComponent(btnEliminar10))
+                .addGroup(pnlPersonaNaturalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPersonaNaturalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnEliminar9)
+                        .addComponent(btnGuardar5)
+                        .addComponent(btnEliminar10))
+                    .addComponent(jButton1))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -1083,6 +1090,7 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGuardar5;
     private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JComboBox<String> cbTipoDcumento;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox10;
     private javax.swing.JComboBox<String> jComboBox11;
     private javax.swing.JComboBox<String> jComboBox5;
