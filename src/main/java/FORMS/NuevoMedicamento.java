@@ -347,12 +347,12 @@ public class NuevoMedicamento extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnEliminar9)
                         .addComponent(btnGuardar5)
-                        .addComponent(btnEliminar10)))
+                        .addComponent(btnEliminar10))
+                    .addComponent(jLabel3))
                 .addGap(16, 16, 16))
         );
 
