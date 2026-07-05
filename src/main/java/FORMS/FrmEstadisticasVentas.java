@@ -253,7 +253,7 @@ public class FrmEstadisticasVentas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar11ActionPerformed
-        // TODO add your handling code here:
+        cargarDatosEstadisticos();
     }//GEN-LAST:event_btnEliminar11ActionPerformed
 
 

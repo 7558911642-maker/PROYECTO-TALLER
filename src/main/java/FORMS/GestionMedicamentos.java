@@ -6,6 +6,7 @@ package FORMS;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class GestionMedicamentos extends javax.swing.JInternalFrame {
 
@@ -280,15 +281,15 @@ public class GestionMedicamentos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
+        cargarTabla("");
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnExportarExelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarExelActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Función en desarrollo");
     }//GEN-LAST:event_btnExportarExelActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Función en desarrollo");
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {

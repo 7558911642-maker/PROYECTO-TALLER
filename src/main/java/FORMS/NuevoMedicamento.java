@@ -4,15 +4,17 @@
  */
 package FORMS;
 
+import DAO.ProductoDAO;
+import LOGICA.ProductoClass;
+import java.math.BigDecimal;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HP
  */
 public class NuevoMedicamento extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form x
-     */
     public NuevoMedicamento() {
         initComponents();
     }
@@ -305,6 +307,7 @@ public class NuevoMedicamento extends javax.swing.JInternalFrame {
         btnEliminar10.setForeground(new java.awt.Color(255, 102, 102));
         btnEliminar10.setText("limpiar");
         btnEliminar10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
+        btnEliminar10.addActionListener(this::btnEliminar10ActionPerformed);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -374,12 +377,58 @@ public class NuevoMedicamento extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminar9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar9ActionPerformed
-        // TODO add your handling code here:
+        String codigo = txtCodigo5.getText().trim();
+        String nombre = txtNombre5.getText().trim();
+        String precioCompraStr = txtPrecio6.getText().trim();
+        String precioVentaStr = txtPrecio7.getText().trim();
+        String stockStr = txtStock6.getText().trim();
+
+        if (codigo.isEmpty() || nombre.isEmpty() || precioCompraStr.isEmpty() || stockStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos obligatorios deben ser llenados", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            BigDecimal precioCompra = new BigDecimal(precioCompraStr);
+            int stock = Integer.parseInt(stockStr);
+
+            ProductoClass prod = new ProductoClass();
+            prod.setCodigo(codigo);
+            prod.setNombreComercial(nombre);
+            prod.setPrecioUnidad(precioCompra);
+            prod.setStock(stock);
+
+            ProductoDAO dao = new ProductoDAO();
+            if (dao.registrarMedicamento(prod)) {
+                JOptionPane.showMessageDialog(this, "Medicamento registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al registrar el medicamento", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Verifique que Precio y Stock sean valores numéricos válidos", "Error de formato", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error de conexión: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminar9ActionPerformed
 
     private void btnGuardar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar5ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnGuardar5ActionPerformed
+
+    private void btnEliminar10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar10ActionPerformed
+        txtCodigo5.setText("");
+        txtNombre5.setText("");
+        txtPrecio6.setText("");
+        txtPrecio7.setText("");
+        txtStock6.setText("");
+        jComboBox7.setSelectedIndex(0);
+        jComboBox8.setSelectedIndex(0);
+        jComboBox11.setSelectedIndex(0);
+        jComboBox12.setSelectedIndex(0);
+        jComboBox15.setSelectedIndex(0);
+        jDateChooser5.setCalendar(null);
+    }//GEN-LAST:event_btnEliminar10ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

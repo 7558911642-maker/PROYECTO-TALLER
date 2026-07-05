@@ -1,14 +1,12 @@
 package FORMS;
 
-
+import DAO.ProveedorDAO;
+import LOGICA.ProveedorClass;
 
 public class NuevoProvedor extends javax.swing.JInternalFrame {
 
-   
-
     public NuevoProvedor() {
         initComponents();
-        
     }
 
 
@@ -59,6 +57,7 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
         btnEliminar10.setForeground(new java.awt.Color(255, 102, 102));
         btnEliminar10.setText("limpiar");
         btnEliminar10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
+        btnEliminar10.addActionListener(this::btnEliminar10ActionPerformed);
 
         setForeground(new java.awt.Color(51, 51, 255));
 
@@ -184,6 +183,7 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
         btnEliminar12.setForeground(new java.awt.Color(255, 102, 102));
         btnEliminar12.setText("limpiar");
         btnEliminar12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
+        btnEliminar12.addActionListener(this::btnEliminar12ActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -242,21 +242,75 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void guardarProveedor() {
+        String ruc = txtRuc.getText().trim();
+        String razon = txtRazon.getText().trim();
+        String telefono = txtTelefono.getText().trim();
+        String correo = txtCorreo1.getText().trim();
+        String direccion = txtDireccion1.getText().trim();
+
+        if (ruc.isEmpty() || razon.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "RUC y Razón Social son obligatorios",
+                "Campos vacíos",
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        ProveedorClass prov = new ProveedorClass();
+        prov.setRuc(ruc);
+        prov.setNombreProveedor(razon);
+        prov.setTelefono(telefono);
+        prov.setCorreo(correo);
+        prov.setDireccion(direccion);
+
+        ProveedorDAO dao = new ProveedorDAO();
+        if (dao.registrar(prov)) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Proveedor registrado correctamente",
+                "Éxito",
+                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Error al registrar el proveedor",
+                "Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void limpiarCampos() {
+        txtRuc.setText("");
+        txtRazon.setText("");
+        txtTelefono.setText("");
+        txtCorreo1.setText("");
+        txtDireccion1.setText("");
+        cbxEstado1.setSelectedIndex(0);
+    }
+
     private void btnEliminar9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar9ActionPerformed
-        // TODO add your handling code here:
+        guardarProveedor();
     }//GEN-LAST:event_btnEliminar9ActionPerformed
 
     private void btnGuardar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar5ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnGuardar5ActionPerformed
 
+    private void btnEliminar10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar10ActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_btnEliminar10ActionPerformed
+
     private void btnEliminar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar11ActionPerformed
-        // TODO add your handling code here:
+        guardarProveedor();
     }//GEN-LAST:event_btnEliminar11ActionPerformed
 
     private void btnGuardar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar6ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnGuardar6ActionPerformed
+
+    private void btnEliminar12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar12ActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_btnEliminar12ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

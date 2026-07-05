@@ -1,5 +1,8 @@
 package FORMS;
 
+import DAO.ClienteDAO;
+import LOGICA.ClienteClass;
+import javax.swing.JOptionPane;
 
 public class NuevoClientes extends javax.swing.JInternalFrame {
 
@@ -428,11 +431,13 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         jPanel10.setBackground(new java.awt.Color(232, 232, 255));
 
         btnEliminar2.setText("Cancelar");
+        btnEliminar2.addActionListener(this::btnEliminar2ActionPerformed);
 
         btnGuardar2.setText("Guardar");
         btnGuardar2.addActionListener(this::btnGuardar2ActionPerformed);
 
         btnEliminar4.setText("limpiar");
+        btnEliminar4.addActionListener(this::btnEliminar4ActionPerformed);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -572,6 +577,7 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         btnEliminar8.setForeground(new java.awt.Color(255, 102, 102));
         btnEliminar8.setText("limpiar");
         btnEliminar8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
+        btnEliminar8.addActionListener(this::btnEliminar8ActionPerformed);
 
         setClosable(true);
         setIconifiable(true);
@@ -746,6 +752,7 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         btnEliminar12.setForeground(new java.awt.Color(255, 102, 102));
         btnEliminar12.setText("limpiar");
         btnEliminar12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
+        btnEliminar12.addActionListener(this::btnEliminar12ActionPerformed);
 
         javax.swing.GroupLayout pnlEmpresaLayout = new javax.swing.GroupLayout(pnlEmpresa);
         pnlEmpresa.setLayout(pnlEmpresaLayout);
@@ -951,6 +958,7 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         btnEliminar10.setForeground(new java.awt.Color(255, 102, 102));
         btnEliminar10.setText("limpiar");
         btnEliminar10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
+        btnEliminar10.addActionListener(this::btnEliminar10ActionPerformed);
 
         javax.swing.GroupLayout pnlPersonaNaturalLayout = new javax.swing.GroupLayout(pnlPersonaNatural);
         pnlPersonaNatural.setLayout(pnlPersonaNaturalLayout);
@@ -1024,7 +1032,33 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jComboBox8ActionPerformed
 
     private void btnGuardar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar2ActionPerformed
-        // TODO add your handling code here:
+        String tipoDoc = jComboBox6.getSelectedItem() != null ? jComboBox6.getSelectedItem().toString().replace(":", "").trim() : "";
+        String nroDoc = txtNombre8.getText().trim();
+        String nombres = txtNombre10.getText().trim();
+        String apellidos = txtNombre9.getText().trim();
+        String correo = txtPrecio4.getText().trim();
+        String direccion = txtStock4.getText().trim();
+        String telefono = txtNombre7.getText().trim();
+        String estado = jComboBox5.getSelectedItem() != null ? jComboBox5.getSelectedItem().toString() : "Activo";
+        if (nroDoc.isEmpty() || nombres.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Documento y Nombres son obligatorios", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        ClienteClass cli = new ClienteClass();
+        cli.setDocumento(nroDoc);
+        cli.setNombreCliente(nombres);
+        cli.setApellidos(apellidos);
+        cli.setCorreo(correo);
+        cli.setDireccion(direccion);
+        cli.setTelefono(telefono);
+        cli.setEstado(estado);
+        ClienteDAO dao = new ClienteDAO();
+        if (dao.registrarCliente(cli)) {
+            JOptionPane.showMessageDialog(this, "Cliente registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al registrar el cliente", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnGuardar2ActionPerformed
 
     private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox9ActionPerformed
@@ -1040,27 +1074,105 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jComboBox11ActionPerformed
 
     private void btnGuardar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar4ActionPerformed
-        // TODO add your handling code here:
+        String tipoDoc = jComboBox9.getSelectedItem() != null ? jComboBox9.getSelectedItem().toString().replace(":", "").trim() : "";
+        String nroDoc = txtNombre13.getText().trim();
+        String nombres = txtNombre15.getText().trim();
+        String apellidos = txtNombre14.getText().trim();
+        String correo = txtPrecio6.getText().trim();
+        String direccion = txtStock6.getText().trim();
+        String telefono = txtNombre12.getText().trim();
+        String estado = jComboBox8.getSelectedItem() != null ? jComboBox8.getSelectedItem().toString() : "Activo";
+        if (nroDoc.isEmpty() || nombres.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Documento y Nombres son obligatorios", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        ClienteClass cli = new ClienteClass();
+        cli.setDocumento(nroDoc);
+        cli.setNombreCliente(nombres);
+        cli.setApellidos(apellidos);
+        cli.setCorreo(correo);
+        cli.setDireccion(direccion);
+        cli.setTelefono(telefono);
+        cli.setEstado(estado);
+        ClienteDAO dao = new ClienteDAO();
+        if (dao.registrarCliente(cli)) {
+            JOptionPane.showMessageDialog(this, "Cliente registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al registrar el cliente", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnGuardar4ActionPerformed
 
     private void btnEliminar7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar7ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnEliminar7ActionPerformed
 
     private void btnGuardar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar5ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnGuardar5ActionPerformed
 
     private void btnEliminar9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar9ActionPerformed
-        // TODO add your handling code here:
+        String tipoDoc = cbTipoDcumento.getSelectedItem() != null ? cbTipoDcumento.getSelectedItem().toString().replace(":", "").trim() : "";
+        String nroDoc = txtNroDocumento.getText().trim();
+        String nombres = txtNombre.getText().trim();
+        String apellidos = txtApellidos.getText().trim();
+        String correo = txtcorreo.getText().trim();
+        String direccion = txtDireccion.getText().trim();
+        String telefono = txttelefono.getText().trim();
+        String estado = cbEstado.getSelectedItem() != null ? cbEstado.getSelectedItem().toString() : "Activo";
+        if (nroDoc.isEmpty() || nombres.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Documento y Nombres son obligatorios", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        ClienteClass cli = new ClienteClass();
+        cli.setDocumento(nroDoc);
+        cli.setNombreCliente(nombres);
+        cli.setApellidos(apellidos);
+        cli.setCorreo(correo);
+        cli.setDireccion(direccion);
+        cli.setTelefono(telefono);
+        cli.setEstado(estado);
+        ClienteDAO dao = new ClienteDAO();
+        if (dao.registrarCliente(cli)) {
+            JOptionPane.showMessageDialog(this, "Cliente registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al registrar el cliente", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminar9ActionPerformed
 
     private void btnEliminar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar11ActionPerformed
-        // TODO add your handling code here:
+        String tipoDoc = jComboBox11.getSelectedItem() != null ? jComboBox11.getSelectedItem().toString().replace(":", "").trim() : "";
+        String nroDoc = txtNombre17.getText().trim();
+        String nombres = txtNombre19.getText().trim();
+        String apellidos = txtNombre18.getText().trim();
+        String correo = txtPrecio7.getText().trim();
+        String direccion = txtStock7.getText().trim();
+        String telefono = txtNombre16.getText().trim();
+        String estado = jComboBox10.getSelectedItem() != null ? jComboBox10.getSelectedItem().toString() : "Activo";
+        if (nroDoc.isEmpty() || nombres.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Documento y Nombres son obligatorios", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        ClienteClass cli = new ClienteClass();
+        cli.setDocumento(nroDoc);
+        cli.setNombreCliente(nombres);
+        cli.setApellidos(apellidos);
+        cli.setCorreo(correo);
+        cli.setDireccion(direccion);
+        cli.setTelefono(telefono);
+        cli.setEstado(estado);
+        ClienteDAO dao = new ClienteDAO();
+        if (dao.registrarCliente(cli)) {
+            JOptionPane.showMessageDialog(this, "Cliente registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al registrar el cliente", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminar11ActionPerformed
 
     private void btnGuardar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar6ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnGuardar6ActionPerformed
 
     private void cbEstadoActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1068,6 +1180,54 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
 
     private void cbTipoDcumentoActionPerformed(java.awt.event.ActionEvent evt) {
     }
+
+    private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnEliminar2ActionPerformed
+
+    private void btnEliminar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar4ActionPerformed
+        txtNombre8.setText("");
+        txtNombre9.setText("");
+        txtNombre10.setText("");
+        txtPrecio4.setText("");
+        txtStock4.setText("");
+        txtNombre7.setText("");
+        jComboBox5.setSelectedIndex(0);
+        jComboBox6.setSelectedIndex(0);
+    }//GEN-LAST:event_btnEliminar4ActionPerformed
+
+    private void btnEliminar8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar8ActionPerformed
+        txtNombre13.setText("");
+        txtNombre14.setText("");
+        txtNombre15.setText("");
+        txtPrecio6.setText("");
+        txtStock6.setText("");
+        txtNombre12.setText("");
+        jComboBox8.setSelectedIndex(0);
+        jComboBox9.setSelectedIndex(0);
+    }//GEN-LAST:event_btnEliminar8ActionPerformed
+
+    private void btnEliminar10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar10ActionPerformed
+        txtNombre.setText("");
+        txtApellidos.setText("");
+        txtNroDocumento.setText("");
+        txtcorreo.setText("");
+        txtDireccion.setText("");
+        txttelefono.setText("");
+        cbTipoDcumento.setSelectedIndex(0);
+        cbEstado.setSelectedIndex(0);
+    }//GEN-LAST:event_btnEliminar10ActionPerformed
+
+    private void btnEliminar12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar12ActionPerformed
+        txtNombre19.setText("");
+        txtNombre18.setText("");
+        txtNombre17.setText("");
+        txtPrecio7.setText("");
+        txtStock7.setText("");
+        txtNombre16.setText("");
+        jComboBox11.setSelectedIndex(0);
+        jComboBox10.setSelectedIndex(0);
+    }//GEN-LAST:event_btnEliminar12ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar10;

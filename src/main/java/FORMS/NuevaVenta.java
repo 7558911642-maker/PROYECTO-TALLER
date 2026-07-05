@@ -111,11 +111,13 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         btnEliminar2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnEliminar2.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar2.setText("Factura");
+        btnEliminar2.addActionListener(this::btnEliminar2ActionPerformed);
 
         btnEliminar3.setBackground(new java.awt.Color(0, 100, 248));
         btnEliminar3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnEliminar3.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar3.setText("Boleta");
+        btnEliminar3.addActionListener(this::btnEliminar3ActionPerformed);
 
         javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
@@ -195,6 +197,7 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         btnAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(this::btnAgregarActionPerformed);
 
         javax.swing.GroupLayout panelDetalleLayout = new javax.swing.GroupLayout(panelDetalle);
         panelDetalle.setLayout(panelDetalleLayout);
@@ -354,6 +357,7 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         btnBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
         javax.swing.GroupLayout panelDatos1Layout = new javax.swing.GroupLayout(panelDatos1);
         panelDatos1.setLayout(panelDatos1Layout);
@@ -532,6 +536,7 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         btnGuardar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("Guardar y cobrar");
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
         btnCancelarVenta.setBackground(new java.awt.Color(237, 246, 254));
         btnCancelarVenta.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
@@ -610,8 +615,28 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVentaActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnCancelarVentaActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        javax.swing.JOptionPane.showMessageDialog(this, "Función en desarrollo");
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        javax.swing.JOptionPane.showMessageDialog(this, "Función en desarrollo");
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
+        javax.swing.JOptionPane.showMessageDialog(this, "Función en desarrollo");
+    }//GEN-LAST:event_btnEliminar2ActionPerformed
+
+    private void btnEliminar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar3ActionPerformed
+        javax.swing.JOptionPane.showMessageDialog(this, "Función en desarrollo");
+    }//GEN-LAST:event_btnEliminar3ActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        javax.swing.JOptionPane.showMessageDialog(this, "Función en desarrollo");
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

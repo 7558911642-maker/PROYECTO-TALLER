@@ -158,7 +158,24 @@ public class GestionarUsuarios extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
-        // TODO add your handling code here:
+        String criterio = txtBuscar.getText().trim();
+        if (criterio.isEmpty()) {
+            return;
+        }
+        DAO.UsuarioDAO dao = new DAO.UsuarioDAO();
+        java.util.List<LOGICA.UsuarioClass> resultados = dao.buscar(criterio);
+
+        String[] columnas = {"ID", "Usuario", "Nombres"};
+        javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(null, columnas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        for (LOGICA.UsuarioClass u : resultados) {
+            model.addRow(new Object[]{u.getIdUsuario(), u.getUsuario(), u.getNombre()});
+        }
+        tblGestionUsuarios.setModel(model);
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
 

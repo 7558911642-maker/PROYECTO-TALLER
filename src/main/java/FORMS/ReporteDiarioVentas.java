@@ -114,6 +114,7 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
         btnEliminar3.setForeground(new java.awt.Color(255, 102, 102));
         btnEliminar3.setText("limpiar");
         btnEliminar3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
+        btnEliminar3.addActionListener(this::btnEliminar3ActionPerformed);
 
         btnGuardar1.setBackground(new java.awt.Color(237, 246, 254));
         btnGuardar1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
@@ -243,14 +244,33 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
-        // TODO add your handling code here:
+        javax.swing.JOptionPane.showMessageDialog(this, "Reporte guardado correctamente", "Guardar", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        dispose();
     }//GEN-LAST:event_btnGuardar1ActionPerformed
 
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
-        // TODO add your handling code here:
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tablaVentasDiarias.getModel();
+        model.setRowCount(0);
+        model.fireTableDataChanged();
+        txtresultadoVentasDia.setText("0");
+        txtVentasAnuladas.setText("0");
+        txtGanancia.setText("0");
+        dcFechaInicio3.setDate(null);
+        javax.swing.JOptionPane.showMessageDialog(this, "Datos actualizados correctamente", "Actualizar", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
-   
+    private void btnEliminar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar3ActionPerformed
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tablaVentasDiarias.getModel();
+        model.setRowCount(0);
+        model.fireTableDataChanged();
+        txtresultadoVentasDia.setText("0");
+        txtVentasAnuladas.setText("0");
+        txtGanancia.setText("0");
+        dcFechaInicio3.setDate(null);
+    }//GEN-LAST:event_btnEliminar3ActionPerformed
+
+    
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

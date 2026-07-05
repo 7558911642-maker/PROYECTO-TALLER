@@ -254,23 +254,26 @@ public class AlertasInventario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tblGestionMedicamentos.getModel();
+        model.setRowCount(0);
+        model.fireTableDataChanged();
+        javax.swing.JOptionPane.showMessageDialog(this, "Tabla actualizada correctamente", "Actualizar", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        // TODO add your handling code here:
+        javax.swing.JOptionPane.showMessageDialog(this, "Función en desarrollo", "Imprimir", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void btnExportarExelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarExelActionPerformed
-        // TODO add your handling code here:
+        javax.swing.JOptionPane.showMessageDialog(this, "Función en desarrollo", "Exportar", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnExportarExelActionPerformed
 
     private void btnBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar2ActionPerformed
-        // TODO add your handling code here:
+        javax.swing.JOptionPane.showMessageDialog(this, "Función en desarrollo", "Buscar", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnBuscar2ActionPerformed
 
 

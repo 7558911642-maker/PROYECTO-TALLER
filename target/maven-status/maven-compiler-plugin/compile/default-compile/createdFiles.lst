@@ -18,11 +18,13 @@ DAO\PedidoDAO.class
 FORMS\NuevaCategoria.class
 DAO\ClienteDAO.class
 FORMS\NuevoProvedor.class
+FORMS\GestionarUsuarios$1.class
 FORMS\GestionarUsuarios.class
 FORMS\NuevoClientes.class
 DAO\UsuarioDAO.class
 FORMS\FrmEstadisticasVentas.class
 com\mycompany\proyectofarmacia\PROYECTO_III_UND.class
+FORMS\GestionInventario$1.class
 LOGICA\EmpleadoClass.class
 FORMS\ReporteDiarioVentas.class
 LOGICA\ProveedorClass.class

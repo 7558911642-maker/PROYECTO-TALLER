@@ -4,17 +4,55 @@
  */
 package FORMS;
 
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HP
  */
 public class GestionInventario extends javax.swing.JInternalFrame {
 
+    DefaultTableModel modeloTabla;
+    DAO.ProductoDAO productoDAO = new DAO.ProductoDAO();
+
     /**
      * Creates new form GestionInventario
      */
     public GestionInventario() {
         initComponents();
+        configurarTabla();
+        cargarTabla("");
+    }
+
+    private void configurarTabla() {
+        String[] cabecera = {"ID", "Código", "Medicamento", "Categoría", "Proveedor", "Precio", "Stock"};
+        modeloTabla = new DefaultTableModel(null, cabecera) {
+            @Override
+            public boolean isCellEditable(int row, int column) { return false; }
+        };
+        tblGestionMedicamentos.setModel(modeloTabla);
+    }
+
+    private void cargarTabla(String criterio) {
+        modeloTabla.setRowCount(0);
+        List<Object[]> lista;
+        if (criterio.isEmpty()) {
+            lista = productoDAO.listarMedicamentos();
+        } else {
+            lista = productoDAO.buscarMedicamentos(criterio);
+        }
+        int total = 0;
+        int activos = 0;
+        int inactivos = 0;
+        for (Object[] fila : lista) {
+            modeloTabla.addRow(fila);
+            total++;
+            int stock = (int) fila[6];
+            if (stock > 0) activos++; else inactivos++;
+        }
+        txtBuscar.setText("Total: " + total + " | Activos: " + activos + " | Inactivos: " + inactivos);
     }
 
     /**
@@ -241,19 +279,19 @@ public class GestionInventario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
+        cargarTabla("");
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
-        // TODO add your handling code here:
+        cargarTabla(txtBuscar.getText().trim());
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Función en desarrollo");
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void btnExportarExelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarExelActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Función en desarrollo");
     }//GEN-LAST:event_btnExportarExelActionPerformed
 
 

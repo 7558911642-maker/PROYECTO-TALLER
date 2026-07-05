@@ -4,6 +4,9 @@
  */
 package FORMS;
 
+import DAO.UsuarioDAO;
+import LOGICA.UsuarioClass;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
@@ -195,6 +198,7 @@ public class NuevoUsuario extends javax.swing.JInternalFrame {
         btnEliminar12.setForeground(new java.awt.Color(255, 102, 102));
         btnEliminar12.setText("limpiar");
         btnEliminar12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
+        btnEliminar12.addActionListener(evt -> limpiarCampos());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -257,14 +261,46 @@ public class NuevoUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPrecio4ActionPerformed
 
     private void btnEliminar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar11ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnEliminar11ActionPerformed
 
     private void btnGuardar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar6ActionPerformed
-        // TODO add your handling code here:
+        String usuario = txtCodigo3.getText().trim();
+        String nombre = txtNombre3.getText().trim();
+        String pass = txtNombre4.getText().trim();
+        String confirmPass = txtNombre5.getText().trim();
+
+        if (usuario.isEmpty() || nombre.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!pass.equals(confirmPass)) {
+            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        UsuarioClass u = new UsuarioClass();
+        u.setUsuario(usuario);
+        u.setNombre(nombre);
+        u.setContrasenia(pass);
+
+        UsuarioDAO dao = new UsuarioDAO();
+        if (dao.registrar(u)) {
+            JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al registrar el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnGuardar6ActionPerformed
 
-  
+    private void limpiarCampos() {
+        txtCodigo3.setText("");
+        txtNombre3.setText("");
+        txtNombre4.setText("");
+        txtNombre5.setText("");
+        txtPrecio4.setText("");
+        jComboBox4.setSelectedIndex(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar11;

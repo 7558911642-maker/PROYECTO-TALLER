@@ -115,6 +115,7 @@ public class GestionarInventario extends javax.swing.JInternalFrame {
 
         btnVolver.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnVolver.setText("<-- VOLVER");
+        btnVolver.addActionListener(this::btnVolverActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -196,8 +197,12 @@ public class GestionarInventario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTotalPActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        // TODO add your handling code here:
+        javax.swing.JOptionPane.showMessageDialog(this, "Funcionalidad en desarrollo");
     }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {
+        dispose();
+    }
 
     private void txtTotalRecaudado1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalRecaudado1ActionPerformed
         // TODO add your handling code here:
