@@ -16,6 +16,9 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnEliminar9 = new javax.swing.JButton();
+        btnGuardar5 = new javax.swing.JButton();
+        btnEliminar10 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -34,9 +37,28 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
         txtDireccion1 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         cbxEstado1 = new javax.swing.JComboBox<>();
-        btnEliminar1 = new javax.swing.JButton();
-        btnGuardar1 = new javax.swing.JButton();
-        btnEliminar3 = new javax.swing.JButton();
+        btnEliminar11 = new javax.swing.JButton();
+        btnGuardar6 = new javax.swing.JButton();
+        btnEliminar12 = new javax.swing.JButton();
+
+        btnEliminar9.setBackground(new java.awt.Color(0, 100, 248));
+        btnEliminar9.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+        btnEliminar9.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar9.setText("Guardar");
+        btnEliminar9.addActionListener(this::btnEliminar9ActionPerformed);
+
+        btnGuardar5.setBackground(new java.awt.Color(237, 246, 254));
+        btnGuardar5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+        btnGuardar5.setForeground(new java.awt.Color(0, 100, 248));
+        btnGuardar5.setText("Cancelar");
+        btnGuardar5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 100, 248), 2, true));
+        btnGuardar5.addActionListener(this::btnGuardar5ActionPerformed);
+
+        btnEliminar10.setBackground(new java.awt.Color(248, 251, 254));
+        btnEliminar10.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+        btnEliminar10.setForeground(new java.awt.Color(255, 102, 102));
+        btnEliminar10.setText("limpiar");
+        btnEliminar10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
 
         setForeground(new java.awt.Color(51, 51, 255));
 
@@ -48,7 +70,7 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 100, 248));
         jLabel4.setText("Informacion empresarial ");
 
@@ -96,7 +118,7 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 100, 248));
         jLabel7.setText("Datos de contacto");
 
@@ -144,41 +166,48 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        btnEliminar1.setBackground(new java.awt.Color(0, 100, 248));
-        btnEliminar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar1.setText("Guardar");
+        btnEliminar11.setBackground(new java.awt.Color(0, 100, 248));
+        btnEliminar11.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+        btnEliminar11.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar11.setText("Guardar");
+        btnEliminar11.addActionListener(this::btnEliminar11ActionPerformed);
 
-        btnGuardar1.setBackground(new java.awt.Color(237, 246, 254));
-        btnGuardar1.setText("Cancelar");
-        btnGuardar1.addActionListener(this::btnGuardar1ActionPerformed);
+        btnGuardar6.setBackground(new java.awt.Color(237, 246, 254));
+        btnGuardar6.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+        btnGuardar6.setForeground(new java.awt.Color(0, 100, 248));
+        btnGuardar6.setText("Cancelar");
+        btnGuardar6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 100, 248), 2, true));
+        btnGuardar6.addActionListener(this::btnGuardar6ActionPerformed);
 
-        btnEliminar3.setBackground(new java.awt.Color(248, 251, 254));
-        btnEliminar3.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
-        btnEliminar3.setForeground(new java.awt.Color(255, 102, 102));
-        btnEliminar3.setText("limpiar");
+        btnEliminar12.setBackground(new java.awt.Color(248, 251, 254));
+        btnEliminar12.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+        btnEliminar12.setForeground(new java.awt.Color(255, 102, 102));
+        btnEliminar12.setText("limpiar");
+        btnEliminar12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(21, 21, 21))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(btnEliminar3)
-                .addGap(26, 26, 26))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEliminar11, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnGuardar6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar12, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(47, 47, 47))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,17 +220,19 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminar1)
-                    .addComponent(btnGuardar1)
-                    .addComponent(btnEliminar3))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(btnEliminar11)
+                    .addComponent(btnGuardar6)
+                    .addComponent(btnEliminar12))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,15 +242,30 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
+    private void btnEliminar9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar9ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardar1ActionPerformed
+    }//GEN-LAST:event_btnEliminar9ActionPerformed
+
+    private void btnGuardar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardar5ActionPerformed
+
+    private void btnEliminar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminar11ActionPerformed
+
+    private void btnGuardar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardar6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEliminar1;
-    private javax.swing.JButton btnEliminar3;
-    private javax.swing.JButton btnGuardar1;
+    private javax.swing.JButton btnEliminar10;
+    private javax.swing.JButton btnEliminar11;
+    private javax.swing.JButton btnEliminar12;
+    private javax.swing.JButton btnEliminar9;
+    private javax.swing.JButton btnGuardar5;
+    private javax.swing.JButton btnGuardar6;
     private javax.swing.JComboBox<String> cbxEstado1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;

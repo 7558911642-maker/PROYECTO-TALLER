@@ -104,7 +104,11 @@ public class GestionMedicamentos extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(tblGestionMedicamentos);
 
+<<<<<<< HEAD
         btnActualizar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+=======
+        btnActualizar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+>>>>>>> b3cfd20b4b187e674d1d0deea4925a03dda1c49c
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(this::btnActualizarActionPerformed);
 
@@ -113,7 +117,13 @@ public class GestionMedicamentos extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jLabel7.setText("Tipo de inventario:");
 
+<<<<<<< HEAD
         btnBuscar1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+=======
+        btnBuscar1.setBackground(new java.awt.Color(0, 100, 248));
+        btnBuscar1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+        btnBuscar1.setForeground(new java.awt.Color(255, 255, 255));
+>>>>>>> b3cfd20b4b187e674d1d0deea4925a03dda1c49c
         btnBuscar1.setText("Buscar");
         btnBuscar1.addActionListener(this::btnBuscar1ActionPerformed);
 
@@ -241,6 +251,7 @@ public class GestionMedicamentos extends javax.swing.JInternalFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addGap(21, 55, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -251,6 +262,18 @@ public class GestionMedicamentos extends javax.swing.JInternalFrame {
                                 .addComponent(btnExportarExel))
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(51, Short.MAX_VALUE))
+=======
+                .addGap(20, 20, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(btnImprimir)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExportarExel)
+                        .addGap(176, 176, 176))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(31, Short.MAX_VALUE))
+>>>>>>> b3cfd20b4b187e674d1d0deea4925a03dda1c49c
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
