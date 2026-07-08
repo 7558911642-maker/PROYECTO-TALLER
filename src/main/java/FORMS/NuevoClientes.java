@@ -107,6 +107,7 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         btnEliminar11 = new javax.swing.JButton();
         btnGuardar6 = new javax.swing.JButton();
         btnEliminar12 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         pnlPersonaNatural = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -431,13 +432,11 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         jPanel10.setBackground(new java.awt.Color(232, 232, 255));
 
         btnEliminar2.setText("Cancelar");
-        btnEliminar2.addActionListener(this::btnEliminar2ActionPerformed);
 
         btnGuardar2.setText("Guardar");
         btnGuardar2.addActionListener(this::btnGuardar2ActionPerformed);
 
         btnEliminar4.setText("limpiar");
-        btnEliminar4.addActionListener(this::btnEliminar4ActionPerformed);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -577,7 +576,6 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         btnEliminar8.setForeground(new java.awt.Color(255, 102, 102));
         btnEliminar8.setText("limpiar");
         btnEliminar8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
-        btnEliminar8.addActionListener(this::btnEliminar8ActionPerformed);
 
         setClosable(true);
         setIconifiable(true);
@@ -728,7 +726,7 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel65)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombre18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
@@ -737,12 +735,14 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         btnEliminar11.setBackground(new java.awt.Color(0, 100, 248));
         btnEliminar11.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnEliminar11.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/disk.png"))); // NOI18N
         btnEliminar11.setText("Guardar");
         btnEliminar11.addActionListener(this::btnEliminar11ActionPerformed);
 
         btnGuardar6.setBackground(new java.awt.Color(237, 246, 254));
         btnGuardar6.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnGuardar6.setForeground(new java.awt.Color(0, 100, 248));
+        btnGuardar6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/close-24.png"))); // NOI18N
         btnGuardar6.setText("Cancelar");
         btnGuardar6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 100, 248), 2, true));
         btnGuardar6.addActionListener(this::btnGuardar6ActionPerformed);
@@ -750,9 +750,11 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         btnEliminar12.setBackground(new java.awt.Color(248, 251, 254));
         btnEliminar12.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnEliminar12.setForeground(new java.awt.Color(255, 102, 102));
+        btnEliminar12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/broom.png"))); // NOI18N
         btnEliminar12.setText("limpiar");
         btnEliminar12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
-        btnEliminar12.addActionListener(this::btnEliminar12ActionPerformed);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/XJ96v-logo.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlEmpresaLayout = new javax.swing.GroupLayout(pnlEmpresa);
         pnlEmpresa.setLayout(pnlEmpresaLayout);
@@ -765,30 +767,34 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
                         .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnlEmpresaLayout.createSequentialGroup()
-                                .addComponent(btnEliminar11, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(btnGuardar6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEliminar12, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnEliminar11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnGuardar6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEliminar12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlEmpresaLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addGap(25, 25, 25)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         pnlEmpresaLayout.setVerticalGroup(
             pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlEmpresaLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(btnEliminar11)
@@ -958,7 +964,6 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
         btnEliminar10.setForeground(new java.awt.Color(255, 102, 102));
         btnEliminar10.setText("limpiar");
         btnEliminar10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
-        btnEliminar10.addActionListener(this::btnEliminar10ActionPerformed);
 
         javax.swing.GroupLayout pnlPersonaNaturalLayout = new javax.swing.GroupLayout(pnlPersonaNatural);
         pnlPersonaNatural.setLayout(pnlPersonaNaturalLayout);
@@ -996,7 +1001,7 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
                     .addComponent(btnEliminar9)
                     .addComponent(btnGuardar5)
                     .addComponent(btnEliminar10))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pnlDinamicos.add(pnlPersonaNatural, "card2");
@@ -1244,6 +1249,7 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGuardar6;
     private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JComboBox<String> cbTipoDcumento;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox10;
     private javax.swing.JComboBox<String> jComboBox11;
     private javax.swing.JComboBox<String> jComboBox5;

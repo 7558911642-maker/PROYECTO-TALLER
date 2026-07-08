@@ -38,6 +38,7 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
         btnEliminar11 = new javax.swing.JButton();
         btnGuardar6 = new javax.swing.JButton();
         btnEliminar12 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         btnEliminar9.setBackground(new java.awt.Color(0, 100, 248));
         btnEliminar9.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
@@ -57,7 +58,6 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
         btnEliminar10.setForeground(new java.awt.Color(255, 102, 102));
         btnEliminar10.setText("limpiar");
         btnEliminar10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
-        btnEliminar10.addActionListener(this::btnEliminar10ActionPerformed);
 
         setForeground(new java.awt.Color(51, 51, 255));
 
@@ -168,12 +168,14 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
         btnEliminar11.setBackground(new java.awt.Color(0, 100, 248));
         btnEliminar11.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnEliminar11.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/disk.png"))); // NOI18N
         btnEliminar11.setText("Guardar");
         btnEliminar11.addActionListener(this::btnEliminar11ActionPerformed);
 
         btnGuardar6.setBackground(new java.awt.Color(237, 246, 254));
         btnGuardar6.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnGuardar6.setForeground(new java.awt.Color(0, 100, 248));
+        btnGuardar6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/close-24.png"))); // NOI18N
         btnGuardar6.setText("Cancelar");
         btnGuardar6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 100, 248), 2, true));
         btnGuardar6.addActionListener(this::btnGuardar6ActionPerformed);
@@ -181,40 +183,48 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
         btnEliminar12.setBackground(new java.awt.Color(248, 251, 254));
         btnEliminar12.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnEliminar12.setForeground(new java.awt.Color(255, 102, 102));
+        btnEliminar12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/broom.png"))); // NOI18N
         btnEliminar12.setText("limpiar");
         btnEliminar12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
-        btnEliminar12.addActionListener(this::btnEliminar12ActionPerformed);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/XJ96v-logo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminar11, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnGuardar6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar12, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEliminar11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGuardar6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminar12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(47, 47, 47))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -223,7 +233,7 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
                     .addComponent(btnEliminar11)
                     .addComponent(btnGuardar6)
                     .addComponent(btnEliminar12))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -325,6 +335,7 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

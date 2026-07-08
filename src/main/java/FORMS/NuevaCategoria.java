@@ -114,13 +114,14 @@ public class NuevaCategoria extends javax.swing.JInternalFrame {
         btnLimpiar.setBackground(new java.awt.Color(248, 251, 254));
         btnLimpiar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnLimpiar.setForeground(new java.awt.Color(255, 102, 102));
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/broom.png"))); // NOI18N
         btnLimpiar.setText("limpiar");
         btnLimpiar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
-        btnLimpiar.addActionListener(this::btnLimpiarActionPerformed);
 
         btnCancelar.setBackground(new java.awt.Color(237, 246, 254));
         btnCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(0, 100, 248));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/close-24.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 100, 248), 2, true));
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
@@ -128,6 +129,7 @@ public class NuevaCategoria extends javax.swing.JInternalFrame {
         btnGuardar.setBackground(new java.awt.Color(0, 100, 248));
         btnGuardar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/disk.png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
@@ -138,16 +140,15 @@ public class NuevaCategoria extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17))
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))

@@ -90,6 +90,7 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         jLabel37 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCancelarVenta = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         panelPrincipal.setBackground(new java.awt.Color(237, 246, 254));
 
@@ -111,13 +112,11 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         btnEliminar2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnEliminar2.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar2.setText("Factura");
-        btnEliminar2.addActionListener(this::btnEliminar2ActionPerformed);
 
         btnEliminar3.setBackground(new java.awt.Color(0, 100, 248));
         btnEliminar3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnEliminar3.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar3.setText("Boleta");
-        btnEliminar3.addActionListener(this::btnEliminar3ActionPerformed);
 
         javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
@@ -196,8 +195,8 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         btnAgregar.setBackground(new java.awt.Color(0, 100, 248));
         btnAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
         btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(this::btnAgregarActionPerformed);
 
         javax.swing.GroupLayout panelDetalleLayout = new javax.swing.GroupLayout(panelDetalle);
         panelDetalle.setLayout(panelDetalleLayout);
@@ -244,7 +243,7 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAgregar))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
@@ -356,8 +355,8 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         btnBuscar.setBackground(new java.awt.Color(0, 100, 248));
         btnBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search.png"))); // NOI18N
         btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
         javax.swing.GroupLayout panelDatos1Layout = new javax.swing.GroupLayout(panelDatos1);
         panelDatos1.setLayout(panelDatos1Layout);
@@ -380,7 +379,7 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtruc, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnBuscar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel23)
                                 .addGap(18, 18, 18)
@@ -536,7 +535,6 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         btnGuardar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("Guardar y cobrar");
-        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
         btnCancelarVenta.setBackground(new java.awt.Color(237, 246, 254));
         btnCancelarVenta.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
@@ -545,12 +543,16 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         btnCancelarVenta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 100, 248), 2, true));
         btnCancelarVenta.addActionListener(this::btnCancelarVentaActionPerformed);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/XJ96v-logo.png"))); // NOI18N
+
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addGap(80, 80, 80)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panelPrincipalLayout.createSequentialGroup()
@@ -575,8 +577,11 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel20))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -648,6 +653,7 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

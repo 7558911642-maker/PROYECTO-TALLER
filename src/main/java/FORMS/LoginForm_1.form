@@ -57,7 +57,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                           <Component id="jLabel1" max="32767" attributes="0"/>
-                          <EmptySpace pref="69" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -98,7 +98,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="txtclave" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btniniciosecion" pref="34" max="32767" attributes="0"/>
+                  <Component id="btniniciosecion" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
               </Group>
               <Component id="jPanel4" max="32767" attributes="0"/>
@@ -197,6 +197,9 @@
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/person.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Usuario:"/>
           </Properties>

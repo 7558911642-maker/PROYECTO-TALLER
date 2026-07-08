@@ -105,6 +105,7 @@ public class GestionInventario extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(tblGestionMedicamentos);
 
         btnActualizar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh.png"))); // NOI18N
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(this::btnActualizarActionPerformed);
 
@@ -114,6 +115,7 @@ public class GestionInventario extends javax.swing.JInternalFrame {
         jLabel7.setText("Tipo de inventario:");
 
         btnBuscar1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        btnBuscar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search.png"))); // NOI18N
         btnBuscar1.setText("Buscar");
         btnBuscar1.addActionListener(this::btnBuscar1ActionPerformed);
 
@@ -224,8 +226,8 @@ public class GestionInventario extends javax.swing.JInternalFrame {
         jLabel4.setText("<html>\n<table width=\"260\" cellpadding=\"0\" cellspacing=\"0\">\n  <tr>\n    <td><font face=\"Segoe UI\" color=\"#0645A3\" size=\"5\"><b>Gestion Inventario</b></font></td>\n  </tr>\n  <tr>\n    <td><font face=\"Segoe UI\" color=\"#707782\" size=\"2\">Controle el inventario de Productos</font></td>\n  </tr>\n  <!-- Se eliminó la fila intermedia que daba el espacio de altura 5 -->\n  <tr>\n    <td bgcolor=\"#62A9F5\" height=\"3\"></td>\n  </tr>\n</table>\n</html>");
 
         btnVolver2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btnVolver2.setText("<-- VOLVER");
-        btnVolver2.addActionListener(this::btnVolverActionPerformed);
+        btnVolver2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow.png"))); // NOI18N
+        btnVolver2.setText("VOLVER");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);

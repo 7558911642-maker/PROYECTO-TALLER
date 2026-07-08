@@ -70,6 +70,7 @@ public class AlertasInventario extends javax.swing.JInternalFrame {
 
         btnActualizar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         btnActualizar.setForeground(new java.awt.Color(0, 100, 248));
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh.png"))); // NOI18N
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(this::btnActualizarActionPerformed);
 
@@ -92,6 +93,7 @@ public class AlertasInventario extends javax.swing.JInternalFrame {
         btnBuscar2.setBackground(new java.awt.Color(0, 100, 248));
         btnBuscar2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         btnBuscar2.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search.png"))); // NOI18N
         btnBuscar2.setText("Buscar");
         btnBuscar2.addActionListener(this::btnBuscar2ActionPerformed);
 
@@ -104,7 +106,7 @@ public class AlertasInventario extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 280, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,6 +197,7 @@ public class AlertasInventario extends javax.swing.JInternalFrame {
 
         btnBuscar1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         btnBuscar1.setForeground(new java.awt.Color(0, 100, 248));
+        btnBuscar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow.png"))); // NOI18N
         btnBuscar1.setText("Volver");
         btnBuscar1.addActionListener(this::btnBuscar1ActionPerformed);
 

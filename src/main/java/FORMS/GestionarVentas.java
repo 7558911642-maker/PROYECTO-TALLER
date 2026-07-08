@@ -75,6 +75,7 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(tblGestionVentas);
 
         btnBuscar1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        btnBuscar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search.png"))); // NOI18N
         btnBuscar1.setText("Buscar");
         btnBuscar1.addActionListener(this::btnBuscar1ActionPerformed);
 
@@ -151,8 +152,8 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
         jLabel4.setText("<html>\n<table width=\"260\" cellpadding=\"0\" cellspacing=\"0\">\n  <tr>\n    <td><font face=\"Segoe UI\" color=\"#0645A3\" size=\"5\"><b>Gestion Ventas</b></font></td>\n  </tr>\n  <tr>\n    <td><font face=\"Segoe UI\" color=\"#707782\" size=\"2\">Controle de Ventas</font></td>\n  </tr>\n  <!-- Se eliminó la fila intermedia que daba el espacio de altura 5 -->\n  <tr>\n    <td bgcolor=\"#62A9F5\" height=\"3\"></td>\n  </tr>\n</table>\n</html>");
 
         btnVolver.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btnVolver.setText("<-- VOLVER");
-        btnVolver.addActionListener(this::btnVolverActionPerformed);
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/back.png"))); // NOI18N
+        btnVolver.setText("VOLVER");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

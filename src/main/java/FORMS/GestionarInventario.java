@@ -67,7 +67,8 @@ public class GestionarInventario extends javax.swing.JInternalFrame {
         txtTotalRecaudado1.addActionListener(this::txtTotalRecaudado1ActionPerformed);
 
         btnNuevo.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        btnNuevo.setText("+ Nuevo");
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
+        btnNuevo.setText("Nuevo");
         btnNuevo.addActionListener(this::btnNuevoActionPerformed);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -114,8 +115,8 @@ public class GestionarInventario extends javax.swing.JInternalFrame {
         jLabel4.setText("<html>\n<table width=\"260\" cellpadding=\"0\" cellspacing=\"0\">\n  <tr>\n    <td><font face=\"Segoe UI\" color=\"#0645A3\" size=\"5\"><b>Gestion Inventario</b></font></td>\n  </tr>\n  <tr>\n    <td><font face=\"Segoe UI\" color=\"#707782\" size=\"2\">Controle de Inventario</font></td>\n  </tr>\n  <!-- Se eliminó la fila intermedia que daba el espacio de altura 5 -->\n  <tr>\n    <td bgcolor=\"#62A9F5\" height=\"3\"></td>\n  </tr>\n</table>\n</html>");
 
         btnVolver.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btnVolver.setText("<-- VOLVER");
-        btnVolver.addActionListener(this::btnVolverActionPerformed);
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/back.png"))); // NOI18N
+        btnVolver.setText(" VOLVER");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -175,7 +176,7 @@ public class GestionarInventario extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
