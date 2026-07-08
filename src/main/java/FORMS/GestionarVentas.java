@@ -1,32 +1,162 @@
 package FORMS;
 
+import DAO.PedidoDAO;
 import java.awt.event.ActionEvent;
-import javax.swing.table.DefaultTableModel;
-import java.text.SimpleDateFormat;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class GestionarVentas extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modeloTabla;
-    DAO.PedidoDAO pedidoDAO = new DAO.PedidoDAO();
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private PedidoDAO pedidoDAO;
+    private int filaSeleccionada = -1;
+    private DefaultTableModel modeloTabla;
     
     public GestionarVentas() {
         initComponents();
-        this.setTitle("Reporte de Ventas por Rango de Fechas");
+        pedidoDAO = new PedidoDAO();
         configurarTabla();
     }
 
     private void configurarTabla() {
-        String[] cabecera = {"ID Venta", "Cliente / Asegurado", "Fecha Emisión", "Tipo Venta", "Monto", "Estado"};
-        modeloTabla = new DefaultTableModel(null, cabecera) {
+        String[] columnas = {"ID", "N° Venta", "Comprobante", "Fecha", "Cliente", "Usuario", "Subtotal", "Descuento", "IGV", "Total", "Estado", "Ver Detalle", "Anular"};
+        modeloTabla = new DefaultTableModel(columnas, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         tblGestionVentas.setModel(modeloTabla);
+        tblGestionVentas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                tblGestionVentasMouseClicked(e);
+            }
+        });
     }
+
+    private void mostrarVentas(List<Object[]> ventas) {
+        modeloTabla.setRowCount(0);
+        BigDecimal totalVentas = BigDecimal.ZERO;
+        int ventasAnuladas = 0;
+
+        for (Object[] v : ventas) {
+            modeloTabla.addRow(new Object[]{
+                v[0], v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8], v[9], v[10],
+                "<html><font color='blue'>Detalle</font></html>",
+                "<html><font color='red'>Anular</font></html>"
+            });
+
+            if ("Anulada".equalsIgnoreCase(valor(v[10]))) ventasAnuladas++;
+            else totalVentas = totalVentas.add(toBigDecimal(v[9]));
+        }
+
+        txtTotalVentas.setText(String.valueOf(ventas.size()));
+        txtVentasAnuladas.setText(String.valueOf(ventasAnuladas));
+        txtTotalGanancias.setText(totalVentas.toString());
+        filaSeleccionada = -1;
+    }
+
+    private void buscarVentasPorFecha() {
+        Date inicio = fchInicio.getDate();
+        Date fin = fchFin.getDate();
+
+        if (inicio == null || fin == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione fecha de inicio y fecha de fin.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (inicio.after(fin)) {
+            JOptionPane.showMessageDialog(this, "La fecha de inicio no puede ser mayor que la fecha de fin.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            List<Object[]> ventas = pedidoDAO.consultarVentasPorFechas(inicio, fin);
+            if (ventas.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No se encontraron ventas en el rango seleccionado.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
+            mostrarVentas(ventas);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al consultar ventas: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void verDetalleVenta() {
+        if (filaSeleccionada < 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione una venta.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int idVenta = Integer.parseInt(modeloTabla.getValueAt(filaSeleccionada, 0).toString());
+        List<Object[]> detalles = pedidoDAO.buscarDetalleVenta(idVenta);
+
+        String[] columnas = {"ID Detalle", "ID Medicamento", "Código", "Medicamento", "Cantidad", "Precio", "Costo", "Descuento", "Subtotal"};
+        DefaultTableModel modeloDetalle = new DefaultTableModel(columnas, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        for (Object[] d : detalles) modeloDetalle.addRow(d);
+
+        JTable tablaDetalle = new JTable(modeloDetalle);
+        JScrollPane scroll = new JScrollPane(tablaDetalle);
+        scroll.setPreferredSize(new java.awt.Dimension(850, 300));
+        JOptionPane.showMessageDialog(this, scroll, "Detalle de venta N° " + idVenta, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void anularVenta() {
+        if (filaSeleccionada < 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione una venta para anular.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int idVenta = Integer.parseInt(modeloTabla.getValueAt(filaSeleccionada, 0).toString());
+        String estado = valor(modeloTabla.getValueAt(filaSeleccionada, 10));
+
+        if ("Anulada".equalsIgnoreCase(estado)) {
+            JOptionPane.showMessageDialog(this, "La venta ya se encuentra anulada.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de anular la venta seleccionada?", "Confirmar anulación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            if (pedidoDAO.anularVenta(idVenta)) {
+                JOptionPane.showMessageDialog(this, "Venta anulada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                buscarVentasPorFecha();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo anular la venta.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void tblGestionVentasMouseClicked(MouseEvent evt) {
+        filaSeleccionada = tblGestionVentas.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            int columna = tblGestionVentas.getSelectedColumn();
+            if (columna == 11) verDetalleVenta();
+            else if (columna == 12) anularVenta();
+            else if (evt.getClickCount() == 2) verDetalleVenta();
+        }
+    }
+
+    private BigDecimal toBigDecimal(Object valor) {
+        if (valor == null) return BigDecimal.ZERO;
+        if (valor instanceof BigDecimal) return (BigDecimal) valor;
+        try { return new BigDecimal(valor.toString()); } catch (Exception e) { return BigDecimal.ZERO; }
+    }
+
+    private String valor(Object dato) {
+        return dato == null ? "" : dato.toString();
+    }
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -226,51 +356,10 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {
-        java.util.Date fechaInicio = fchInicio.getDate();
-        java.util.Date fechaFin = fchFin.getDate();
-        if (fechaInicio == null || fechaFin == null) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione fecha de inicio y fecha de fin.");
-            return;
-        }
-        java.util.Calendar cal = java.util.Calendar.getInstance();
-        cal.setTime(fechaFin);
-        cal.set(java.util.Calendar.HOUR_OF_DAY, 23);
-        cal.set(java.util.Calendar.MINUTE, 59);
-        cal.set(java.util.Calendar.SECOND, 59);
-        fechaFin = cal.getTime();
-
-        modeloTabla.setRowCount(0);
-        double totalSum = 0;
-        double gananciaSum = 0;
-        int anuladosCount = 0;
-
-        for (Object[] fila : pedidoDAO.consultarVentasPorFechas(fechaInicio, fechaFin)) {
-            Object[] fila6 = new Object[6];
-            fila6[0] = fila[0]; // id_venta
-            fila6[1] = fila[1]; // cliente
-            fila6[2] = sdf.format((java.util.Date) fila[2]); // fecha
-            fila6[3] = "Normal"; // tipo venta
-            fila6[4] = fila[3]; // monto
-            String estado = fila[4].toString();
-            fila6[5] = "Pagada".equals(estado) ? "COMPLETADO" : "ANULADO";
-            modeloTabla.addRow(fila6);
-
-            java.math.BigDecimal monto = (java.math.BigDecimal) fila[3];
-            totalSum += monto.doubleValue();
-            if ("COMPLETADO".equals(fila6[5])) {
-                gananciaSum += monto.doubleValue();
-            } else {
-                anuladosCount++;
-            }
-        }
-        txtTotalVentas.setText(String.format("%.2f", totalSum));
-        txtTotalGanancias.setText(String.format("%.2f", gananciaSum));
-        txtVentasAnuladas.setText(String.valueOf(anuladosCount));
+        buscarVentasPorFecha();
     }
-
     private void txtTotalRecaudadoActionPerformed(java.awt.event.ActionEvent evt) {
     }
-
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {
         dispose();
@@ -300,4 +389,5 @@ public class GestionarVentas extends javax.swing.JInternalFrame {
     private void txtTotalVentasActionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 }

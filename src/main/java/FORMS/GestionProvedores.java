@@ -4,60 +4,199 @@
  */
 package FORMS;
 
-import java.awt.event.ActionEvent;
-import javax.swing.table.DefaultTableModel;
+import DAO.ProveedorDAO;
+import LOGICA.ProveedorClass;
+import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class GestionProvedores extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modeloTabla;
-    DAO.ProveedorDAO proveedorDAO = new DAO.ProveedorDAO();
+    private ProveedorDAO proveedorDAO;
+    private int filaSeleccionada = -1;
+    private DefaultTableModel modeloTabla;;
 
     public GestionProvedores() {
         initComponents();
-        this.setTitle("Reporte de Proveedores");
+        proveedorDAO = new ProveedorDAO();
         configurarTabla();
-        cargarTabla("");
+        cargarDatos();
     }
 
     private void configurarTabla() {
-        String[] cabecera = {"ID", "RUC", "Razón Social", "Teléfono", "Correo", "Dirección", "Estado"};
-        modeloTabla = new DefaultTableModel(null, cabecera) {
+        String[] columnas = {"ID", "RUC", "Razón Social", "Nombre Comercial", "Teléfono", "Correo", "Dirección", "Estado", "Modificar", "Eliminar"};
+        modeloTabla = new DefaultTableModel(columnas, 0) {
             @Override
-            public boolean isCellEditable(int row, int column) { return false; }
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
         };
         tablaReporteFechas1.setModel(modeloTabla);
+        tablaReporteFechas1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                tablaReporteFechas1MouseClicked(e);
+            }
+        });
     }
-
-    private void cargarTabla(String criterio) {
+    
+    private void mostrarProveedores(List<ProveedorClass> proveedores) {
         modeloTabla.setRowCount(0);
-        List<LOGICA.ProveedorClass> lista;
-        if (criterio.isEmpty()) {
-            lista = proveedorDAO.listar();
-        } else {
-            lista = proveedorDAO.buscar(criterio);
-        }
-        int total = 0;
-        int activos = 0;
-        int inactivos = 0;
-        for (LOGICA.ProveedorClass p : lista) {
-            Object[] fila = new Object[7];
-            fila[0] = p.getIdProveedor();
-            fila[1] = p.getRuc();
-            fila[2] = p.getNombreProveedor();
-            fila[3] = p.getTelefono();
-            fila[4] = p.getCorreo();
-            fila[5] = p.getDireccion();
-            fila[6] = p.getEstado();
-            modeloTabla.addRow(fila);
+        int total = 0, activos = 0, inactivos = 0;
+
+        for (ProveedorClass p : proveedores) {
+            modeloTabla.addRow(new Object[]{
+                p.getIdProveedor(),
+                p.getRuc(),
+                p.getRazonSocial(),
+                p.getNombreComercial(),
+                p.getTelefono(),
+                p.getCorreo(),
+                p.getDireccion(),
+                p.getEstado(),
+                "<html><font color='blue'>Modificar</font></html>",
+                "<html><font color='red'>Eliminar</font></html>"
+            });
             total++;
-            if ("Activo".equals(p.getEstado())) activos++; else inactivos++;
+            if ("Activo".equalsIgnoreCase(p.getEstado())) activos++; else inactivos++;
         }
+
         txtTotalProvee.setText(String.valueOf(total));
         txtActivos.setText(String.valueOf(activos));
         txtInactivo.setText(String.valueOf(inactivos));
+        filaSeleccionada = -1;
+    }
+    
+    private void cargarDatos() {
+        try {
+            List<ProveedorClass> proveedores = proveedorDAO.listar();
+            mostrarProveedores(proveedores);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar proveedores: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
+    private void buscarProveedor() {
+        String textoBusqueda = txtBuscar.getText().trim();
+        try {
+            List<ProveedorClass> proveedores = textoBusqueda.isEmpty() ? proveedorDAO.listar() : proveedorDAO.buscar(textoBusqueda);
+            if (proveedores.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No se encontraron proveedores.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
+            mostrarProveedores(proveedores);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al buscar proveedor: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void modificarProveedor() {
+        if (filaSeleccionada < 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un proveedor para modificar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int id = Integer.parseInt(modeloTabla.getValueAt(filaSeleccionada, 0).toString());
+        ProveedorClass proveedor = proveedorDAO.buscarPorId(id);
+        if (proveedor == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo cargar la información del proveedor.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JTextField txtRucDlg = new JTextField(valor(proveedor.getRuc()));
+        JTextField txtRazonDlg = new JTextField(valor(proveedor.getRazonSocial()));
+        JTextField txtComercialDlg = new JTextField(valor(proveedor.getNombreComercial()));
+        JTextField txtTelefonoDlg = new JTextField(valor(proveedor.getTelefono()));
+        JTextField txtCorreoDlg = new JTextField(valor(proveedor.getCorreo()));
+        JTextField txtDireccionDlg = new JTextField(valor(proveedor.getDireccion()));
+        JComboBox<String> cbxEstadoDlg = new JComboBox<>(new String[]{"Activo", "Inactivo"});
+        cbxEstadoDlg.setSelectedItem(valor(proveedor.getEstado()).isEmpty() ? "Activo" : proveedor.getEstado());
+
+        JPanel panel = new JPanel(new GridLayout(7, 2, 10, 10));
+        panel.add(new JLabel("RUC:")); panel.add(txtRucDlg);
+        panel.add(new JLabel("Razón social:")); panel.add(txtRazonDlg);
+        panel.add(new JLabel("Nombre comercial:")); panel.add(txtComercialDlg);
+        panel.add(new JLabel("Teléfono:")); panel.add(txtTelefonoDlg);
+        panel.add(new JLabel("Correo:")); panel.add(txtCorreoDlg);
+        panel.add(new JLabel("Dirección:")); panel.add(txtDireccionDlg);
+        panel.add(new JLabel("Estado:")); panel.add(cbxEstadoDlg);
+
+        int opcion = JOptionPane.showConfirmDialog(this, panel, "Modificar proveedor", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (opcion == JOptionPane.OK_OPTION) {
+            String ruc = txtRucDlg.getText().trim();
+            String razon = txtRazonDlg.getText().trim();
+
+            if (ruc.isEmpty() || razon.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "El RUC y la razón social son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!ruc.matches("\\d{11}")) {
+                JOptionPane.showMessageDialog(this, "El RUC debe tener 11 dígitos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            proveedor.setRuc(ruc);
+            proveedor.setRazonSocial(razon);
+            proveedor.setNombreProveedor(razon);
+            proveedor.setNombreComercial(txtComercialDlg.getText().trim());
+            proveedor.setTelefono(txtTelefonoDlg.getText().trim());
+            proveedor.setCorreo(txtCorreoDlg.getText().trim());
+            proveedor.setDireccion(txtDireccionDlg.getText().trim());
+            proveedor.setEstado(cbxEstadoDlg.getSelectedItem().toString());
+
+            if (proveedorDAO.actualizar(proveedor)) {
+                JOptionPane.showMessageDialog(this, "Proveedor actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                cargarDatos();
+                txtBuscar.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar el proveedor.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void eliminarProveedor() {
+        if (filaSeleccionada < 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un proveedor para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int id = Integer.parseInt(modeloTabla.getValueAt(filaSeleccionada, 0).toString());
+        String nombre = valor(modeloTabla.getValueAt(filaSeleccionada, 2));
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar/inactivar al proveedor: " + nombre + "?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            if (proveedorDAO.eliminar(id)) {
+                JOptionPane.showMessageDialog(this, "Proveedor eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                cargarDatos();
+                txtBuscar.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo eliminar el proveedor.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void tablaReporteFechas1MouseClicked(MouseEvent evt) {
+        filaSeleccionada = tablaReporteFechas1.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            int columna = tablaReporteFechas1.getSelectedColumn();
+            if (columna == 8) modificarProveedor();
+            else if (columna == 9) eliminarProveedor();
+            else if (evt.getClickCount() == 2) modificarProveedor();
+        }
+    }
+
+    private String valor(Object dato) {
+        return dato == null ? "" : dato.toString();
+    }
+
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -154,6 +293,7 @@ public class GestionProvedores extends javax.swing.JInternalFrame {
         btnVolver.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/back.png"))); // NOI18N
         btnVolver.setText("VOLVER");
+        btnVolver.addActionListener(this::btnVolverActionPerformed);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/close-32.png"))); // NOI18N
 
@@ -253,18 +393,31 @@ public class GestionProvedores extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtInactivoActionPerformed
 
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
+
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {
-        cargarTabla(txtBuscar.getText().trim());
+        buscarProveedor();
     }
 
     private void txtTotalRecaudadoActionPerformed(java.awt.event.ActionEvent evt) {
     }
-
-
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {
-        dispose();
+    
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {
+        NuevoProvedor formulario = new NuevoProvedor();
+        if (getDesktopPane() != null) {
+            getDesktopPane().add(formulario);
+            formulario.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Abra este formulario desde la ventana principal.");
+        }
     }
-
+    
+    private void txtTotalProveeActionPerformed(java.awt.event.ActionEvent evt) {
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnVolver;
@@ -285,11 +438,7 @@ public class GestionProvedores extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTotalProvee;
     // End of variables declaration//GEN-END:variables
 
-    private void btnNuevoActionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
-    private void txtTotalProveeActionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }
