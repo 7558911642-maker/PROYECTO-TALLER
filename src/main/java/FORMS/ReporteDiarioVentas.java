@@ -338,10 +338,6 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_btnEliminar3ActionPerformed
 
-    
-
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar1;
     private javax.swing.JButton btnEliminar3;
