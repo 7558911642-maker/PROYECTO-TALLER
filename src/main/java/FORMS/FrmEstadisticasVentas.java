@@ -1,41 +1,72 @@
 package FORMS;
 
-import javax.swing.table.DefaultTableModel;
+import DAO.PedidoDAO;
+import java.math.BigDecimal;
 import java.util.List;
-
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 public class FrmEstadisticasVentas extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modeloProductos;
-    DefaultTableModel modeloClientes;
-    DAO.PedidoDAO pedidoDAO = new DAO.PedidoDAO();
+    private PedidoDAO pedidoDAO;
+    private DefaultTableModel modeloTabla;
     
     public FrmEstadisticasVentas() {
         initComponents();
-        this.setTitle("Módulo de Analítica y Estadísticas Gerenciales");
-        configurarTablas();
-        cargarDatosEstadisticos();
+         pedidoDAO = new PedidoDAO();
+        configurarTabla();
+        cargarEstadisticas();
     }
 
-    private void configurarTablas() {
-        // Configuración de la tabla de productos (Top 5)
-        String[] cabeceraProd = {"Código", "Medicamento / Fármaco", "Unidades Vendidas"};
-        modeloProductos = new DefaultTableModel(null, cabeceraProd) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        tablaTopProductos1.setModel(modeloProductos);
-
-    }
     
-    private void cargarDatosEstadisticos() {
-        modeloProductos.setRowCount(0);
-        List<Object[]> topProductos = pedidoDAO.obtenerTop5Medicamentos();
-        for (Object[] fila : topProductos) {
-            modeloProductos.addRow(fila);
+// 4) MÉTODOS: pegar antes de // Variables declaration
+private void configurarTabla() {
+    String[] columnas = {"ID", "Código", "Medicamento", "Unidades Vendidas", "Ingreso Total"};
+    modeloTabla = new DefaultTableModel(columnas, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
         }
+    };
+    tablaTopProductos1.setModel(modeloTabla);
+}
+
+private void cargarEstadisticas() {
+    try {
+        List<Object[]> top = pedidoDAO.obtenerTop5Medicamentos();
+        modeloTabla.setRowCount(0);
+
+        int unidades = 0;
+        BigDecimal ingreso = BigDecimal.ZERO;
+
+        for (Object[] fila : top) {
+            modeloTabla.addRow(fila);
+            unidades += toInt(fila[3]);
+            ingreso = ingreso.add(toBigDecimal(fila[4]));
+        }
+
+        lblTotalCat.setText(String.valueOf(top.size()));
+        lblCatActivas.setText(String.valueOf(unidades));
+        lblCatInactiva.setText(ingreso.toString());
+        lblCatActivas1.setText("Top 5");
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar estadísticas: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
+}
+
+private BigDecimal toBigDecimal(Object valor) {
+    if (valor == null) return BigDecimal.ZERO;
+    if (valor instanceof BigDecimal) return (BigDecimal) valor;
+    try { return new BigDecimal(valor.toString()); } catch (Exception e) { return BigDecimal.ZERO; }
+}
+
+private int toInt(Object valor) {
+    if (valor == null) return 0;
+    try { return Integer.parseInt(valor.toString()); } catch (Exception e) { return 0; }
+}
+
+
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -254,14 +285,15 @@ public class FrmEstadisticasVentas extends javax.swing.JInternalFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCatActivas)
-                            .addComponent(lblCatInactiva)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCatActivas1)
-                            .addComponent(lblTotalCat)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12))))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblCatActivas)
+                                .addComponent(lblCatInactiva)
+                                .addComponent(lblTotalCat)
+                                .addComponent(jLabel11)
+                                .addComponent(jLabel12)))))
                 .addGap(25, 25, 25))
         );
 
@@ -284,7 +316,7 @@ public class FrmEstadisticasVentas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar11ActionPerformed
-        cargarDatosEstadisticos();
+         cargarEstadisticas();
     }//GEN-LAST:event_btnEliminar11ActionPerformed
 
 

@@ -4,51 +4,264 @@
  */
 package FORMS;
 
-import javax.swing.table.DefaultTableModel;
+import DAO.ProductoDAO;
+import LOGICA.ProductoClass;
+import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.print.PrinterException;
+import java.io.File;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class GestionMedicamentos extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modeloTabla;
-    DAO.ProductoDAO productoDAO = new DAO.ProductoDAO();
+   private ProductoDAO productoDAO;
+    private int filaSeleccionada = -1;
+    private DefaultTableModel modeloTabla;
 
     public GestionMedicamentos() {
         initComponents();
-        this.setTitle("Reporte de Medicamentos");
+         productoDAO = new ProductoDAO();
         configurarTabla();
-        cargarTabla("");
+        cargarDatos();
     }
 
-    private void configurarTabla() {
-        String[] cabecera = {"ID", "Código", "Medicamento", "Categoría", "Proveedor", "Precio", "Stock"};
-        modeloTabla = new DefaultTableModel(null, cabecera) {
-            @Override
-            public boolean isCellEditable(int row, int column) { return false; }
-        };
-        tblGestionMedicamentos.setModel(modeloTabla);
+
+
+// 4) MÉTODOS: pegar antes de // Variables declaration
+private void configurarTabla() {
+    String[] columnas = {"ID", "Código", "Medicamento", "Principio Activo", "Concentración", "Presentación", "Categoría", "Proveedor", "Laboratorio", "P. Compra", "P. Venta", "Stock", "Stock Mín.", "Stock Máx.", "Estado", "Modificar", "Eliminar"};
+    modeloTabla = new DefaultTableModel(columnas, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    tblGestionMedicamentos.setModel(modeloTabla);
+    tblGestionMedicamentos.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            tblGestionMedicamentosMouseClicked(e);
+        }
+    });
+}
+
+private void mostrarMedicamentos(List<Object[]> medicamentos) {
+    modeloTabla.setRowCount(0);
+    int total = 0, activos = 0, inactivos = 0;
+
+    for (Object[] m : medicamentos) {
+        modeloTabla.addRow(new Object[]{
+            m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14],
+            "<html><font color='blue'>Modificar</font></html>",
+            "<html><font color='red'>Eliminar</font></html>"
+        });
+        total++;
+        if ("Activo".equalsIgnoreCase(valor(m[14]))) activos++; else inactivos++;
     }
 
-    private void cargarTabla(String criterio) {
-        modeloTabla.setRowCount(0);
-        List<Object[]> lista;
-        if (criterio.isEmpty()) {
-            lista = productoDAO.listarMedicamentos();
+    lblTotal.setText(String.valueOf(total));
+    lblActivos.setText(String.valueOf(activos));
+    lblInactivos.setText(String.valueOf(inactivos));
+    filaSeleccionada = -1;
+}
+
+private void cargarDatos() {
+    try {
+        List<Object[]> medicamentos = productoDAO.listarMedicamentos();
+        mostrarMedicamentos(medicamentos);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar medicamentos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+private void buscarMedicamento() {
+    String textoBusqueda = txtBuscar.getText().trim();
+    try {
+        List<Object[]> medicamentos = textoBusqueda.isEmpty() ? productoDAO.listarMedicamentos() : productoDAO.buscarMedicamentos(textoBusqueda);
+        if (medicamentos.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se encontraron medicamentos.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
+        mostrarMedicamentos(medicamentos);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al buscar medicamento: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+private void modificarMedicamento() {
+    if (filaSeleccionada < 0) {
+        JOptionPane.showMessageDialog(this, "Seleccione un medicamento para modificar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    int id = Integer.parseInt(modeloTabla.getValueAt(filaSeleccionada, 0).toString());
+    ProductoClass producto = productoDAO.buscarPorId(id);
+    if (producto == null) {
+        JOptionPane.showMessageDialog(this, "No se pudo cargar la información del medicamento.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    JTextField txtCodigoDlg = new JTextField(valor(producto.getCodigo()));
+    JTextField txtNombreDlg = new JTextField(valor(producto.getNombreComercial()));
+    JTextField txtPrincipioDlg = new JTextField(valor(producto.getPrincipioActivo()));
+    JTextField txtConcentracionDlg = new JTextField(valor(producto.getConcentracion()));
+    JTextField txtPresentacionDlg = new JTextField(valor(producto.getPresentacion()));
+    JTextField txtUnidadDlg = new JTextField(valor(producto.getUnidadMedida()).isEmpty() ? "Unidad" : valor(producto.getUnidadMedida()));
+    JTextField txtPrecioCompraDlg = new JTextField(valor(producto.getPrecioCompra()));
+    JTextField txtPrecioVentaDlg = new JTextField(valor(producto.getPrecio()));
+    JTextField txtStockDlg = new JTextField(String.valueOf(producto.getStock()));
+    JTextField txtStockMinDlg = new JTextField(String.valueOf(producto.getStockMinimo()));
+    JTextField txtStockMaxDlg = new JTextField(producto.getStockMaximo() == null ? "" : String.valueOf(producto.getStockMaximo()));
+    JComboBox<String> cbxEstadoDlg = new JComboBox<>(new String[]{"Activo", "Inactivo"});
+    cbxEstadoDlg.setSelectedItem(valor(producto.getEstado()).isEmpty() ? "Activo" : producto.getEstado());
+
+    JPanel panel = new JPanel(new GridLayout(12, 2, 10, 10));
+    panel.add(new JLabel("Código:")); panel.add(txtCodigoDlg);
+    panel.add(new JLabel("Nombre comercial:")); panel.add(txtNombreDlg);
+    panel.add(new JLabel("Principio activo:")); panel.add(txtPrincipioDlg);
+    panel.add(new JLabel("Concentración:")); panel.add(txtConcentracionDlg);
+    panel.add(new JLabel("Presentación:")); panel.add(txtPresentacionDlg);
+    panel.add(new JLabel("Unidad medida:")); panel.add(txtUnidadDlg);
+    panel.add(new JLabel("Precio compra:")); panel.add(txtPrecioCompraDlg);
+    panel.add(new JLabel("Precio venta:")); panel.add(txtPrecioVentaDlg);
+    panel.add(new JLabel("Stock:")); panel.add(txtStockDlg);
+    panel.add(new JLabel("Stock mínimo:")); panel.add(txtStockMinDlg);
+    panel.add(new JLabel("Stock máximo:")); panel.add(txtStockMaxDlg);
+    panel.add(new JLabel("Estado:")); panel.add(cbxEstadoDlg);
+
+    int opcion = JOptionPane.showConfirmDialog(this, panel, "Modificar medicamento", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+    if (opcion == JOptionPane.OK_OPTION) {
+        try {
+            if (txtCodigoDlg.getText().trim().isEmpty() || txtNombreDlg.getText().trim().isEmpty() || txtPresentacionDlg.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Código, nombre y presentación son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            BigDecimal precioCompra = new BigDecimal(txtPrecioCompraDlg.getText().trim());
+            BigDecimal precioVenta = new BigDecimal(txtPrecioVentaDlg.getText().trim());
+            int stock = Integer.parseInt(txtStockDlg.getText().trim());
+            int stockMin = Integer.parseInt(txtStockMinDlg.getText().trim());
+            Integer stockMax = txtStockMaxDlg.getText().trim().isEmpty() ? null : Integer.valueOf(txtStockMaxDlg.getText().trim());
+
+            if (precioCompra.compareTo(BigDecimal.ZERO) < 0 || precioVenta.compareTo(BigDecimal.ZERO) < 0 || stock < 0 || stockMin < 0) {
+                JOptionPane.showMessageDialog(this, "Precios y stock no pueden ser negativos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            producto.setCodigo(txtCodigoDlg.getText().trim());
+            producto.setNombreComercial(txtNombreDlg.getText().trim());
+            producto.setPrincipioActivo(txtPrincipioDlg.getText().trim());
+            producto.setConcentracion(txtConcentracionDlg.getText().trim());
+            producto.setPresentacion(txtPresentacionDlg.getText().trim());
+            producto.setUnidadMedida(txtUnidadDlg.getText().trim());
+            producto.setPrecioCompra(precioCompra);
+            producto.setPrecio(precioVenta);
+            producto.setPrecioUnidad(precioVenta);
+            producto.setStock(stock);
+            producto.setStockMinimo(stockMin);
+            producto.setStockMaximo(stockMax);
+            producto.setEstado(cbxEstadoDlg.getSelectedItem().toString());
+
+            if (productoDAO.actualizar(producto)) {
+                JOptionPane.showMessageDialog(this, "Medicamento actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                cargarDatos();
+                txtBuscar.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar el medicamento.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Precio y stock deben ser valores numéricos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+
+private void eliminarMedicamento() {
+    if (filaSeleccionada < 0) {
+        JOptionPane.showMessageDialog(this, "Seleccione un medicamento para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    int id = Integer.parseInt(modeloTabla.getValueAt(filaSeleccionada, 0).toString());
+    String nombre = valor(modeloTabla.getValueAt(filaSeleccionada, 2));
+    int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar/inactivar el medicamento: " + nombre + "?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+    if (confirmacion == JOptionPane.YES_OPTION) {
+        if (productoDAO.eliminar(id)) {
+            JOptionPane.showMessageDialog(this, "Medicamento eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            cargarDatos();
+            txtBuscar.setText("");
         } else {
-            lista = productoDAO.buscarMedicamentos(criterio);
+            JOptionPane.showMessageDialog(this, "No se pudo eliminar el medicamento.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        int total = 0;
-        int activos = 0;
-        int inactivos = 0;
-        for (Object[] fila : lista) {
-            modeloTabla.addRow(fila);
-            total++;
-            int stock = (int) fila[6];
-            if (stock > 0) activos++; else inactivos++;
-        }
-        txtBuscar.setText("Total: " + total + " | Activos: " + activos + " | Inactivos: " + inactivos);
     }
+}
 
+private void tblGestionMedicamentosMouseClicked(MouseEvent evt) {
+    filaSeleccionada = tblGestionMedicamentos.getSelectedRow();
+    if (filaSeleccionada >= 0) {
+        int columna = tblGestionMedicamentos.getSelectedColumn();
+        if (columna == 15) modificarMedicamento();
+        else if (columna == 16) eliminarMedicamento();
+        else if (evt.getClickCount() == 2) modificarMedicamento();
+    }
+}
+
+private void imprimirTabla() {
+    try {
+        tblGestionMedicamentos.print();
+    } catch (PrinterException e) {
+        JOptionPane.showMessageDialog(this, "Error al imprimir: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+private void exportarTablaCSV() {
+    JFileChooser chooser = new JFileChooser();
+    chooser.setDialogTitle("Guardar reporte de medicamentos");
+    chooser.setSelectedFile(new File("reporte_medicamentos.csv"));
+    int opcion = chooser.showSaveDialog(this);
+    if (opcion == JFileChooser.APPROVE_OPTION) {
+        try (PrintWriter pw = new PrintWriter(chooser.getSelectedFile())) {
+            for (int i = 0; i < modeloTabla.getColumnCount() - 2; i++) {
+                pw.print(modeloTabla.getColumnName(i));
+                if (i < modeloTabla.getColumnCount() - 3) pw.print(";");
+            }
+            pw.println();
+            for (int f = 0; f < modeloTabla.getRowCount(); f++) {
+                for (int c = 0; c < modeloTabla.getColumnCount() - 2; c++) {
+                    pw.print(valor(modeloTabla.getValueAt(f, c)));
+                    if (c < modeloTabla.getColumnCount() - 3) pw.print(";");
+                }
+                pw.println();
+            }
+            JOptionPane.showMessageDialog(this, "Reporte exportado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al exportar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+
+private String valor(Object dato) {
+    return dato == null ? "" : dato.toString();
+}
+
+// 5) EVENTOS EXISTENTES: 
+private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {
+    buscarMedicamento();
+}
+
+private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {
+    dispose();
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -283,28 +496,19 @@ public class GestionMedicamentos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        cargarTabla("");
+        cargarDatos();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnExportarExelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarExelActionPerformed
-        JOptionPane.showMessageDialog(this, "Función en desarrollo");
+        exportarTablaCSV();
+        
     }//GEN-LAST:event_btnExportarExelActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        JOptionPane.showMessageDialog(this, "Función en desarrollo");
+       
+        imprimirTabla();
     }//GEN-LAST:event_btnImprimirActionPerformed
 
-    private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {
-        cargarTabla(txtBuscar.getText().trim());
-    }
-
-    private void txtTotalRecaudadoActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {
-        dispose();
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
