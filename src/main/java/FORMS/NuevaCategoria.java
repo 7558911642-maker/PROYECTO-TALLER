@@ -1,15 +1,67 @@
 package FORMS;
+import DAO.CategoriaDAO;
+import LOGICA.CategoriaClass;
+import javax.swing.JOptionPane;
 
 
 
 public class NuevaCategoria extends javax.swing.JInternalFrame {
-
+    private CategoriaDAO categoriaDAO;
 
     public NuevaCategoria() {
         initComponents();
-       
+       categoriaDAO = new CategoriaDAO();
+    }
+    
+ 
+
+    private void guardarCategoria() {
+        String codigo = txtCodigo.getText().trim();
+        String nombre = txtNombre.getText().trim();
+        String descripcion = txtDescripcion.getText().trim();
+        String estado = cbEstado.getSelectedItem() == null ? "Activo" : cbEstado.getSelectedItem().toString();
+
+        if (codigo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El código de la categoría es obligatorio.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtCodigo.requestFocus();
+            return;
+        }
+        if (nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El nombre de la categoría es obligatorio.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtNombre.requestFocus();
+            return;
+        }
+        if (estado.equals("Seleccionar")) {
+            JOptionPane.showMessageDialog(this, "Seleccione un estado válido.", "Validación", JOptionPane.WARNING_MESSAGE);
+            cbEstado.requestFocus();
+            return;
+        }
+
+        CategoriaClass categoria = new CategoriaClass();
+        categoria.setCodigo(codigo);
+        categoria.setNombreCategoria(nombre);
+        categoria.setDescripcion(descripcion);
+        categoria.setEstado(estado);
+
+        if (categoriaDAO.registrar(categoria)) {
+            JOptionPane.showMessageDialog(this, "Categoría registrada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            limpiarCategoria();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo registrar la categoría.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
+    private void limpiarCategoria() {
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtDescripcion.setText("");
+        cbEstado.setSelectedIndex(0);
+        txtCodigo.requestFocus();
+    }
+
+
+
+ 
     
 
     @SuppressWarnings("unchecked")
@@ -184,39 +236,15 @@ public class NuevaCategoria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        dispose();
+    dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String nombre = txtNombre.getText().trim();
-        String descripcion = txtDescripcion.getText().trim();
-        String codigo = txtCodigo.getText().trim();
-        if (nombre.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "El nombre de la categoría es obligatorio", "Campo vacío", javax.swing.JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        LOGICA.CategoriaClass cat = new LOGICA.CategoriaClass();
-        cat.setNombreCategoria(nombre);
-        cat.setDescripcion(descripcion);
-        cat.setCodigo(codigo.isEmpty() ? "CAT-" + System.currentTimeMillis() : codigo);
-        DAO.CategoriaDAO dao = new DAO.CategoriaDAO();
-        try {
-            if (dao.registrar(cat)) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Categoría registrada correctamente", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "Error al registrar la categoría", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error de conexión: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
+       guardarCategoria();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        txtCodigo.setText("");
-        txtNombre.setText("");
-        txtDescripcion.setText("");
-        cbEstado.setSelectedIndex(0);
+        limpiarCategoria();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
 
