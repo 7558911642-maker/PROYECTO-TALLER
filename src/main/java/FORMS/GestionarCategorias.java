@@ -1,10 +1,214 @@
 package FORMS;
 
+
+
+import DAO.CategoriaDAO;
+import LOGICA.CategoriaClass;
+import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+
+
 public class GestionarCategorias extends javax.swing.JInternalFrame {
 
+    private CategoriaDAO categoriaDAO;
+    private int filaSeleccionada = -1;
+    private DefaultTableModel modeloTabla;
+    
+    
     public GestionarCategorias() {
         initComponents();
+        categoriaDAO = new CategoriaDAO();
+        configurarTabla();
+        cargarDatos();
+        
     }
+    
+    // ===============================
+// GESTIONARCATEGORIAS.java
+// ===============================
+
+
+
+// 4) MÉTODOS: pegar antes de // Variables declaration
+private void configurarTabla() {
+    String[] columnas = {"ID", "Código", "Nombre", "Descripción", "Estado", "Modificar", "Eliminar"};
+    modeloTabla = new DefaultTableModel(columnas, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    tblGestionCategorias.setModel(modeloTabla);
+    tblGestionCategorias.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            tblGestionCategoriasMouseClicked(e);
+        }
+    });
+}
+
+private void mostrarCategorias(List<CategoriaClass> categorias) {
+    modeloTabla.setRowCount(0);
+    int total = 0, activos = 0, inactivos = 0;
+
+    for (CategoriaClass cat : categorias) {
+        modeloTabla.addRow(new Object[]{
+            cat.getIdCategoria(),
+            cat.getCodigo(),
+            cat.getNombreCategoria(),
+            cat.getDescripcion(),
+            cat.getEstado(),
+            "<html><font color='blue'>Modificar</font></html>",
+            "<html><font color='red'>Eliminar</font></html>"
+        });
+        total++;
+        if ("Activo".equalsIgnoreCase(cat.getEstado())) activos++; else inactivos++;
+    }
+
+    lblTotalCat.setText(String.valueOf(total));
+    lblCatActivas.setText(String.valueOf(activos));
+    lblCatInactiva.setText(String.valueOf(inactivos));
+    filaSeleccionada = -1;
+}
+
+private void cargarDatos() {
+    try {
+        List<CategoriaClass> categorias = categoriaDAO.listar();
+        mostrarCategorias(categorias);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar categorías: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+private void buscarCategoria() {
+    String textoBusqueda = txtBuscar.getText().trim();
+    try {
+        List<CategoriaClass> categorias = textoBusqueda.isEmpty() ? categoriaDAO.listar() : categoriaDAO.buscar(textoBusqueda);
+        if (categorias.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se encontraron categorías.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
+        mostrarCategorias(categorias);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al buscar categoría: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+private void modificarCategoria() {
+    if (filaSeleccionada < 0) {
+        JOptionPane.showMessageDialog(this, "Seleccione una categoría para modificar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    int id = Integer.parseInt(modeloTabla.getValueAt(filaSeleccionada, 0).toString());
+    String codigoActual = valor(modeloTabla.getValueAt(filaSeleccionada, 1));
+    String nombreActual = valor(modeloTabla.getValueAt(filaSeleccionada, 2));
+    String descripcionActual = valor(modeloTabla.getValueAt(filaSeleccionada, 3));
+    String estadoActual = valor(modeloTabla.getValueAt(filaSeleccionada, 4));
+
+    JTextField txtCodigoDlg = new JTextField(codigoActual);
+    JTextField txtNombreDlg = new JTextField(nombreActual);
+    JTextField txtDescripcionDlg = new JTextField(descripcionActual);
+    JComboBox<String> cbxEstadoDlg = new JComboBox<>(new String[]{"Activo", "Inactivo"});
+    cbxEstadoDlg.setSelectedItem(estadoActual);
+
+    JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10));
+    panel.add(new JLabel("Código:")); panel.add(txtCodigoDlg);
+    panel.add(new JLabel("Nombre:")); panel.add(txtNombreDlg);
+    panel.add(new JLabel("Descripción:")); panel.add(txtDescripcionDlg);
+    panel.add(new JLabel("Estado:")); panel.add(cbxEstadoDlg);
+
+    int opcion = JOptionPane.showConfirmDialog(this, panel, "Modificar categoría", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+    if (opcion == JOptionPane.OK_OPTION) {
+        String codigo = txtCodigoDlg.getText().trim();
+        String nombre = txtNombreDlg.getText().trim();
+        String descripcion = txtDescripcionDlg.getText().trim();
+        String estado = cbxEstadoDlg.getSelectedItem().toString();
+
+        if (codigo.isEmpty() || nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El código y el nombre son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        CategoriaClass categoria = new CategoriaClass();
+        categoria.setIdCategoria(id);
+        categoria.setCodigo(codigo);
+        categoria.setNombreCategoria(nombre);
+        categoria.setDescripcion(descripcion);
+        categoria.setEstado(estado);
+
+        if (categoriaDAO.actualizar(categoria)) {
+            JOptionPane.showMessageDialog(this, "Categoría actualizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            cargarDatos();
+            txtBuscar.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo actualizar la categoría.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+
+private void eliminarCategoria() {
+    if (filaSeleccionada < 0) {
+        JOptionPane.showMessageDialog(this, "Seleccione una categoría para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    int id = Integer.parseInt(modeloTabla.getValueAt(filaSeleccionada, 0).toString());
+    String nombre = valor(modeloTabla.getValueAt(filaSeleccionada, 2));
+    int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar/inactivar la categoría: " + nombre + "?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+    if (confirmacion == JOptionPane.YES_OPTION) {
+        if (categoriaDAO.eliminar(id)) {
+            JOptionPane.showMessageDialog(this, "Categoría eliminada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            cargarDatos();
+            txtBuscar.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo eliminar la categoría.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+
+private void tblGestionCategoriasMouseClicked(MouseEvent evt) {
+    filaSeleccionada = tblGestionCategorias.getSelectedRow();
+    if (filaSeleccionada >= 0) {
+        int columna = tblGestionCategorias.getSelectedColumn();
+        if (columna == 5) modificarCategoria();
+        else if (columna == 6) eliminarCategoria();
+        else if (evt.getClickCount() == 2) modificarCategoria();
+    }
+}
+
+private String valor(Object dato) {
+    return dato == null ? "" : dato.toString();
+}
+
+// 5) EVENTOS EXISTENTES: reemplazar el contenido
+private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {
+    NuevaCategoria formulario = new NuevaCategoria();
+    if (getDesktopPane() != null) {
+        getDesktopPane().add(formulario);
+        formulario.setVisible(true);
+    } else {
+        JOptionPane.showMessageDialog(this, "Abra este formulario desde la ventana principal.");
+    }
+}
+
+
+
+// Si tienes botón Buscar, usa esto:
+private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+    buscarCategoria();
+}
+
+// Si no tienes botón Buscar, puedes llamar buscarCategoria() al presionar Enter en txtBuscar.
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -16,7 +220,7 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
         tblGestionCategorias = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        btnNuevo = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lblTotalCat = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -51,10 +255,10 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(tblGestionCategorias);
 
-        btnNuevo.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
-        btnNuevo.setText("Nuevo");
-        btnNuevo.addActionListener(this::btnNuevoActionPerformed);
+        btnBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -70,7 +274,7 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30)
                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnNuevo)
+                .addComponent(btnBuscar)
                 .addGap(41, 41, 41))
         );
         jPanel3Layout.setVerticalGroup(
@@ -80,7 +284,7 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(4, 4, 4)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevo)
+                    .addComponent(btnBuscar)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,9 +339,9 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
                 .addComponent(btnVolver)
                 .addGap(64, 64, 64))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -177,7 +381,7 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel5)
@@ -190,7 +394,7 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
                                 .addComponent(lblCatInactiva))
                             .addComponent(jLabel7)
                             .addComponent(jLabel8))))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -211,17 +415,10 @@ public class GestionarCategorias extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {
-        NuevaCategoria ventana = new NuevaCategoria();
-        javax.swing.JDesktopPane desktop = (javax.swing.JDesktopPane) getParent();
-        if (desktop != null) {
-            desktop.add(ventana);
-            ventana.setVisible(true);
-        }
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -6,95 +6,179 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class CategoriaDAO {
 
+    // LISTAR TODAS LAS CATEGORÍAS
     public List<CategoriaClass> listar() {
-        List<CategoriaClass> lista = new ArrayList<>();
-        String sql = "SELECT id_categoria, codigo, nombre, descripcion FROM categorias";
+        List<CategoriaClass> categorias = new ArrayList<>();
+        String sql = "SELECT id_categoria, codigo, nombre, descripcion, estado, creado_en, actualizado_en FROM categorias ORDER BY id_categoria";
 
-        try (Connection cn = ConexionBD.getConnection();
-             PreparedStatement pst = cn.prepareStatement(sql);
-             ResultSet rs = pst.executeQuery()) {
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                CategoriaClass cat = new CategoriaClass();
-                cat.setIdCategoria(rs.getInt("id_categoria"));
-                cat.setCodigo(rs.getString("codigo"));
-                cat.setNombreCategoria(rs.getString("nombre"));
-                cat.setDescripcion(rs.getString("descripcion"));
-                lista.add(cat);
+                categorias.add(mapearCategoria(rs));
             }
+
         } catch (SQLException e) {
-            System.out.println("Error al listar categorías: " + e.getMessage());
+            mostrarError("Error al listar categorías", e);
         }
-        return lista;
+
+        return categorias;
     }
 
-    public boolean registrar(CategoriaClass cat) {
-        String sql = "INSERT INTO categorias (codigo, nombre, descripcion) VALUES (?, ?, ?)";
-        try (Connection cn = ConexionBD.getConnection();
-             PreparedStatement pst = cn.prepareStatement(sql)) {
-            pst.setString(1, cat.getCodigo() != null ? cat.getCodigo() : "CAT-" + System.currentTimeMillis());
-            pst.setString(2, cat.getNombreCategoria());
-            pst.setString(3, cat.getDescripcion() != null ? cat.getDescripcion() : "");
-            return pst.executeUpdate() > 0;
-        } catch (SQLException e) {
-            System.out.println("Error al registrar categoría: " + e.getMessage());
-            return false;
-        }
-    }
-
+    // BUSCAR CATEGORÍAS POR CÓDIGO, NOMBRE O DESCRIPCIÓN
     public List<CategoriaClass> buscar(String criterio) {
-        List<CategoriaClass> lista = new ArrayList<>();
-        String sql = "SELECT id_categoria, codigo, nombre, descripcion FROM categorias WHERE codigo LIKE ? OR nombre LIKE ?";
-        try (Connection cn = ConexionBD.getConnection();
-             PreparedStatement pst = cn.prepareStatement(sql)) {
-            String busqueda = "%" + criterio + "%";
-            pst.setString(1, busqueda);
-            pst.setString(2, busqueda);
-            try (ResultSet rs = pst.executeQuery()) {
+        List<CategoriaClass> categorias = new ArrayList<>();
+        String sql = "SELECT id_categoria, codigo, nombre, descripcion, estado, creado_en, actualizado_en FROM categorias "
+                + "WHERE codigo LIKE ? OR nombre LIKE ? OR descripcion LIKE ? OR estado LIKE ? ORDER BY id_categoria";
+
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            String filtro = "%" + criterio + "%";
+            stmt.setString(1, filtro);
+            stmt.setString(2, filtro);
+            stmt.setString(3, filtro);
+            stmt.setString(4, filtro);
+
+            try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    CategoriaClass cat = new CategoriaClass();
-                    cat.setIdCategoria(rs.getInt("id_categoria"));
-                    cat.setCodigo(rs.getString("codigo"));
-                    cat.setNombreCategoria(rs.getString("nombre"));
-                    cat.setDescripcion(rs.getString("descripcion"));
-                    lista.add(cat);
+                    categorias.add(mapearCategoria(rs));
                 }
             }
+
         } catch (SQLException e) {
-            System.out.println("Error al buscar categorías: " + e.getMessage());
+            mostrarError("Error al buscar categorías", e);
         }
-        return lista;
+
+        return categorias;
     }
 
-    public boolean actualizar(CategoriaClass cat) {
-        String sql = "UPDATE categorias SET codigo=?, nombre=?, descripcion=? WHERE id_categoria=?";
-        try (Connection cn = ConexionBD.getConnection();
-             PreparedStatement pst = cn.prepareStatement(sql)) {
-            pst.setString(1, cat.getCodigo() != null ? cat.getCodigo() : "");
-            pst.setString(2, cat.getNombreCategoria());
-            pst.setString(3, cat.getDescripcion() != null ? cat.getDescripcion() : "");
-            pst.setInt(4, cat.getIdCategoria());
-            return pst.executeUpdate() > 0;
+    // BUSCAR CATEGORÍAS POR NOMBRE
+    public List<CategoriaClass> buscarPorNombre(String nombre) {
+        return buscar(nombre);
+    }
+
+    // BUSCAR UNA CATEGORÍA POR ID
+    public CategoriaClass buscarPorId(int idCategoria) {
+        String sql = "SELECT id_categoria, codigo, nombre, descripcion, estado, creado_en, actualizado_en FROM categorias WHERE id_categoria = ?";
+
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idCategoria);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return mapearCategoria(rs);
+                }
+            }
+
         } catch (SQLException e) {
-            System.out.println("Error al actualizar categoría: " + e.getMessage());
+            mostrarError("Error al buscar la categoría", e);
+        }
+
+        return null;
+    }
+
+    // REGISTRAR UNA CATEGORÍA
+    public boolean registrar(CategoriaClass categoria) {
+        String sql = "INSERT INTO categorias (codigo, nombre, descripcion, estado) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, categoria.getCodigo());
+            stmt.setString(2, categoria.getNombreCategoria());
+            stmt.setString(3, categoria.getDescripcion());
+            stmt.setString(4, categoria.getEstado() == null ? "Activo" : categoria.getEstado());
+
+            boolean registrado = stmt.executeUpdate() > 0;
+
+            if (registrado) {
+                try (ResultSet rs = stmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        categoria.setIdCategoria(rs.getInt(1));
+                    }
+                }
+            }
+
+            return registrado;
+
+        } catch (SQLException e) {
+            mostrarError("Error al registrar la categoría", e);
             return false;
         }
     }
 
-    public boolean eliminar(int id) {
-        String sql = "DELETE FROM categorias WHERE id_categoria=?";
-        try (Connection cn = ConexionBD.getConnection();
-             PreparedStatement pst = cn.prepareStatement(sql)) {
-            pst.setInt(1, id);
-            return pst.executeUpdate() > 0;
+    // ACTUALIZAR UNA CATEGORÍA
+    public boolean actualizar(CategoriaClass categoria) {
+        String sql = "UPDATE categorias SET codigo = ?, nombre = ?, descripcion = ?, estado = ? WHERE id_categoria = ?";
+
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, categoria.getCodigo());
+            stmt.setString(2, categoria.getNombreCategoria());
+            stmt.setString(3, categoria.getDescripcion());
+            stmt.setString(4, categoria.getEstado() == null ? "Activo" : categoria.getEstado());
+            stmt.setInt(5, categoria.getIdCategoria());
+
+            return stmt.executeUpdate() > 0;
+
         } catch (SQLException e) {
-            System.out.println("Error al eliminar categoría: " + e.getMessage());
+            mostrarError("Error al actualizar la categoría", e);
             return false;
         }
+    }
+
+    // ACTUALIZAR UNA CATEGORÍA, NOMBRE COMPATIBLE CON EL ESTILO DEL DOCENTE
+    public boolean actualizarCategoria(CategoriaClass categoria) {
+        return actualizar(categoria);
+    }
+
+    // ELIMINAR UNA CATEGORÍA
+    public boolean eliminar(int idCategoria) {
+        String sql = "UPDATE categorias SET estado = 'Inactivo' WHERE id_categoria = ?";
+
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idCategoria);
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            mostrarError("Error al eliminar la categoría", e);
+            return false;
+        }
+    }
+
+    // ELIMINAR UNA CATEGORÍA, NOMBRE COMPATIBLE CON EL ESTILO DEL DOCENTE
+    public boolean eliminarCategoria(int idCategoria) {
+        return eliminar(idCategoria);
+    }
+
+    private CategoriaClass mapearCategoria(ResultSet rs) throws SQLException {
+        CategoriaClass categoria = new CategoriaClass();
+        categoria.setIdCategoria(rs.getInt("id_categoria"));
+        categoria.setCodigo(rs.getString("codigo"));
+        categoria.setNombreCategoria(rs.getString("nombre"));
+        categoria.setDescripcion(rs.getString("descripcion"));
+        categoria.setEstado(rs.getString("estado"));
+        categoria.setCreadoEn(rs.getTimestamp("creado_en"));
+        categoria.setActualizadoEn(rs.getTimestamp("actualizado_en"));
+        return categoria;
+    }
+
+    private void mostrarError(String mensaje, SQLException e) {
+        JOptionPane.showMessageDialog(null, mensaje + ": " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
     }
 }

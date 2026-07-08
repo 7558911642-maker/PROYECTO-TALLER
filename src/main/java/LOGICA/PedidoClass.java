@@ -1,65 +1,54 @@
 package LOGICA;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 
-public class PedidoClass {
-    
-    private int idPedido;
-    private int idCliente;
-    private int idEmpleado;
-    private Date fechaPedido;
+public class PedidoClass extends VentaClass {
     private Date fechaEntrega;
     private Date fechaEnvio;
     private String formaEnvio;
-    private BigDecimal montoPagado; // Para el cálculo de vuelto en el sistema
-    private String estado;
 
     public PedidoClass() {
+        super();
     }
 
     public PedidoClass(int idPedido, int idCliente, int idEmpleado, Date fechaPedido, Date fechaEntrega, Date fechaEnvio, String formaEnvio, BigDecimal montoPagado, String estado) {
-        this.idPedido = idPedido;
-        this.idCliente = idCliente;
-        this.idEmpleado = idEmpleado;
-        this.fechaPedido = fechaPedido;
+        this();
+        setIdPedido(idPedido);
+        setIdCliente(idCliente);
+        setIdEmpleado(idEmpleado);
+        setFechaPedido(fechaPedido);
         this.fechaEntrega = fechaEntrega;
         this.fechaEnvio = fechaEnvio;
         this.formaEnvio = formaEnvio;
-        this.montoPagado = montoPagado;
-        this.estado = estado;
+        setMontoPagado(montoPagado);
+        setEstado(estado);
     }
 
     public int getIdPedido() {
-        return idPedido;
+        return (int) getIdVenta();
     }
 
     public void setIdPedido(int idPedido) {
-        this.idPedido = idPedido;
-    }
-
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+        setIdVenta(idPedido);
     }
 
     public int getIdEmpleado() {
-        return idEmpleado;
+        return getIdUsuario();
     }
 
     public void setIdEmpleado(int idEmpleado) {
-        this.idEmpleado = idEmpleado;
+        setIdUsuario(idEmpleado);
     }
 
     public Date getFechaPedido() {
-        return fechaPedido;
+        Timestamp fecha = getFecha();
+        return fecha != null ? new Date(fecha.getTime()) : null;
     }
 
     public void setFechaPedido(Date fechaPedido) {
-        this.fechaPedido = fechaPedido;
+        setFecha(fechaPedido != null ? new Timestamp(fechaPedido.getTime()) : null);
     }
 
     public Date getFechaEntrega() {
@@ -87,21 +76,10 @@ public class PedidoClass {
     }
 
     public BigDecimal getMontoPagado() {
-        return montoPagado;
+        return getEfectivo();
     }
 
     public void setMontoPagado(BigDecimal montoPagado) {
-        this.montoPagado = montoPagado;
+        setEfectivo(montoPagado);
     }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-    
-    
-    
 }

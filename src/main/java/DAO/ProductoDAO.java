@@ -6,191 +6,276 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class ProductoDAO {
 
+    // LISTAR MEDICAMENTOS PARA TABLAS Y REPORTES
     public List<Object[]> listarMedicamentos() {
-        List<Object[]> lista = new ArrayList<>();
-        String sql = "SELECT m.id_medicamento, m.codigo, m.nombre_comercial, "
-                + "COALESCE(c.nombre, '') AS categoria, "
-                + "COALESCE(p.razon_social, '') AS proveedor, "
-                + "m.precio, m.stock "
-                + "FROM medicamentos m "
-                + "LEFT JOIN categorias c ON m.id_categoria = c.id_categoria "
-                + "LEFT JOIN proveedores p ON m.id_proveedor = p.id_proveedor";
+        List<Object[]> medicamentos = new ArrayList<>();
+        String sql = "SELECT m.id_medicamento, m.codigo, m.nombre_comercial, m.principio_activo, m.concentracion, m.presentacion, "
+                + "COALESCE(c.nombre, '') AS categoria, COALESCE(p.razon_social, '') AS proveedor, COALESCE(l.nombre, '') AS laboratorio, "
+                + "m.precio_compra, m.precio AS precio_venta, m.stock, m.stock_minimo, m.stock_maximo, m.estado "
+                + "FROM medicamentos m INNER JOIN categorias c ON c.id_categoria = m.id_categoria "
+                + "LEFT JOIN proveedores p ON p.id_proveedor = m.id_proveedor "
+                + "LEFT JOIN laboratorios l ON l.id_laboratorio = m.id_laboratorio ORDER BY m.id_medicamento";
 
-        try (Connection cn = ConexionBD.getConnection();
-             PreparedStatement pst = cn.prepareStatement(sql);
-             ResultSet rs = pst.executeQuery()) {
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                Object[] fila = new Object[7];
-                fila[0] = rs.getInt("id_medicamento");
-                fila[1] = rs.getString("codigo");
-                fila[2] = rs.getString("nombre_comercial");
-                fila[3] = rs.getString("categoria");
-                fila[4] = rs.getString("proveedor");
-                fila[5] = rs.getBigDecimal("precio");
-                fila[6] = rs.getInt("stock");
-                lista.add(fila);
+                medicamentos.add(new Object[]{
+                    rs.getInt("id_medicamento"),
+                    rs.getString("codigo"),
+                    rs.getString("nombre_comercial"),
+                    rs.getString("principio_activo"),
+                    rs.getString("concentracion"),
+                    rs.getString("presentacion"),
+                    rs.getString("categoria"),
+                    rs.getString("proveedor"),
+                    rs.getString("laboratorio"),
+                    rs.getBigDecimal("precio_compra"),
+                    rs.getBigDecimal("precio_venta"),
+                    rs.getInt("stock"),
+                    rs.getInt("stock_minimo"),
+                    rs.getObject("stock_maximo"),
+                    rs.getString("estado")
+                });
             }
+
         } catch (SQLException e) {
-            System.out.println("Error al listar medicamentos: " + e.getMessage());
+            mostrarError("Error al listar medicamentos", e);
         }
-        return lista;
+
+        return medicamentos;
     }
 
-    public boolean registrarMedicamento(ProductoClass prod) {
-        String sql = "INSERT INTO medicamentos (codigo, nombre_comercial, id_categoria, id_proveedor, precio, stock, estado) "
-                + "VALUES (?, ?, 1, 1, ?, ?, 'Activo')";
-
-        try (Connection cn = ConexionBD.getConnection();
-             PreparedStatement pst = cn.prepareStatement(sql)) {
-
-            pst.setString(1, prod.getCodigo());
-            pst.setString(2, prod.getNombreComercial());
-            pst.setBigDecimal(3, prod.getPrecioUnidad());
-            pst.setInt(4, prod.getStock());
-
-            return pst.executeUpdate() > 0;
-        } catch (SQLException e) {
-            System.out.println("Error al registrar medicamento: " + e.getMessage());
-            return false;
-        }
-    }
-
+    // BUSCAR MEDICAMENTOS POR CÓDIGO, NOMBRE, PRINCIPIO ACTIVO, CATEGORÍA, PROVEEDOR O LABORATORIO
     public List<Object[]> buscarMedicamentos(String criterio) {
-        List<Object[]> lista = new ArrayList<>();
-        String sql = "SELECT m.id_medicamento, m.codigo, m.nombre_comercial, "
-                + "COALESCE(c.nombre, '') AS categoria, "
-                + "COALESCE(p.razon_social, '') AS proveedor, "
-                + "m.precio, m.stock "
-                + "FROM medicamentos m "
-                + "LEFT JOIN categorias c ON m.id_categoria = c.id_categoria "
-                + "LEFT JOIN proveedores p ON m.id_proveedor = p.id_proveedor "
-                + "WHERE m.codigo LIKE ? OR m.nombre_comercial LIKE ?";
+        List<Object[]> medicamentos = new ArrayList<>();
+        String sql = "SELECT m.id_medicamento, m.codigo, m.nombre_comercial, m.principio_activo, m.concentracion, m.presentacion, "
+                + "COALESCE(c.nombre, '') AS categoria, COALESCE(p.razon_social, '') AS proveedor, COALESCE(l.nombre, '') AS laboratorio, "
+                + "m.precio_compra, m.precio AS precio_venta, m.stock, m.stock_minimo, m.stock_maximo, m.estado "
+                + "FROM medicamentos m INNER JOIN categorias c ON c.id_categoria = m.id_categoria "
+                + "LEFT JOIN proveedores p ON p.id_proveedor = m.id_proveedor "
+                + "LEFT JOIN laboratorios l ON l.id_laboratorio = m.id_laboratorio "
+                + "WHERE m.codigo LIKE ? OR m.nombre_comercial LIKE ? OR m.principio_activo LIKE ? OR m.presentacion LIKE ? OR c.nombre LIKE ? OR p.razon_social LIKE ? OR l.nombre LIKE ? OR m.estado LIKE ? "
+                + "ORDER BY m.id_medicamento";
 
-        try (Connection cn = ConexionBD.getConnection();
-             PreparedStatement pst = cn.prepareStatement(sql)) {
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            String busqueda = "%" + criterio + "%";
-            pst.setString(1, busqueda);
-            pst.setString(2, busqueda);
+            String filtro = "%" + criterio + "%";
+            for (int i = 1; i <= 8; i++) {
+                stmt.setString(i, filtro);
+            }
 
-            try (ResultSet rs = pst.executeQuery()) {
+            try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    Object[] fila = new Object[7];
-                    fila[0] = rs.getInt("id_medicamento");
-                    fila[1] = rs.getString("codigo");
-                    fila[2] = rs.getString("nombre_comercial");
-                    fila[3] = rs.getString("categoria");
-                    fila[4] = rs.getString("proveedor");
-                    fila[5] = rs.getBigDecimal("precio");
-                    fila[6] = rs.getInt("stock");
-                    lista.add(fila);
+                    medicamentos.add(new Object[]{
+                        rs.getInt("id_medicamento"), rs.getString("codigo"), rs.getString("nombre_comercial"), rs.getString("principio_activo"),
+                        rs.getString("concentracion"), rs.getString("presentacion"), rs.getString("categoria"), rs.getString("proveedor"),
+                        rs.getString("laboratorio"), rs.getBigDecimal("precio_compra"), rs.getBigDecimal("precio_venta"), rs.getInt("stock"),
+                        rs.getInt("stock_minimo"), rs.getObject("stock_maximo"), rs.getString("estado")
+                    });
                 }
             }
+
         } catch (SQLException e) {
-            System.out.println("Error al buscar medicamentos: " + e.getMessage());
+            mostrarError("Error al buscar medicamentos", e);
         }
-        return lista;
+
+        return medicamentos;
     }
 
-    public boolean anularVenta(int idVenta) {
-        String sqlCabecera = "UPDATE ventas SET estado = 'Anulada', fecha_anulacion = NOW() WHERE id_venta = ?";
-        String sqlDetalle = "SELECT id_medicamento, cantidad FROM detalle_ventas WHERE id_venta = ?";
-        String sqlStock = "UPDATE medicamentos SET stock = stock + ? WHERE id_medicamento = ?";
+    // BUSCAR MEDICAMENTO POR ID
+    public ProductoClass buscarPorId(int idMedicamento) {
+        String sql = "SELECT m.*, c.nombre AS categoria, p.razon_social AS proveedor, l.nombre AS laboratorio_nombre "
+                + "FROM medicamentos m INNER JOIN categorias c ON c.id_categoria = m.id_categoria "
+                + "LEFT JOIN proveedores p ON p.id_proveedor = m.id_proveedor "
+                + "LEFT JOIN laboratorios l ON l.id_laboratorio = m.id_laboratorio WHERE m.id_medicamento = ?";
 
-        Connection cn = null;
-        PreparedStatement pstCabecera = null;
-        PreparedStatement pstDetalle = null;
-        PreparedStatement pstStock = null;
-        ResultSet rs = null;
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        try {
-            cn = ConexionBD.getConnection();
-            cn.setAutoCommit(false);
+            stmt.setInt(1, idMedicamento);
 
-            pstCabecera = cn.prepareStatement(sqlCabecera);
-            pstCabecera.setInt(1, idVenta);
-            int filas = pstCabecera.executeUpdate();
-            if (filas == 0) {
-                throw new SQLException("La venta con ID " + idVenta + " no existe.");
-            }
-
-            pstDetalle = cn.prepareStatement(sqlDetalle);
-            pstDetalle.setInt(1, idVenta);
-            rs = pstDetalle.executeQuery();
-
-            pstStock = cn.prepareStatement(sqlStock);
-            while (rs.next()) {
-                int idMedicamento = rs.getInt("id_medicamento");
-                int cantidad = rs.getInt("cantidad");
-                pstStock.setInt(1, cantidad);
-                pstStock.setInt(2, idMedicamento);
-                pstStock.executeUpdate();
-            }
-
-            cn.commit();
-            return true;
-
-        } catch (SQLException e) {
-            System.out.println("Error al anular venta: " + e.getMessage());
-            if (cn != null) {
-                try {
-                    cn.rollback();
-                } catch (SQLException ex) {
-                    System.out.println("Error en rollback: " + ex.getMessage());
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return mapearProducto(rs);
                 }
             }
+
+        } catch (SQLException e) {
+            mostrarError("Error al buscar el medicamento", e);
+        }
+
+        return null;
+    }
+
+    // BUSCAR MEDICAMENTO POR CÓDIGO
+    public ProductoClass buscarPorCodigo(String codigo) {
+        String sql = "SELECT m.*, c.nombre AS categoria, p.razon_social AS proveedor, l.nombre AS laboratorio_nombre "
+                + "FROM medicamentos m INNER JOIN categorias c ON c.id_categoria = m.id_categoria "
+                + "LEFT JOIN proveedores p ON p.id_proveedor = m.id_proveedor "
+                + "LEFT JOIN laboratorios l ON l.id_laboratorio = m.id_laboratorio WHERE m.codigo = ?";
+
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, codigo);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return mapearProducto(rs);
+                }
+            }
+
+        } catch (SQLException e) {
+            mostrarError("Error al buscar el medicamento por código", e);
+        }
+
+        return null;
+    }
+
+    // REGISTRAR MEDICAMENTO
+    public boolean registrarMedicamento(ProductoClass producto) {
+        String sql = "INSERT INTO medicamentos (codigo, nombre_comercial, principio_activo, concentracion, presentacion, unidad_medida, registro_sanitario, "
+                + "requiere_receta, id_categoria, id_proveedor, id_laboratorio, precio_compra, precio, stock, stock_minimo, stock_maximo, estado) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            prepararProducto(stmt, producto, false);
+            boolean registrado = stmt.executeUpdate() > 0;
+
+            if (registrado) {
+                try (ResultSet rs = stmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        producto.setIdMedicamento(rs.getInt(1));
+                    }
+                }
+            }
+
+            return registrado;
+
+        } catch (SQLException e) {
+            mostrarError("Error al registrar el medicamento", e);
             return false;
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (pstCabecera != null) pstCabecera.close();
-                if (pstDetalle != null) pstDetalle.close();
-                if (pstStock != null) pstStock.close();
-                if (cn != null) cn.close();
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar recursos: " + e.getMessage());
-            }
         }
     }
 
-    public List<Object[]> buscarPedidosParaAnular(String criterio) {
-        List<Object[]> lista = new ArrayList<>();
-        String sql = "SELECT v.id_venta, c.nombres AS cliente, v.fecha, v.estado "
-                + "FROM ventas v "
-                + "INNER JOIN clientes c ON v.id_cliente = c.id_cliente "
-                + "WHERE (v.id_venta = ? OR c.nombres LIKE ?) AND v.estado = 'Pagada'";
+    // ACTUALIZAR MEDICAMENTO
+    public boolean actualizar(ProductoClass producto) {
+        String sql = "UPDATE medicamentos SET codigo = ?, nombre_comercial = ?, principio_activo = ?, concentracion = ?, presentacion = ?, unidad_medida = ?, registro_sanitario = ?, "
+                + "requiere_receta = ?, id_categoria = ?, id_proveedor = ?, id_laboratorio = ?, precio_compra = ?, precio = ?, stock = ?, stock_minimo = ?, stock_maximo = ?, estado = ? "
+                + "WHERE id_medicamento = ?";
 
-        try (Connection cn = ConexionBD.getConnection();
-             PreparedStatement pst = cn.prepareStatement(sql)) {
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            int idBuscado = 0;
-            try {
-                idBuscado = Integer.parseInt(criterio);
-            } catch (NumberFormatException e) {
-            }
+            prepararProducto(stmt, producto, true);
+            return stmt.executeUpdate() > 0;
 
-            pst.setInt(1, idBuscado);
-            pst.setString(2, "%" + criterio + "%");
-
-            try (ResultSet rs = pst.executeQuery()) {
-                while (rs.next()) {
-                    Object[] fila = new Object[4];
-                    fila[0] = rs.getInt("id_venta");
-                    fila[1] = rs.getString("cliente");
-                    fila[2] = rs.getDate("fecha");
-                    fila[3] = rs.getString("estado");
-                    lista.add(fila);
-                }
-            }
         } catch (SQLException e) {
-            System.out.println("Error al buscar pedidos: " + e.getMessage());
+            mostrarError("Error al actualizar el medicamento", e);
+            return false;
         }
-        return lista;
+    }
+
+    // ELIMINAR MEDICAMENTO
+    public boolean eliminar(int idMedicamento) {
+        String sql = "UPDATE medicamentos SET estado = 'Inactivo' WHERE id_medicamento = ?";
+
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idMedicamento);
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            mostrarError("Error al eliminar el medicamento", e);
+            return false;
+        }
+    }
+
+    // ANULAR VENTA, MÉTODO CONSERVADO POR COMPATIBILIDAD CON TU PROYECTO ANTERIOR
+    public boolean anularVenta(int idVenta) {
+        return new PedidoDAO().anularVenta(idVenta);
+    }
+
+    // BUSCAR VENTAS PARA ANULAR, MÉTODO CONSERVADO POR COMPATIBILIDAD CON TU PROYECTO ANTERIOR
+    public List<Object[]> buscarPedidosParaAnular(String criterio) {
+        return new PedidoDAO().buscarPedidosParaAnular(criterio);
+    }
+
+    private void prepararProducto(PreparedStatement stmt, ProductoClass p, boolean incluyeId) throws SQLException {
+        stmt.setString(1, p.getCodigo());
+        stmt.setString(2, p.getNombreComercial());
+        stmt.setString(3, p.getPrincipioActivo());
+        stmt.setString(4, p.getConcentracion());
+        stmt.setString(5, p.getPresentacion());
+        stmt.setString(6, p.getUnidadMedida() == null ? "Unidad" : p.getUnidadMedida());
+        stmt.setString(7, p.getRegistroSanitario());
+        stmt.setBoolean(8, p.getRequiereReceta());
+        stmt.setInt(9, p.getIdCategoria());
+        setNullableInt(stmt, 10, p.getIdProveedor());
+        setNullableInt(stmt, 11, p.getIdLaboratorio());
+        stmt.setBigDecimal(12, p.getPrecioCompra());
+        stmt.setBigDecimal(13, p.getPrecio());
+        stmt.setInt(14, p.getStock());
+        stmt.setInt(15, p.getStockMinimo());
+        setNullableInt(stmt, 16, p.getStockMaximo());
+        stmt.setString(17, p.getEstado() == null ? "Activo" : p.getEstado());
+
+        if (incluyeId) {
+            stmt.setInt(18, p.getIdMedicamento());
+        }
+    }
+
+    private ProductoClass mapearProducto(ResultSet rs) throws SQLException {
+        ProductoClass producto = new ProductoClass();
+        producto.setIdMedicamento(rs.getInt("id_medicamento"));
+        producto.setCodigo(rs.getString("codigo"));
+        producto.setNombreComercial(rs.getString("nombre_comercial"));
+        producto.setPrincipioActivo(rs.getString("principio_activo"));
+        producto.setConcentracion(rs.getString("concentracion"));
+        producto.setPresentacion(rs.getString("presentacion"));
+        producto.setUnidadMedida(rs.getString("unidad_medida"));
+        producto.setRegistroSanitario(rs.getString("registro_sanitario"));
+        producto.setRequiereReceta(rs.getBoolean("requiere_receta"));
+        producto.setIdCategoria(rs.getInt("id_categoria"));
+        producto.setIdProveedor((Integer) rs.getObject("id_proveedor"));
+        producto.setIdLaboratorio((Integer) rs.getObject("id_laboratorio"));
+        producto.setPrecioCompra(rs.getBigDecimal("precio_compra"));
+        producto.setPrecio(rs.getBigDecimal("precio"));
+        producto.setStock(rs.getInt("stock"));
+        producto.setStockMinimo(rs.getInt("stock_minimo"));
+        producto.setStockMaximo((Integer) rs.getObject("stock_maximo"));
+        producto.setEstado(rs.getString("estado"));
+        producto.setCreadoEn(rs.getTimestamp("creado_en"));
+        producto.setActualizadoEn(rs.getTimestamp("actualizado_en"));
+        producto.setNombreCategoria(rs.getString("categoria"));
+        producto.setNombreProveedor(rs.getString("proveedor"));
+        producto.setLaboratorio(rs.getString("laboratorio_nombre"));
+        return producto;
+    }
+
+    private void setNullableInt(PreparedStatement stmt, int index, Integer value) throws SQLException {
+        if (value == null || value <= 0) {
+            stmt.setNull(index, java.sql.Types.INTEGER);
+        } else {
+            stmt.setInt(index, value);
+        }
+    }
+
+    private void mostrarError(String mensaje, SQLException e) {
+        JOptionPane.showMessageDialog(null, mensaje + ": " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
     }
 }

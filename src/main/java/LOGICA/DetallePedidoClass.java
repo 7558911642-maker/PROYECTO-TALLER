@@ -2,55 +2,41 @@ package LOGICA;
 
 import java.math.BigDecimal;
 
-public class DetallePedidoClass {
-    
-    private int idPedido;
-    private int idProducto;
-    private BigDecimal precioUnidad; // Precio histórico congelado al momento de la venta
-    private int cantidad;
-
+public class DetallePedidoClass extends DetalleVentaClass {
     public DetallePedidoClass() {
+        super();
     }
 
     public DetallePedidoClass(int idPedido, int idProducto, BigDecimal precioUnidad, int cantidad) {
-        this.idPedido = idPedido;
-        this.idProducto = idProducto;
-        this.precioUnidad = precioUnidad;
-        this.cantidad = cantidad;
+        this();
+        setIdPedido(idPedido);
+        setIdProducto(idProducto);
+        setPrecioUnidad(precioUnidad);
+        setCantidad(cantidad);
+        calcularSubtotal();
     }
 
     public int getIdPedido() {
-        return idPedido;
+        return (int) getIdVenta();
     }
 
     public void setIdPedido(int idPedido) {
-        this.idPedido = idPedido;
+        setIdVenta(idPedido);
     }
 
     public int getIdProducto() {
-        return idProducto;
+        return getIdMedicamento();
     }
 
     public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
+        setIdMedicamento(idProducto);
     }
 
     public BigDecimal getPrecioUnidad() {
-        return precioUnidad;
+        return getPrecioUnitario();
     }
 
     public void setPrecioUnidad(BigDecimal precioUnidad) {
-        this.precioUnidad = precioUnidad;
+        setPrecioUnitario(precioUnidad);
     }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-    
-    
-    
 }
