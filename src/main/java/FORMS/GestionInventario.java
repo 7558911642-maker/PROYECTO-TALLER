@@ -85,6 +85,11 @@ public class GestionInventario extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         btnVolver2 = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         jPanel5.setBackground(new java.awt.Color(237, 246, 254));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));

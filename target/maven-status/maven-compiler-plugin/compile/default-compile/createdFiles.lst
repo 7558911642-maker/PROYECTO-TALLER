@@ -23,6 +23,7 @@ FORMS\GestionMedicamentos$2.class
 FORMS\ReporteDiarioVentas.class
 LOGICA\ProveedorClass.class
 LOGICA\RolClass.class
+FORMS\GestionarVentas$2.class
 LOGICA\MovimientoInventarioClass.class
 DAO\EmpleadoDAO.class
 FORMS\GestionarClientes.class
@@ -30,6 +31,7 @@ FORMS\GestionarCategorias$1.class
 FORMS\GestionProvedores.class
 FORMS\NuevoMedicamento.class
 FORMS\GestionarCategorias.class
+FORMS\GestionarVentas$3.class
 DAO\InventarioDAO.class
 LOGICA\DetallePedidoClass.class
 FORMS\GestionarClientes$1.class
@@ -41,10 +43,12 @@ LOGICA\ProductoClass.class
 DAO\ProveedorDAO.class
 LOGICA\PagoVentaClass.class
 FORMS\GestionarClientes$2.class
+FORMS\NuevaVenta$1.class
 LOGICA\BitacoraClass.class
 LOGICA\LaboratorioClass.class
 DAO\LaboratorioDAO.class
 FORMS\GestionMedicamentos.class
+FORMS\GestionarUsuarios$2.class
 FORMS\GestionarInventario$2.class
 DAO\SerieComprobanteDAO.class
 FORMS\FrmPrincipal_1.class
@@ -55,10 +59,12 @@ FORMS\NuevaCategoria.class
 DAO\ClienteDAO.class
 DAO\VentaDAO.class
 LOGICA\LoteMedicamentoClass.class
+FORMS\GestionProvedores$2.class
 DAO\RolDAO.class
 FORMS\NuevoClientes.class
 DAO\CompraDAO.class
 FORMS\GestionInventario$1.class
+FORMS\ReporteDiarioVentas$1.class
 LOGICA\EmpleadoClass.class
 FORMS\NuevioPedido.class
 FORMS\LoginForm_1.class
