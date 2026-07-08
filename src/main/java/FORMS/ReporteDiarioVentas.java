@@ -1,17 +1,70 @@
 package FORMS;
 
-
+import DAO.PedidoDAO;
+import java.math.BigDecimal;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
 
-  
+    private PedidoDAO pedidoDAO;
+    private DefaultTableModel modeloTabla;
     
     public ReporteDiarioVentas() {
         initComponents();
-    
+        pedidoDAO = new PedidoDAO();
+        configurarTabla();
+        cargarReporteDiario();
     }
 
-    
+    private void configurarTabla() {
+    String[] columnas = {"Fecha", "Comprobantes", "Total Ventas", "Ventas Anuladas", "Monto Anulado", "Ganancia Bruta"};
+    modeloTabla = new DefaultTableModel(columnas, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    tablaVentasDiarias.setModel(modeloTabla);
+}
+
+    private void cargarReporteDiario() {
+        try {
+            List<Object[]> reporte = pedidoDAO.obtenerReporteDiario();
+            modeloTabla.setRowCount(0);
+
+            BigDecimal totalVentas = BigDecimal.ZERO;
+            BigDecimal ganancia = BigDecimal.ZERO;
+            int anuladas = 0;
+
+            for (Object[] fila : reporte) {
+                modeloTabla.addRow(fila);
+                totalVentas = totalVentas.add(toBigDecimal(fila[2]));
+                anuladas += toInt(fila[3]);
+                ganancia = ganancia.add(toBigDecimal(fila[5]));
+            }
+
+            txtresultadoVentasDia.setText(totalVentas.toString());
+            txtVentasAnuladas.setText(String.valueOf(anuladas));
+            txtGanancia.setText(ganancia.toString());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar reporte diario: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private BigDecimal toBigDecimal(Object valor) {
+        if (valor == null) return BigDecimal.ZERO;
+        if (valor instanceof BigDecimal) return (BigDecimal) valor;
+        try { return new BigDecimal(valor.toString()); } catch (Exception e) { return BigDecimal.ZERO; }
+    }
+
+    private int toInt(Object valor) {
+        if (valor == null) return 0;
+        try { return Integer.parseInt(valor.toString()); } catch (Exception e) { return 0; }
+    }
+
     
     
     @SuppressWarnings("unchecked")
@@ -224,7 +277,7 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -273,34 +326,17 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
-        javax.swing.JOptionPane.showMessageDialog(this, "Reporte guardado correctamente", "Guardar", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        dispose();
+        cargarReporteDiario();
+        JOptionPane.showMessageDialog(this, "Reporte actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnGuardar1ActionPerformed
 
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
-        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tablaVentasDiarias.getModel();
-        model.setRowCount(0);
-        model.fireTableDataChanged();
-        txtresultadoVentasDia.setText("0");
-        txtVentasAnuladas.setText("0");
-        txtGanancia.setText("0");
-        dcFechaInicio3.setDate(null);
-        javax.swing.JOptionPane.showMessageDialog(this, "Datos actualizados correctamente", "Actualizar", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        cargarReporteDiario();
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
     private void btnEliminar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar3ActionPerformed
-        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tablaVentasDiarias.getModel();
-        model.setRowCount(0);
-        model.fireTableDataChanged();
-        txtresultadoVentasDia.setText("0");
-        txtVentasAnuladas.setText("0");
-        txtGanancia.setText("0");
-        dcFechaInicio3.setDate(null);
+        dispose();
     }//GEN-LAST:event_btnEliminar3ActionPerformed
-
-    
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar1;
