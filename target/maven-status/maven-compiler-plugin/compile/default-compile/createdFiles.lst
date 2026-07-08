@@ -19,6 +19,7 @@ DAO\UsuarioDAO.class
 FORMS\FrmEstadisticasVentas.class
 com\mycompany\proyectofarmacia\PROYECTO_III_UND.class
 LOGICA\MedicamentoProveedorClass.class
+FORMS\GestionMedicamentos$2.class
 FORMS\ReporteDiarioVentas.class
 LOGICA\ProveedorClass.class
 LOGICA\RolClass.class
@@ -33,15 +34,18 @@ DAO\InventarioDAO.class
 LOGICA\DetallePedidoClass.class
 FORMS\GestionarClientes$1.class
 LOGICA\EmpresaClass.class
+FORMS\GestionarInventario$1.class
 LOGICA\PedidoClass.class
 LOGICA\ClienteClass.class
 LOGICA\ProductoClass.class
 DAO\ProveedorDAO.class
 LOGICA\PagoVentaClass.class
+FORMS\GestionarClientes$2.class
 LOGICA\BitacoraClass.class
 LOGICA\LaboratorioClass.class
 DAO\LaboratorioDAO.class
 FORMS\GestionMedicamentos.class
+FORMS\GestionarInventario$2.class
 DAO\SerieComprobanteDAO.class
 FORMS\FrmPrincipal_1.class
 LOGICA\SerieComprobanteClass.class
