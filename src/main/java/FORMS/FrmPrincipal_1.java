@@ -134,13 +134,10 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jButton5.addActionListener(this::jButton5ActionPerformed);
 
         jButton14.setText("<html><center><b>Consulta Stock</b><br><font size=\"2\">Consultar disponibilidad<br>de medicamentos.</font></center></html>");
-        jButton14.addActionListener(this::jButton14ActionPerformed);
 
         jButton15.setText("<html><center><b>Nuevo Cliente</b><br><font size=\"2\">Registrar un nuevo<br>cliente en el sistema.</font></center></html>");
-        jButton15.addActionListener(this::saveMenuItemActionPerformed);
 
         jButton16.setText("<html><center><b>Alertas</b><br><font size=\"2\">Ver alertas de stock bajo<br>y vencimientos.</font></center></html>");
-        jButton16.addActionListener(this::jButton16ActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -182,7 +179,6 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         btnInicio.setForeground(new java.awt.Color(255, 255, 255));
         btnInicio.setText("Inicio");
         btnInicio.setBorder(null);
-        btnInicio.addActionListener(this::btnInicioActionPerformed);
 
         btnClientes.setBackground(new java.awt.Color(0, 100, 248));
         btnClientes.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
@@ -197,7 +193,6 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         btnInventario.setForeground(new java.awt.Color(255, 255, 255));
         btnInventario.setText("Inventario");
         btnInventario.setBorder(null);
-        btnInventario.addActionListener(this::btnInventarioActionPerformed);
 
         btnProvedores.setBackground(new java.awt.Color(0, 100, 248));
         btnProvedores.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
@@ -205,14 +200,12 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         btnProvedores.setText("Provedores");
         btnProvedores.setBorder(null);
         btnProvedores.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnProvedores.addActionListener(this::btnProvedoresActionPerformed);
 
         btnReportes.setBackground(new java.awt.Color(0, 100, 248));
         btnReportes.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
         btnReportes.setForeground(new java.awt.Color(255, 255, 255));
         btnReportes.setText("Reportes");
         btnReportes.setBorder(null);
-        btnReportes.addActionListener(this::btnReportesActionPerformed);
 
         btnMedicamentos.setBackground(new java.awt.Color(0, 100, 248));
         btnMedicamentos.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
@@ -226,7 +219,6 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         btnConfiguraciones.setForeground(new java.awt.Color(255, 255, 255));
         btnConfiguraciones.setText("configuraciones");
         btnConfiguraciones.setBorder(null);
-        btnConfiguraciones.addActionListener(this::btnConfiguracionesActionPerformed);
 
         jLabel5.setText("<html>\n    <center>\n        <font face=\"Segoe UI\" color=\"#DCE7F3\" size=\"3\">\n            Tu salud, nuestro compromiso\n        </font>\n    </center>\n</html>");
 
@@ -237,27 +229,31 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMedicamentos)
-                    .addComponent(btnConfiguraciones)
-                    .addComponent(btnInventario)
-                    .addComponent(btnInicio)
-                    .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProvedores, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReportes))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnMedicamentos)
+                            .addComponent(btnConfiguraciones)
+                            .addComponent(btnInventario)
+                            .addComponent(btnInicio)
+                            .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnProvedores, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReportes))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap(12, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnInicio)
@@ -329,8 +325,8 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(42, Short.MAX_VALUE))
@@ -339,10 +335,11 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2))
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -368,7 +365,7 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -383,11 +380,9 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu7.setText("Categoria");
 
         jMenuItem1.setText("Registrar categoría");
-        jMenuItem1.addActionListener(this::exitMenuItemActionPerformed);
         jMenu7.add(jMenuItem1);
 
         jMenuItem4.setText("Gestionar categorías");
-        jMenuItem4.addActionListener(this::contentMenuItemActionPerformed);
         jMenu7.add(jMenuItem4);
 
         fileMenu.add(jMenu7);
@@ -395,11 +390,9 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu9.setText("Clientes");
 
         jMenuItem5.setText("Registrar cliente");
-        jMenuItem5.addActionListener(this::saveMenuItemActionPerformed);
         jMenu9.add(jMenuItem5);
 
         jMenuItem22.setText("Gestionar clientes");
-        jMenuItem22.addActionListener(this::jMenuItem4ActionPerformed);
         jMenu9.add(jMenuItem22);
 
         fileMenu.add(jMenu9);
@@ -407,11 +400,9 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu17.setText("Provedores");
 
         jMenuItem31.setText("Registrar proveedor");
-        jMenuItem31.addActionListener(this::jMenuItem8ActionPerformed);
         jMenu17.add(jMenuItem31);
 
         jMenuItem32.setText("Gestionar proveedores");
-        jMenuItem32.addActionListener(this::jMenuItem5ActionPerformed);
         jMenu17.add(jMenuItem32);
 
         fileMenu.add(jMenu17);
@@ -419,11 +410,9 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu11.setText("Medicamentos");
 
         jMenuItem27.setText("Registrar medicamento");
-        jMenuItem27.addActionListener(this::openMenuItemActionPerformed);
         jMenu11.add(jMenuItem27);
 
         jMenuItem28.setText("Gestionar medicamentos");
-        jMenuItem28.addActionListener(this::jMenuItem6ActionPerformed);
         jMenu11.add(jMenuItem28);
 
         fileMenu.add(jMenu11);
@@ -431,11 +420,9 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu15.setText("Usuarios");
 
         jMenuItem35.setText("Registrar usuario");
-        jMenuItem35.addActionListener(this::jMenuItem11ActionPerformed);
         jMenu15.add(jMenuItem35);
 
         jMenuItem36.setText("Gestionar usuarios");
-        jMenuItem36.addActionListener(this::jMenuItem36ActionPerformed);
         jMenu15.add(jMenuItem36);
 
         fileMenu.add(jMenu15);
@@ -456,11 +443,9 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         editMenu.add(copyMenuItem);
 
         jMenuItem10.setText(" Ajustar stock");
-        jMenuItem10.addActionListener(this::jButton14ActionPerformed);
         editMenu.add(jMenuItem10);
 
         jMenuItem12.setText("Consultar inventario");
-        jMenuItem12.addActionListener(this::jMenuItem12ActionPerformed);
         editMenu.add(jMenuItem12);
 
         menuBar.add(editMenu);
@@ -471,19 +456,15 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu2.setText(" Ventas");
 
         jMenuItem6.setText("Ventas por fecha");
-        jMenuItem6.addActionListener(this::aboutMenuItemActionPerformed);
         jMenu2.add(jMenuItem6);
 
         jMenuItem13.setText("Ventas por Cliente");
-        jMenuItem13.addActionListener(this::jMenuItem13ActionPerformed);
         jMenu2.add(jMenuItem13);
 
         jMenuItem14.setText("Ventas por Usuario");
-        jMenuItem14.addActionListener(this::jMenuItem14ActionPerformed);
         jMenu2.add(jMenuItem14);
 
         jMenuItem15.setText("Ventas anuladas");
-        jMenuItem15.addActionListener(this::jMenuItem15ActionPerformed);
         jMenu2.add(jMenuItem15);
 
         helpMenu.add(jMenu2);
@@ -491,19 +472,15 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu4.setText("Inventario");
 
         jMenuItem7.setText("Stock actual");
-        jMenuItem7.addActionListener(this::jMenuItem7ActionPerformed);
         jMenu4.add(jMenuItem7);
 
         jMenuItem16.setText("Bajo stock");
-        jMenuItem16.addActionListener(this::jMenuItem16ActionPerformed);
         jMenu4.add(jMenuItem16);
 
         jMenuItem17.setText("Medicamentos vencidos ");
-        jMenuItem17.addActionListener(this::jMenuItem17ActionPerformed);
         jMenu4.add(jMenuItem17);
 
         jMenuItem18.setText("Proximos a Vencer");
-        jMenuItem18.addActionListener(this::jMenuItem18ActionPerformed);
         jMenu4.add(jMenuItem18);
 
         helpMenu.add(jMenu4);
@@ -521,11 +498,9 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu5.add(saveMenuItem1);
 
         jMenuItem20.setText("Provedores");
-        jMenuItem20.addActionListener(this::jMenuItem5ActionPerformed);
         jMenu5.add(jMenuItem20);
 
         jMenuItem21.setText("Usuarios");
-        jMenuItem21.addActionListener(this::jMenuItem21ActionPerformed);
         jMenu5.add(jMenuItem21);
 
         helpMenu.add(jMenu5);
@@ -533,15 +508,12 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu6.setText("Estadisticas");
 
         jMenuItem19.setText("Estadísticas de ventas");
-        jMenuItem19.addActionListener(this::jMenuItem19ActionPerformed);
         jMenu6.add(jMenuItem19);
 
         jMenuItem23.setText("Productos más vendidos");
-        jMenuItem23.addActionListener(this::jMenuItem23ActionPerformed);
         jMenu6.add(jMenuItem23);
 
         jMenuItem24.setText("Clientes frecuentes");
-        jMenuItem24.addActionListener(this::jMenuItem24ActionPerformed);
         jMenu6.add(jMenuItem24);
 
         saveMenuItem2.setMnemonic('s');
@@ -556,11 +528,9 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu3.setText("Ayuda");
 
         jMenuItem33.setText("Manual de usuario");
-        jMenuItem33.addActionListener(this::jMenuItem33ActionPerformed);
         jMenu3.add(jMenuItem33);
 
         jMenuItem34.setText("Informacion del sistema");
-        jMenuItem34.addActionListener(this::jMenuItem34ActionPerformed);
         jMenu3.add(jMenuItem34);
 
         menuBar.add(jMenu3);
@@ -568,11 +538,9 @@ public class FrmPrincipal_1 extends javax.swing.JFrame {
         jMenu1.setText("Salir");
 
         jMenuItem2.setText("CerrarSesion");
-        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("SalirSistema");
-        jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
         jMenu1.add(jMenuItem3);
 
         menuBar.add(jMenu1);
