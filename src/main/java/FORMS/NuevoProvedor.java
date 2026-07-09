@@ -2,12 +2,83 @@ package FORMS;
 
 import DAO.ProveedorDAO;
 import LOGICA.ProveedorClass;
+import javax.swing.JOptionPane;
 
 public class NuevoProvedor extends javax.swing.JInternalFrame {
 
+    private ProveedorDAO proveedorDAO;
     public NuevoProvedor() {
         initComponents();
+        proveedorDAO = new ProveedorDAO();
     }
+
+    private void guardarProveedor() {
+        String ruc = txtRuc.getText().trim();
+        String razonSocial = txtRazon.getText().trim();
+        String telefono = txtTelefono.getText().trim();
+        String correo = txtCorreo1.getText().trim();
+        String direccion = txtDireccion1.getText().trim();
+        String estado = cbxEstado1.getSelectedItem() == null ? "Activo" : cbxEstado1.getSelectedItem().toString();
+
+        if (ruc.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El RUC es obligatorio.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtRuc.requestFocus();
+            return;
+        }
+        if (!ruc.matches("\\d{11}")) {
+            JOptionPane.showMessageDialog(this, "El RUC debe tener 11 dígitos numéricos.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtRuc.requestFocus();
+            return;
+        }
+        if (razonSocial.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "La razón social es obligatoria.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtRazon.requestFocus();
+            return;
+        }
+        if (!telefono.isEmpty() && !telefono.matches("\\d{6,15}")) {
+            JOptionPane.showMessageDialog(this, "El teléfono debe contener solo números, entre 6 y 15 dígitos.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtTelefono.requestFocus();
+            return;
+        }
+        if (!correo.isEmpty() && !correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            JOptionPane.showMessageDialog(this, "Ingrese un correo válido.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtCorreo1.requestFocus();
+            return;
+        }
+        if (estado.equals("Seleccionar")) {
+            JOptionPane.showMessageDialog(this, "Seleccione un estado válido.", "Validación", JOptionPane.WARNING_MESSAGE);
+            cbxEstado1.requestFocus();
+            return;
+        }
+
+        ProveedorClass proveedor = new ProveedorClass();
+        proveedor.setRuc(ruc);
+        proveedor.setRazonSocial(razonSocial);
+        proveedor.setNombreProveedor(razonSocial);
+        proveedor.setNombreComercial(razonSocial);
+        proveedor.setTelefono(telefono);
+        proveedor.setCorreo(correo);
+        proveedor.setDireccion(direccion);
+        proveedor.setEstado(estado);
+
+        if (proveedorDAO.registrar(proveedor)) {
+            JOptionPane.showMessageDialog(this, "Proveedor registrado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            limpiarProveedor();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo registrar el proveedor.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void limpiarProveedor() {
+        txtRuc.setText("");
+        txtRazon.setText("");
+        txtTelefono.setText("");
+        txtCorreo1.setText("");
+        txtDireccion1.setText("");
+        cbxEstado1.setSelectedIndex(0);
+        txtRuc.requestFocus();
+    }
+
 
 
     @SuppressWarnings("unchecked")
@@ -252,74 +323,30 @@ public class NuevoProvedor extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void guardarProveedor() {
-        String ruc = txtRuc.getText().trim();
-        String razon = txtRazon.getText().trim();
-        String telefono = txtTelefono.getText().trim();
-        String correo = txtCorreo1.getText().trim();
-        String direccion = txtDireccion1.getText().trim();
 
-        if (ruc.isEmpty() || razon.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                "RUC y Razón Social son obligatorios",
-                "Campos vacíos",
-                javax.swing.JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        ProveedorClass prov = new ProveedorClass();
-        prov.setRuc(ruc);
-        prov.setNombreProveedor(razon);
-        prov.setTelefono(telefono);
-        prov.setCorreo(correo);
-        prov.setDireccion(direccion);
-
-        ProveedorDAO dao = new ProveedorDAO();
-        if (dao.registrar(prov)) {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                "Proveedor registrado correctamente",
-                "Éxito",
-                javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            dispose();
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                "Error al registrar el proveedor",
-                "Error",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void limpiarCampos() {
-        txtRuc.setText("");
-        txtRazon.setText("");
-        txtTelefono.setText("");
-        txtCorreo1.setText("");
-        txtDireccion1.setText("");
-        cbxEstado1.setSelectedIndex(0);
-    }
 
     private void btnEliminar9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar9ActionPerformed
-        guardarProveedor();
+         guardarProveedor();
     }//GEN-LAST:event_btnEliminar9ActionPerformed
 
     private void btnGuardar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar5ActionPerformed
-        dispose();
+         dispose();
     }//GEN-LAST:event_btnGuardar5ActionPerformed
 
     private void btnEliminar10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar10ActionPerformed
-        limpiarCampos();
+          limpiarProveedor();
     }//GEN-LAST:event_btnEliminar10ActionPerformed
 
     private void btnEliminar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar11ActionPerformed
-        guardarProveedor();
+       guardarProveedor();
     }//GEN-LAST:event_btnEliminar11ActionPerformed
 
     private void btnGuardar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar6ActionPerformed
-        dispose();
+           dispose();
     }//GEN-LAST:event_btnGuardar6ActionPerformed
 
     private void btnEliminar12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar12ActionPerformed
-        limpiarCampos();
+        limpiarProveedor();
     }//GEN-LAST:event_btnEliminar12ActionPerformed
 
 

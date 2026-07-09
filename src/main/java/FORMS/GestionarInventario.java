@@ -53,6 +53,7 @@ private void configurarTabla() {
     });
 }
 
+
 private void mostrarInventario(List<Object[]> inventario) {
     modeloTabla.setRowCount(0);
     int total = 0, stockNormal = 0, stockBajo = 0;

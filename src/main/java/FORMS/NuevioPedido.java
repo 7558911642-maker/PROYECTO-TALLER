@@ -4,17 +4,254 @@
  */
 package FORMS;
 
+import DAO.CompraDAO;
+import DAO.ProductoDAO;
+import LOGICA.CompraClass;
+import LOGICA.DetalleCompraClass;
+import LOGICA.ProductoClass;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.sql.Timestamp;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author HP
  */
 public class NuevioPedido extends javax.swing.JInternalFrame {
 
+    private CompraDAO compraDAO;
+    private ProductoDAO productoDAO;
+    private DefaultTableModel modeloDetalle;
+    private ProductoClass productoSeleccionado;
+
     /**
      * Creates new form NuevioPedido
      */
     public NuevioPedido() {
         initComponents();
+        compraDAO = new CompraDAO();
+        productoDAO = new ProductoDAO();
+        configurarTablaDetalleCompra();
+        prepararCompraInicial();
+    }
+
+
+
+    private void configurarTablaDetalleCompra() {
+        String[] columnas = {"ID Medicamento", "Código", "Medicamento", "Cantidad", "Costo", "Descuento", "Subtotal", "Lote"};
+        modeloDetalle = new DefaultTableModel(columnas, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tblDetalleVenta.setModel(modeloDetalle);
+    }
+
+    private void prepararCompraInicial() {
+        if (txtSerie.getText().trim().isEmpty()) {
+            txtSerie.setText("COM-" + System.currentTimeMillis());
+        }
+        if (txtusuario.getText().trim().isEmpty()) {
+            txtusuario.setText("1");
+        }
+        if (jDateChooser1 != null) {
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.add(java.util.Calendar.YEAR, 1);
+            jDateChooser1.setDate(cal.getTime());
+        }
+        txtsubtotal.setEditable(false);
+        txtigv.setEditable(false);
+        actualizarTotalesCompra();
+    }
+
+    private void buscarMedicamentoCompra() {
+        String codigo = txtCodigoProducto.getText().trim();
+        if (codigo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese el código del medicamento.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtCodigoProducto.requestFocus();
+            return;
+        }
+
+        productoSeleccionado = productoDAO.buscarPorCodigo(codigo);
+        if (productoSeleccionado == null) {
+            JOptionPane.showMessageDialog(this, "No se encontró un medicamento con ese código.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        txtProducto.setText(productoSeleccionado.getNombreComercial());
+        txtPrecio.setText(productoSeleccionado.getPrecioCompra() != null ? productoSeleccionado.getPrecioCompra().toPlainString() : "0.00");
+    }
+
+    private void agregarProductoCompra() {
+        if (productoSeleccionado == null || !txtCodigoProducto.getText().trim().equals(productoSeleccionado.getCodigo())) {
+            buscarMedicamentoCompra();
+        }
+        if (productoSeleccionado == null) {
+            return;
+        }
+
+        String cantidadTexto = txtCantidad.getText().trim();
+        String costoTexto = txtPrecio.getText().trim();
+        if (cantidadTexto.isEmpty() || costoTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cantidad y costo unitario son obligatorios.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            int cantidad = Integer.parseInt(cantidadTexto);
+            BigDecimal costo = new BigDecimal(costoTexto);
+            BigDecimal descuento = txtDescuento.getText().trim().isEmpty() ? BigDecimal.ZERO : new BigDecimal(txtDescuento.getText().trim());
+
+            if (cantidad <= 0) {
+                JOptionPane.showMessageDialog(this, "La cantidad debe ser mayor que cero.", "Validación", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (costo.compareTo(BigDecimal.ZERO) <= 0) {
+                JOptionPane.showMessageDialog(this, "El costo unitario debe ser mayor que cero.", "Validación", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            BigDecimal subtotal = costo.multiply(BigDecimal.valueOf(cantidad)).subtract(descuento);
+            String lote = "LOTE-" + productoSeleccionado.getCodigo() + "-" + System.currentTimeMillis();
+
+            modeloDetalle.addRow(new Object[]{
+                productoSeleccionado.getIdMedicamento(),
+                productoSeleccionado.getCodigo(),
+                productoSeleccionado.getNombreComercial(),
+                cantidad,
+                costo,
+                descuento,
+                subtotal,
+                lote
+            });
+
+            limpiarProductoCompra();
+            actualizarTotalesCompra();
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Cantidad, costo y descuento deben ser numéricos.", "Validación", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void quitarProductoCompra() {
+        int fila = tblDetalleVenta.getSelectedRow();
+        if (fila < 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto del detalle.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        modeloDetalle.removeRow(fila);
+        actualizarTotalesCompra();
+    }
+
+    private void actualizarTotalesCompra() {
+        BigDecimal total = BigDecimal.ZERO;
+        for (int i = 0; i < modeloDetalle.getRowCount(); i++) {
+            total = total.add(new BigDecimal(modeloDetalle.getValueAt(i, 6).toString()));
+        }
+        BigDecimal base = total.divide(new BigDecimal("1.18"), 2, RoundingMode.HALF_UP);
+        BigDecimal igv = total.subtract(base).setScale(2, RoundingMode.HALF_UP);
+        txtsubtotal.setText(base.toPlainString());
+        txtigv.setText(igv.toPlainString());
+    }
+
+    private void guardarCompra() {
+        if (modeloDetalle.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Agregue al menos un medicamento al pedido.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (txtComprobante.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese el ID del proveedor.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtComprobante.requestFocus();
+            return;
+        }
+
+        try {
+            int idProveedor = Integer.parseInt(txtComprobante.getText().trim());
+            int idUsuario = Integer.parseInt(txtusuario.getText().trim().isEmpty() ? "1" : txtusuario.getText().trim());
+            BigDecimal subtotalBase = new BigDecimal(txtsubtotal.getText().trim());
+            BigDecimal igv = new BigDecimal(txtigv.getText().trim());
+            BigDecimal total = subtotalBase.add(igv);
+
+            CompraClass compra = new CompraClass();
+            compra.setNumeroCompra(txtSerie.getText().trim().isEmpty() ? "COM-" + System.currentTimeMillis() : txtSerie.getText().trim());
+            compra.setFechaRecepcion(new Timestamp(System.currentTimeMillis()));
+            compra.setIdProveedor(idProveedor);
+            compra.setIdUsuario(idUsuario);
+            compra.setDocumentoProveedor(txtComprobante.getText().trim());
+            compra.setSubtotal(subtotalBase);
+            compra.setDescuento(BigDecimal.ZERO);
+            compra.setIgv(igv);
+            compra.setTotal(total);
+            compra.setEstado("Recibida");
+            compra.setObservaciones(txaObservaciones.getText().trim());
+
+            for (int i = 0; i < modeloDetalle.getRowCount(); i++) {
+                DetalleCompraClass detalle = new DetalleCompraClass();
+                detalle.setIdMedicamento(Integer.parseInt(modeloDetalle.getValueAt(i, 0).toString()));
+                detalle.setCantidad(Integer.parseInt(modeloDetalle.getValueAt(i, 3).toString()));
+                detalle.setCostoUnitario(new BigDecimal(modeloDetalle.getValueAt(i, 4).toString()));
+                detalle.setDescuento(new BigDecimal(modeloDetalle.getValueAt(i, 5).toString()));
+                detalle.setSubtotal(new BigDecimal(modeloDetalle.getValueAt(i, 6).toString()));
+                detalle.setNumeroLote(modeloDetalle.getValueAt(i, 7).toString());
+                detalle.setFechaVencimiento(obtenerFechaVencimientoSQL());
+                compra.agregarDetalle(detalle);
+            }
+
+            if (compraDAO.registrarCompra(compra)) {
+                JOptionPane.showMessageDialog(this, "Pedido/compra registrado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                limpiarCompra();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo registrar el pedido/compra.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "ID de proveedor, usuario y montos deben ser numéricos.", "Validación", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private java.sql.Date obtenerFechaVencimientoSQL() {
+        java.util.Date fecha = jDateChooser1 != null ? jDateChooser1.getDate() : null;
+        if (fecha == null) {
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.add(java.util.Calendar.YEAR, 1);
+            fecha = cal.getTime();
+        }
+        return new java.sql.Date(fecha.getTime());
+    }
+
+    private void limpiarProductoCompra() {
+        txtCodigoProducto.setText("");
+        txtProducto.setText("");
+        txtPrecio.setText("");
+        txtCantidad.setText("");
+        txtDescuento.setText("");
+        productoSeleccionado = null;
+        txtCodigoProducto.requestFocus();
+    }
+
+    private void limpiarCompra() {
+        modeloDetalle.setRowCount(0);
+        limpiarProductoCompra();
+        txaObservaciones.setText("");
+        txtComprobante.setText("");
+        txtSerie.setText("COM-" + System.currentTimeMillis());
+        prepararCompraInicial();
+    }
+
+
+
+  
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {
+        agregarProductoCompra();
+    }
+
+
+    private void btnQuitarDetalleActionPerformed(java.awt.event.ActionEvent evt) {
+        quitarProductoCompra();
     }
 
     /**
@@ -447,11 +684,12 @@ public class NuevioPedido extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar11ActionPerformed
+        guardarCompra();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminar11ActionPerformed
 
     private void btnGuardar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar6ActionPerformed
-        // TODO add your handling code here:
+            dispose();// TODO add your handling code here:
     }//GEN-LAST:event_btnGuardar6ActionPerformed
 
 

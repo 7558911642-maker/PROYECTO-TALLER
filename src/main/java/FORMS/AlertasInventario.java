@@ -4,18 +4,134 @@
  */
 package FORMS;
 
+import DAO.InventarioDAO;
+import java.awt.print.PrinterException;
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author HP
  */
 public class AlertasInventario extends javax.swing.JInternalFrame {
-
+    private InventarioDAO inventarioDAO;
+    private DefaultTableModel modeloTabla;
+    
+    
     /**
      * Creates new form AlertasInventario
      */
     public AlertasInventario() {
         initComponents();
+        inventarioDAO = new InventarioDAO();
+        configurarTabla();
+        cargarDatos();
     }
+
+// 4) MÉTODOS: pegar antes de // Variables declaration
+private void configurarTabla() {
+    String[] columnas = {"ID Medicamento", "ID Lote", "Código", "Medicamento", "N° Lote", "Stock Total", "Stock Lote", "Vencimiento", "Tipo Alerta", "Prioridad"};
+    modeloTabla = new DefaultTableModel(columnas, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    tblGestionMedicamentos.setModel(modeloTabla);
+}
+
+private void mostrarAlertas(List<Object[]> alertas) {
+    modeloTabla.setRowCount(0);
+    int total = 0, alta = 0, mediaBaja = 0;
+
+    for (Object[] a : alertas) {
+        modeloTabla.addRow(a);
+        total++;
+        if (valor(a[9]).equalsIgnoreCase("ALTA")) alta++; else mediaBaja++;
+    }
+
+    lblTotal.setText(String.valueOf(total));
+    lblActivos.setText(String.valueOf(mediaBaja));
+    lblInactivos.setText(String.valueOf(alta));
+}
+
+private void cargarDatos() {
+    try {
+        List<Object[]> alertas = inventarioDAO.listarAlertasInventario();
+        mostrarAlertas(filtrarAlertas(alertas));
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar alertas: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+private void buscarAlerta() {
+    try {
+        List<Object[]> alertas = inventarioDAO.listarAlertasInventario();
+        alertas = filtrarAlertas(alertas);
+        if (alertas.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se encontraron alertas.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
+        mostrarAlertas(alertas);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al buscar alerta: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+private List<Object[]> filtrarAlertas(List<Object[]> alertas) {
+    String criterio = txtBuscar.getText().trim().toLowerCase();
+    if (criterio.isEmpty()) return alertas;
+
+    java.util.ArrayList<Object[]> filtradas = new java.util.ArrayList<>();
+    for (Object[] fila : alertas) {
+        String texto = (valor(fila[2]) + " " + valor(fila[3]) + " " + valor(fila[4]) + " " + valor(fila[8]) + " " + valor(fila[9])).toLowerCase();
+        if (texto.contains(criterio)) filtradas.add(fila);
+    }
+    return filtradas;
+}
+
+private void imprimirTablaAlertas() {
+    try {
+        tblGestionMedicamentos.print();
+    } catch (PrinterException e) {
+        JOptionPane.showMessageDialog(this, "Error al imprimir: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+private void exportarAlertasCSV() {
+    JFileChooser chooser = new JFileChooser();
+    chooser.setDialogTitle("Guardar reporte de alertas");
+    chooser.setSelectedFile(new File("reporte_alertas_inventario.csv"));
+    int opcion = chooser.showSaveDialog(this);
+    if (opcion == JFileChooser.APPROVE_OPTION) {
+        try (PrintWriter pw = new PrintWriter(chooser.getSelectedFile())) {
+            for (int i = 0; i < modeloTabla.getColumnCount(); i++) {
+                pw.print(modeloTabla.getColumnName(i));
+                if (i < modeloTabla.getColumnCount() - 1) pw.print(";");
+            }
+            pw.println();
+            for (int f = 0; f < modeloTabla.getRowCount(); f++) {
+                for (int c = 0; c < modeloTabla.getColumnCount(); c++) {
+                    pw.print(valor(modeloTabla.getValueAt(f, c)));
+                    if (c < modeloTabla.getColumnCount() - 1) pw.print(";");
+                }
+                pw.println();
+            }
+            JOptionPane.showMessageDialog(this, "Reporte exportado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al exportar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+
+private String valor(Object dato) {
+    return dato == null ? "" : dato.toString();
+}
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -257,26 +373,29 @@ public class AlertasInventario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tblGestionMedicamentos.getModel();
-        model.setRowCount(0);
-        model.fireTableDataChanged();
-        javax.swing.JOptionPane.showMessageDialog(this, "Tabla actualizada correctamente", "Actualizar", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        
+        cargarDatos();
+       
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
-        dispose();
+    
+        buscarAlerta();
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        javax.swing.JOptionPane.showMessageDialog(this, "Función en desarrollo", "Imprimir", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        
+        imprimirTablaAlertas();
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void btnExportarExelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarExelActionPerformed
-        javax.swing.JOptionPane.showMessageDialog(this, "Función en desarrollo", "Exportar", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        exportarAlertasCSV();
+        
     }//GEN-LAST:event_btnExportarExelActionPerformed
 
     private void btnBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar2ActionPerformed
-        javax.swing.JOptionPane.showMessageDialog(this, "Función en desarrollo", "Buscar", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+         buscarAlerta();
+        
     }//GEN-LAST:event_btnBuscar2ActionPerformed
 
 

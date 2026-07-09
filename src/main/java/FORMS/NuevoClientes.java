@@ -2,16 +2,127 @@ package FORMS;
 
 import DAO.ClienteDAO;
 import LOGICA.ClienteClass;
+import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
 public class NuevoClientes extends javax.swing.JInternalFrame {
+    private ClienteDAO clienteDAO;
 
-    
-
+   
     public NuevoClientes() {
         initComponents();
-       
+        clienteDAO = new ClienteDAO(); 
     }
+    
+
+
+    private void guardarCliente() {
+        String tipoDocumento = limpiarTipoDocumento(cbTipoDcumento.getSelectedItem() == null ? "" : cbTipoDcumento.getSelectedItem().toString());
+        String numeroDocumento = txtNroDocumento.getText().trim();
+        String nombres = txtNombre.getText().trim();
+        String apellidos = txtApellidos.getText().trim();
+        String correo = txtcorreo.getText().trim();
+        String direccion = txtDireccion.getText().trim();
+        String telefono = txttelefono.getText().trim();
+        String estado = cbEstado.getSelectedItem() == null ? "Activo" : cbEstado.getSelectedItem().toString();
+
+        if (tipoDocumento.isEmpty() || tipoDocumento.equals("Seleccionar")) {
+            JOptionPane.showMessageDialog(this, "Seleccione el tipo de documento.", "Validación", JOptionPane.WARNING_MESSAGE);
+            cbTipoDcumento.requestFocus();
+            return;
+        }
+        if (numeroDocumento.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El número de documento es obligatorio.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtNroDocumento.requestFocus();
+            return;
+        }
+        if (!validarDocumento(tipoDocumento, numeroDocumento)) {
+            return;
+        }
+        if (nombres.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Los nombres o razón social son obligatorios.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtNombre.requestFocus();
+            return;
+        }
+        if (!correo.isEmpty() && !correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            JOptionPane.showMessageDialog(this, "Ingrese un correo válido.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtcorreo.requestFocus();
+            return;
+        }
+        if (!telefono.isEmpty() && !telefono.matches("\\d{6,15}")) {
+            JOptionPane.showMessageDialog(this, "El teléfono debe contener solo números, entre 6 y 15 dígitos.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txttelefono.requestFocus();
+            return;
+        }
+
+        ClienteClass cliente = new ClienteClass();
+        cliente.setTipoDocumento(tipoDocumento);
+        cliente.setNumeroDocumento(numeroDocumento);
+        cliente.setDocumento(numeroDocumento);
+        cliente.setTelefono(telefono);
+        cliente.setCorreo(correo);
+        cliente.setDireccion(direccion);
+        cliente.setEstado(estado == null || estado.trim().isEmpty() ? "Activo" : estado);
+
+        if (tipoDocumento.equals("RUC")) {
+            cliente.setTipoCliente("EMPRESA");
+            cliente.setRazonSocial(nombres);
+            cliente.setNombreComercial(apellidos);
+            cliente.setDireccionFiscal(direccion);
+        } else {
+            cliente.setTipoCliente("PERSONA_NATURAL");
+            cliente.setNombres(nombres);
+            cliente.setNombreCliente(nombres);
+            cliente.setApellidos(apellidos);
+        }
+
+        if (clienteDAO.registrarCliente(cliente)) {
+            JOptionPane.showMessageDialog(this, "Cliente registrado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            limpiarCliente();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo registrar el cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private boolean validarDocumento(String tipoDocumento, String numeroDocumento) {
+        if (tipoDocumento.equals("DNI") && !numeroDocumento.matches("\\d{8}")) {
+            JOptionPane.showMessageDialog(this, "El DNI debe tener 8 dígitos numéricos.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtNroDocumento.requestFocus();
+            return false;
+        }
+        if (tipoDocumento.equals("RUC") && !numeroDocumento.matches("\\d{11}")) {
+            JOptionPane.showMessageDialog(this, "El RUC debe tener 11 dígitos numéricos.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtNroDocumento.requestFocus();
+            return false;
+        }
+        if ((tipoDocumento.equals("CE") || tipoDocumento.equals("PASAPORTE")) && numeroDocumento.length() < 6) {
+            JOptionPane.showMessageDialog(this, "El documento debe tener al menos 6 caracteres.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtNroDocumento.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private String limpiarTipoDocumento(String texto) {
+        return texto == null ? "" : texto.replace(":", "").trim().toUpperCase();
+    }
+
+    private void limpiarCliente() {
+        txtNombre.setText("");
+        txtApellidos.setText("");
+        txtNroDocumento.setText("");
+        txtcorreo.setText("");
+        txtDireccion.setText("");
+        txttelefono.setText("");
+        cbTipoDcumento.setSelectedIndex(0);
+        cbEstado.setSelectedIndex(0);
+        txtNombre.requestFocus();
+    }
+
+
+
+  
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1037,33 +1148,7 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jComboBox8ActionPerformed
 
     private void btnGuardar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar2ActionPerformed
-        String tipoDoc = jComboBox6.getSelectedItem() != null ? jComboBox6.getSelectedItem().toString().replace(":", "").trim() : "";
-        String nroDoc = txtNombre8.getText().trim();
-        String nombres = txtNombre10.getText().trim();
-        String apellidos = txtNombre9.getText().trim();
-        String correo = txtPrecio4.getText().trim();
-        String direccion = txtStock4.getText().trim();
-        String telefono = txtNombre7.getText().trim();
-        String estado = jComboBox5.getSelectedItem() != null ? jComboBox5.getSelectedItem().toString() : "Activo";
-        if (nroDoc.isEmpty() || nombres.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Documento y Nombres son obligatorios", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        ClienteClass cli = new ClienteClass();
-        cli.setDocumento(nroDoc);
-        cli.setNombreCliente(nombres);
-        cli.setApellidos(apellidos);
-        cli.setCorreo(correo);
-        cli.setDireccion(direccion);
-        cli.setTelefono(telefono);
-        cli.setEstado(estado);
-        ClienteDAO dao = new ClienteDAO();
-        if (dao.registrarCliente(cli)) {
-            JOptionPane.showMessageDialog(this, "Cliente registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al registrar el cliente", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+      guardarCliente();
     }//GEN-LAST:event_btnGuardar2ActionPerformed
 
     private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox9ActionPerformed
@@ -1079,37 +1164,11 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jComboBox11ActionPerformed
 
     private void btnGuardar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar4ActionPerformed
-        String tipoDoc = jComboBox9.getSelectedItem() != null ? jComboBox9.getSelectedItem().toString().replace(":", "").trim() : "";
-        String nroDoc = txtNombre13.getText().trim();
-        String nombres = txtNombre15.getText().trim();
-        String apellidos = txtNombre14.getText().trim();
-        String correo = txtPrecio6.getText().trim();
-        String direccion = txtStock6.getText().trim();
-        String telefono = txtNombre12.getText().trim();
-        String estado = jComboBox8.getSelectedItem() != null ? jComboBox8.getSelectedItem().toString() : "Activo";
-        if (nroDoc.isEmpty() || nombres.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Documento y Nombres son obligatorios", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        ClienteClass cli = new ClienteClass();
-        cli.setDocumento(nroDoc);
-        cli.setNombreCliente(nombres);
-        cli.setApellidos(apellidos);
-        cli.setCorreo(correo);
-        cli.setDireccion(direccion);
-        cli.setTelefono(telefono);
-        cli.setEstado(estado);
-        ClienteDAO dao = new ClienteDAO();
-        if (dao.registrarCliente(cli)) {
-            JOptionPane.showMessageDialog(this, "Cliente registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al registrar el cliente", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        guardarCliente();
     }//GEN-LAST:event_btnGuardar4ActionPerformed
 
     private void btnEliminar7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar7ActionPerformed
-        dispose();
+     
     }//GEN-LAST:event_btnEliminar7ActionPerformed
 
     private void btnGuardar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar5ActionPerformed
@@ -1117,121 +1176,36 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGuardar5ActionPerformed
 
     private void btnEliminar9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar9ActionPerformed
-        String tipoDoc = cbTipoDcumento.getSelectedItem() != null ? cbTipoDcumento.getSelectedItem().toString().replace(":", "").trim() : "";
-        String nroDoc = txtNroDocumento.getText().trim();
-        String nombres = txtNombre.getText().trim();
-        String apellidos = txtApellidos.getText().trim();
-        String correo = txtcorreo.getText().trim();
-        String direccion = txtDireccion.getText().trim();
-        String telefono = txttelefono.getText().trim();
-        String estado = cbEstado.getSelectedItem() != null ? cbEstado.getSelectedItem().toString() : "Activo";
-        if (nroDoc.isEmpty() || nombres.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Documento y Nombres son obligatorios", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        ClienteClass cli = new ClienteClass();
-        cli.setDocumento(nroDoc);
-        cli.setNombreCliente(nombres);
-        cli.setApellidos(apellidos);
-        cli.setCorreo(correo);
-        cli.setDireccion(direccion);
-        cli.setTelefono(telefono);
-        cli.setEstado(estado);
-        ClienteDAO dao = new ClienteDAO();
-        if (dao.registrarCliente(cli)) {
-            JOptionPane.showMessageDialog(this, "Cliente registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al registrar el cliente", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+         guardarCliente();
     }//GEN-LAST:event_btnEliminar9ActionPerformed
 
     private void btnEliminar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar11ActionPerformed
-        String tipoDoc = jComboBox11.getSelectedItem() != null ? jComboBox11.getSelectedItem().toString().replace(":", "").trim() : "";
-        String nroDoc = txtNombre17.getText().trim();
-        String nombres = txtNombre19.getText().trim();
-        String apellidos = txtNombre18.getText().trim();
-        String correo = txtPrecio7.getText().trim();
-        String direccion = txtStock7.getText().trim();
-        String telefono = txtNombre16.getText().trim();
-        String estado = jComboBox10.getSelectedItem() != null ? jComboBox10.getSelectedItem().toString() : "Activo";
-        if (nroDoc.isEmpty() || nombres.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Documento y Nombres son obligatorios", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        ClienteClass cli = new ClienteClass();
-        cli.setDocumento(nroDoc);
-        cli.setNombreCliente(nombres);
-        cli.setApellidos(apellidos);
-        cli.setCorreo(correo);
-        cli.setDireccion(direccion);
-        cli.setTelefono(telefono);
-        cli.setEstado(estado);
-        ClienteDAO dao = new ClienteDAO();
-        if (dao.registrarCliente(cli)) {
-            JOptionPane.showMessageDialog(this, "Cliente registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al registrar el cliente", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+      
     }//GEN-LAST:event_btnEliminar11ActionPerformed
 
     private void btnGuardar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar6ActionPerformed
-        dispose();
+    
     }//GEN-LAST:event_btnGuardar6ActionPerformed
 
-    private void cbEstadoActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-    private void cbTipoDcumentoActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
+  
     private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
-        dispose();
+
     }//GEN-LAST:event_btnEliminar2ActionPerformed
 
     private void btnEliminar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar4ActionPerformed
-        txtNombre8.setText("");
-        txtNombre9.setText("");
-        txtNombre10.setText("");
-        txtPrecio4.setText("");
-        txtStock4.setText("");
-        txtNombre7.setText("");
-        jComboBox5.setSelectedIndex(0);
-        jComboBox6.setSelectedIndex(0);
+        
     }//GEN-LAST:event_btnEliminar4ActionPerformed
 
     private void btnEliminar8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar8ActionPerformed
-        txtNombre13.setText("");
-        txtNombre14.setText("");
-        txtNombre15.setText("");
-        txtPrecio6.setText("");
-        txtStock6.setText("");
-        txtNombre12.setText("");
-        jComboBox8.setSelectedIndex(0);
-        jComboBox9.setSelectedIndex(0);
+        
     }//GEN-LAST:event_btnEliminar8ActionPerformed
 
     private void btnEliminar10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar10ActionPerformed
-        txtNombre.setText("");
-        txtApellidos.setText("");
-        txtNroDocumento.setText("");
-        txtcorreo.setText("");
-        txtDireccion.setText("");
-        txttelefono.setText("");
-        cbTipoDcumento.setSelectedIndex(0);
-        cbEstado.setSelectedIndex(0);
+        limpiarCliente();
     }//GEN-LAST:event_btnEliminar10ActionPerformed
 
     private void btnEliminar12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar12ActionPerformed
-        txtNombre19.setText("");
-        txtNombre18.setText("");
-        txtNombre17.setText("");
-        txtPrecio7.setText("");
-        txtStock7.setText("");
-        txtNombre16.setText("");
-        jComboBox11.setSelectedIndex(0);
-        jComboBox10.setSelectedIndex(0);
+        
     }//GEN-LAST:event_btnEliminar12ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1353,4 +1327,12 @@ public class NuevoClientes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtcorreo;
     private javax.swing.JTextField txttelefono;
     // End of variables declaration//GEN-END:variables
+
+    private void cbTipoDcumentoActionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void cbEstadoActionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

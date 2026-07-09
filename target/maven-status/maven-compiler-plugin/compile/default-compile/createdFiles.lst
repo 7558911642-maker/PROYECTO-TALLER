@@ -8,6 +8,7 @@ LOGICA\InicioSesion.class
 LOGICA\MetodoPagoClass.class
 CONEX\ConexionBD.class
 FORMS\GestionarVentas$1.class
+FORMS\AlertasInventario$1.class
 FORMS\GestionInventario.class
 DAO\PedidoDAO.class
 LOGICA\DetalleVentaClass.class
@@ -71,6 +72,7 @@ FORMS\LoginForm_1.class
 DAO\CategoriaDAO.class
 LOGICA\CategoriaClass.class
 FORMS\NuevoUsuario.class
+FORMS\NuevioPedido$1.class
 LOGICA\VentaClass.class
 LOGICA\UsuarioClass.class
 LOGICA\DetalleCompraClass.class

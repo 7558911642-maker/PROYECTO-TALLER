@@ -4,27 +4,113 @@
  */
 package FORMS;
 
+import DAO.RolDAO;
 import DAO.UsuarioDAO;
+import LOGICA.RolClass;
 import LOGICA.UsuarioClass;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import java.util.List;
-
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 /**
  *
  * @author HP
  */
 public class NuevoUsuario extends javax.swing.JInternalFrame {
 
- 
+    private UsuarioDAO usuarioDAO;
+    private RolDAO rolDAO;
     
-
     public NuevoUsuario() {
         initComponents();
-       
+        usuarioDAO = new UsuarioDAO();
+        rolDAO = new RolDAO();
+        cargarRoles();
     }
 
 
+
+    private void cargarRoles() {
+        jComboBox4.removeAllItems();
+        jComboBox4.addItem("Seleccionar");
+        List<RolClass> roles = rolDAO.listar();
+        for (RolClass r : roles) {
+            if ("Activo".equalsIgnoreCase(r.getEstado())) {
+                jComboBox4.addItem(r.getNombre());
+            }
+        }
+    }
+
+    private void guardarUsuario() {
+        String usuarioTexto = txtCodigo3.getText().trim();
+        String nombres = txtNombre3.getText().trim();
+        String contrasena = txtNombre4.getText().trim();
+        String confirmar = txtNombre5.getText().trim();
+        String rol = jComboBox4.getSelectedItem() == null ? "" : jComboBox4.getSelectedItem().toString();
+        String estado = txtPrecio4.getText().trim();
+
+        if (usuarioTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El usuario es obligatorio.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtCodigo3.requestFocus();
+            return;
+        }
+        if (nombres.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El nombre del usuario es obligatorio.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtNombre3.requestFocus();
+            return;
+        }
+        if (contrasena.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "La contraseña es obligatoria.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtNombre4.requestFocus();
+            return;
+        }
+        if (contrasena.length() < 6) {
+            JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos 6 caracteres.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtNombre4.requestFocus();
+            return;
+        }
+        if (!contrasena.equals(confirmar)) {
+            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtNombre5.requestFocus();
+            return;
+        }
+        if (rol.equals("Seleccionar") || rol.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione un rol.", "Validación", JOptionPane.WARNING_MESSAGE);
+            jComboBox4.requestFocus();
+            return;
+        }
+        if (estado.isEmpty()) {
+            estado = "Activo";
+        }
+
+        UsuarioClass usuario = new UsuarioClass();
+        usuario.setUsuario(usuarioTexto);
+        usuario.setNombres(nombres);
+        usuario.setNombre(nombres);
+        usuario.setContrasena(contrasena);
+        usuario.setContrasenia(contrasena);
+        usuario.setRol(rol);
+        usuario.setEstado(estado);
+        usuario.setRequiereCambioClave(false);
+
+        if (usuarioDAO.registrar(usuario)) {
+            JOptionPane.showMessageDialog(this, "Usuario registrado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            limpiarUsuario();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo registrar el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void limpiarUsuario() {
+        txtCodigo3.setText("");
+        txtNombre3.setText("");
+        txtNombre4.setText("");
+        txtNombre5.setText("");
+        txtPrecio4.setText("Activo");
+        jComboBox4.setSelectedIndex(0);
+        txtCodigo3.requestFocus();
+    }
+
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -202,6 +288,7 @@ public class NuevoUsuario extends javax.swing.JInternalFrame {
         btnEliminar12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/broom.png"))); // NOI18N
         btnEliminar12.setText("limpiar");
         btnEliminar12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
+        btnEliminar12.addActionListener(this::btnEliminar12ActionPerformed);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/XJ96v-logo.png"))); // NOI18N
 
@@ -268,46 +355,19 @@ public class NuevoUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPrecio4ActionPerformed
 
     private void btnEliminar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar11ActionPerformed
-        dispose();
+     guardarUsuario();
     }//GEN-LAST:event_btnEliminar11ActionPerformed
 
     private void btnGuardar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar6ActionPerformed
-        String usuario = txtCodigo3.getText().trim();
-        String nombre = txtNombre3.getText().trim();
-        String pass = txtNombre4.getText().trim();
-        String confirmPass = txtNombre5.getText().trim();
-
-        if (usuario.isEmpty() || nombre.isEmpty() || pass.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Validación", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if (!pass.equals(confirmPass)) {
-            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.", "Validación", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        UsuarioClass u = new UsuarioClass();
-        u.setUsuario(usuario);
-        u.setNombre(nombre);
-        u.setContrasenia(pass);
-
-        UsuarioDAO dao = new UsuarioDAO();
-        if (dao.registrar(u)) {
-            JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            limpiarCampos();
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al registrar el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+   dispose();
     }//GEN-LAST:event_btnGuardar6ActionPerformed
 
-    private void limpiarCampos() {
-        txtCodigo3.setText("");
-        txtNombre3.setText("");
-        txtNombre4.setText("");
-        txtNombre5.setText("");
-        txtPrecio4.setText("");
-        jComboBox4.setSelectedIndex(0);
-    }
+    private void btnEliminar12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar12ActionPerformed
+
+   limpiarUsuario();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminar12ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar11;
