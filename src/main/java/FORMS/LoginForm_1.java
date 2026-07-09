@@ -157,8 +157,10 @@ public class LoginForm_1 extends javax.swing.JFrame {
         if (acceso) {
             JOptionPane.showMessageDialog(this, "Bienvenido al sistema");
 
-            // Aquí abres tu siguiente ventana
-            new FrmPrincipal_1().setVisible(true);
+            FrmPrincipal_1 principal = new FrmPrincipal_1();
+            principal.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+            principal.setLocationRelativeTo(null);
+            principal.setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");

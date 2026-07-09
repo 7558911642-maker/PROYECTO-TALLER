@@ -173,6 +173,7 @@ public class ReporteDiarioVentas extends javax.swing.JInternalFrame {
         btnEliminar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/broom.png"))); // NOI18N
         btnEliminar3.setText("limpiar");
         btnEliminar3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
+        btnEliminar3.addActionListener(this::btnEliminar3ActionPerformed);
 
         btnGuardar1.setBackground(new java.awt.Color(237, 246, 254));
         btnGuardar1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
