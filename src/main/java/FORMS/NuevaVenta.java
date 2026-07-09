@@ -398,6 +398,10 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         btnCancelarVenta = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         panelPrincipal.setBackground(new java.awt.Color(237, 246, 254));
 
         panelDatos.setBackground(new java.awt.Color(255, 255, 255));
@@ -418,11 +422,13 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         btnEliminar2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnEliminar2.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar2.setText("Factura");
+        btnEliminar2.addActionListener(this::btnEliminar2ActionPerformed);
 
         btnEliminar3.setBackground(new java.awt.Color(0, 100, 248));
         btnEliminar3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnEliminar3.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar3.setText("Boleta");
+        btnEliminar3.addActionListener(this::btnEliminar3ActionPerformed);
 
         javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
@@ -503,6 +509,7 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(this::btnAgregarActionPerformed);
 
         javax.swing.GroupLayout panelDetalleLayout = new javax.swing.GroupLayout(panelDetalle);
         panelDetalle.setLayout(panelDetalleLayout);
@@ -644,7 +651,7 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(153, 153, 255));
-        jLabel20.setText("<html> <table cellpadding=\"0\" cellspacing=\"0\">     <tr>        \n <td style=\"padding-left:18px;\">           \n  <span style=\"font-family:Segoe UI; font-size:16px; color:#075DEB;\">          \n       <b>Nueva Venta</b>             </span>             <br>        \n     <span style=\"font-family:Segoe UI; font-size:13px; color:#5A6E8C;\">         \n        Registre una nueva Venta         </span>         </td>     </tr>     <tr>    \n     <td>             <hr color=\"#0066FF\" size=\"1\">         </td>     </tr> </table> </html>");
+        jLabel20.setText("<html> <table cellpadding=\"0\" cellspacing=\"0\">     <tr>        \n <td style=\"padding-left:18px;\">           \n  <span style=\"font-family:Segoe UI; font-size:16px; color:#075DEB;\">          \n       <b>Nueva Venta</b>             </span>             <br>        \n     <span style=\"font-family:Segoe UI; font-size:13px; color:#5A6E8C;\">         \n         </span>         </td>     </tr>     <tr>    \n     <td>             <hr color=\"#0066FF\" size=\"1\">         </td>     </tr> </table> </html>");
 
         panelDatos1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -663,6 +670,7 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
         javax.swing.GroupLayout panelDatos1Layout = new javax.swing.GroupLayout(panelDatos1);
         panelDatos1.setLayout(panelDatos1Layout);
@@ -841,6 +849,7 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
         btnGuardar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("Guardar y cobrar");
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
         btnCancelarVenta.setBackground(new java.awt.Color(237, 246, 254));
         btnCancelarVenta.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
@@ -859,7 +868,7 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGap(9, 9, 9)
@@ -886,25 +895,25 @@ public class NuevaVenta extends javax.swing.JInternalFrame {
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel20))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelDatos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelTotales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelTotales1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelarVenta))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -169,6 +169,7 @@ public class NuevaCategoria extends javax.swing.JInternalFrame {
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/broom.png"))); // NOI18N
         btnLimpiar.setText("limpiar");
         btnLimpiar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
+        btnLimpiar.addActionListener(this::btnLimpiarActionPerformed);
 
         btnCancelar.setBackground(new java.awt.Color(237, 246, 254));
         btnCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
